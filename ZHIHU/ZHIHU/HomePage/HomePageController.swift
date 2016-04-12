@@ -8,88 +8,136 @@
 
 import UIKit
 
-class HomePageController: UITableViewController {
-
+import Alamofire
+let rowHeight :CGFloat = 90.0
+let sectionHeight :CGFloat = 35.0
+let homeCellIdentifier:String = "HomeCell"
+typealias Homeprotocol = protocol<SDCycleScrollViewDelegate,ParallaxHeaderViewDelegate>
+// MARK:轮播图数据模型
+struct Top_story{
+    var image : String
+    var ga_prefix : String
+    var id : NSNumber
+    var title : String
+    var type : Int
+    init(dic:[String : AnyObject]) {
+        image = dic["image"] as? String ?? ""
+        ga_prefix = dic["ga_prefix"] as? String ?? ""
+        id = dic["id"] as? NSNumber ?? 0
+        title = dic["title"] as? String ?? ""
+        type = dic["type"] as? Int ?? 0
+    }
+    func serialize() -> [String : AnyObject] {
+        return ["image":image,"ga_prefix":ga_prefix,"id":id,"title":title,"type":type];
+    }
+}
+// MARK:cell数据模型
+struct Story {
+    var images:[String]
+    var type : Int
+    var id : NSNumber
+    var ga_prefix : String
+    var title : String
+    init(dict:[String : AnyObject]) {
+        images = dict["images"] as? [String] ?? [""]
+        type = dict["type"] as? Int ?? 0
+        id = dict["id"] as? NSNumber ?? 0
+        ga_prefix = dict["ga_prefix"] as? String ?? ""
+        title = dict["title"] as? String ?? ""
+    }
+    func serialize() -> [String : AnyObject] {
+        return ["images":images,"type":type,"id":id,"ga_prefix":ga_prefix,"title":title];
+    }
+}
+// MARK:控制器
+class HomePageController: UITableViewController,Homeprotocol {
+    var top_stories : [Top_story] = []{
+        didSet{
+            headerView.titlesGroup = top_stories.map { (top)  in top.title }
+            headerView.imageURLStringsGroup = top_stories.map { (top)  in top.image }
+        }
+    }
+    var stories : [Story] = []
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+        navigationController?.navigationBar.lt_setBackgroundColor(UIColor.clearColor())
+        navigationController?.navigationBar.shadowImage = UIImage()
+        automaticallyAdjustsScrollViewInsets = false
+        //将其添加到ParallaxView
+        let headerSubview: ParallaxHeaderView = ParallaxHeaderView.parallaxHeaderViewWithSubView(headerView, forSize: CGSize(width: tableView.frame.width, height: 154)) as! ParallaxHeaderView
+        headerSubview.delegate  = self
+        //将ParallaxView设置为tableHeaderView
+        tableView.tableHeaderView = headerSubview
+        tableView.showsVerticalScrollIndicator = false
+        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.estimatedRowHeight = 50
+        prepareForData()
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    func prepareForData() {
+        Alamofire.request(.GET, Urls.homeUrl).responseJSON { (resultData) in
+            guard resultData.result.error == nil else{
+                print("网络失败")
+                return
+            }
+            let top_stories = resultData.result.value!["top_stories"] as? [[String:AnyObject]] ?? [[:]]
+            self.top_stories = top_stories.map({ (dic) in Top_story(dic:dic)})
+            let stories = resultData.result.value!["stories"] as? [[String:AnyObject]] ?? [[:]]
+            self.stories = stories.map({ (dic) in Story(dict:dic)})
+            self.tableView.reloadData()
+        }
     }
-
-    // MARK: - Table view data source
-
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return 0
-    }
-
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        return 0
-    }
-
-    /*
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("reuseIdentifier", forIndexPath: indexPath)
-
-        // Configure the cell...
-
-        return cell
+        var cell = tableView.dequeueReusableCellWithIdentifier(homeCellIdentifier)
+        if cell == nil {
+            cell = UITableViewCell(style: .Default, reuseIdentifier: homeCellIdentifier)
+        }
+        cell?.textLabel?.text = stories[indexPath.item].title
+        return cell!
     }
-    */
-
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
+    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        return 1
     }
-    */
-
-    /*
-    // Override to support editing the table view.
-    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
-        if editingStyle == .Delete {
-            // Delete the row from the data source
-            tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
-        } else if editingStyle == .Insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
+    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return stories.count
     }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(tableView: UITableView, moveRowAtIndexPath fromIndexPath: NSIndexPath, toIndexPath: NSIndexPath) {
-
+    override func viewDidAppear(animated: Bool) {
+        tableView.reloadData()
     }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(tableView: UITableView, canMoveRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
+    override func  scrollViewDidScroll(scrollView: UIScrollView) {
+        //Parallax效果
+        if scrollView != tableView {
+            return
+        }
+        let header = tableView.tableHeaderView as! ParallaxHeaderView
+        header.layoutHeaderViewForScrollViewOffset(scrollView.contentOffset)
+        header.delegate = self
+        tableView.tableHeaderView = header
     }
-    */
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    // MARK:SDCycleScrollViewDelegate
+    func cycleScrollView(cycleScrollView: SDCycleScrollView!, didSelectItemAtIndex index: Int) {
+        let top = top_stories[index]
+        print(top.serialize())
     }
-    */
-
+    
+    // MARK: ParallaxHeaderViewDelegate
+    func lockDirection() {
+        tableView.contentOffset.y = -154
+    }
+    
+    // MARK:懒加载headerView
+    lazy private  var headerView: SDCycleScrollView = {
+        let runloopView = SDCycleScrollView(frame: CGRect(origin: CGPointZero, size: CGSize(width: self.tableView.frame.width, height: 154)), imageURLStringsGroup: nil)
+        runloopView.infiniteLoop = true
+        runloopView.delegate = self
+        runloopView.pageControlStyle = SDCycleScrollViewPageContolStyleAnimated
+        runloopView.autoScrollTimeInterval = 3.0;
+        runloopView.pageControlStyle = SDCycleScrollViewPageContolStyleClassic
+        runloopView.titleLabelTextFont = UIFont(name: "STHeitiSC-Medium", size: 21)
+        runloopView.titleLabelBackgroundColor = UIColor.clearColor()
+        runloopView.titleLabelHeight = 60
+        //alpha在未设置的状态下默认为0
+        runloopView.titleLabelAlpha = 1
+        return runloopView
+    }()
 }
