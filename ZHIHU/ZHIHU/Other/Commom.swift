@@ -11,6 +11,9 @@ import UIKit
 // MARK: 设备相关
 //判断设备类型
 let iphone4 : Bool = UIScreen.mainScreen().bounds.size.height == 480
+let iphone5 : Bool = UIScreen.mainScreen().bounds.size.height == 568
+let iphone6 : Bool = UIScreen.mainScreen().bounds.size.height == 667
+let iphone6plus : Bool = UIScreen.mainScreen().bounds.size.height == 736
 /// 屏幕Bounds
 let kScreenBounds: CGRect = UIScreen.mainScreen().bounds
 /// 屏幕宽
@@ -37,9 +40,9 @@ let KwhiteColor:UIColor = UIColor.whiteColor()
 /// - parameter line:     代码行数
 func printLog<T>(message: T,
     logError: Bool = false,
-    file: String = __FILE__,
-    method: String = __FUNCTION__,
-    line: Int = __LINE__)
+    file: String = #file,
+    method: String = #function,
+    line: Int = #line)
 {
     if logError {
         print("\((file as NSString).lastPathComponent)[\(line)], \(method): \(message)")

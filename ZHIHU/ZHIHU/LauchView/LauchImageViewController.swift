@@ -55,7 +55,7 @@ class LauchImageViewController: UIViewController {
         Alamofire.request(.GET, Urls.launchUrl).responseJSON
             { (response) in
                 guard response.result.error == nil else{
-                    print("失败")
+                    printLog(response.result.error, logError: true)
                     return;
                 }
                 self.lauchData = LauchData(dic: response.result.value as? [String : AnyObject] ?? ["":""])
