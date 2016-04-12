@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "213E11551CBD0472000CF97C"
+               BlueprintIdentifier = "D5E4BE081CBD2BC800851D44"
                BuildableName = "ZHIHU.app"
                BlueprintName = "ZHIHU"
                ReferencedContainer = "container:ZHIHU.xcodeproj">
@@ -28,31 +28,11 @@
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "213E11691CBD0473000CF97C"
-               BuildableName = "ZHIHUTests.xctest"
-               BlueprintName = "ZHIHUTests"
-               ReferencedContainer = "container:ZHIHU.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "213E11741CBD0473000CF97C"
-               BuildableName = "ZHIHUUITests.xctest"
-               BlueprintName = "ZHIHUUITests"
-               ReferencedContainer = "container:ZHIHU.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
       </Testables>
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "213E11551CBD0472000CF97C"
+            BlueprintIdentifier = "D5E4BE081CBD2BC800851D44"
             BuildableName = "ZHIHU.app"
             BlueprintName = "ZHIHU"
             ReferencedContainer = "container:ZHIHU.xcodeproj">
@@ -75,7 +55,7 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "213E11551CBD0472000CF97C"
+            BlueprintIdentifier = "D5E4BE081CBD2BC800851D44"
             BuildableName = "ZHIHU.app"
             BlueprintName = "ZHIHU"
             ReferencedContainer = "container:ZHIHU.xcodeproj">
@@ -94,7 +74,7 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "213E11551CBD0472000CF97C"
+            BlueprintIdentifier = "D5E4BE081CBD2BC800851D44"
             BuildableName = "ZHIHU.app"
             BlueprintName = "ZHIHU"
             ReferencedContainer = "container:ZHIHU.xcodeproj">

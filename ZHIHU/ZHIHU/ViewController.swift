@@ -2,7 +2,7 @@
 //  ViewController.swift
 //  ZHIHU
 //
-//  Created by wzh on 16/4/12.
+//  Created by tanchao on 16/4/12.
 //  Copyright © 2016年 谈超. All rights reserved.
 //
 
