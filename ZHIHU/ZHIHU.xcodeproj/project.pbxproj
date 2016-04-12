@@ -23,6 +23,7 @@
 		D554EACA1CBD3C1B001466E1 /* ParallaxHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = D554EAC81CBD3C1B001466E1 /* ParallaxHeaderView.m */; };
 		D554EACE1CBD3C26001466E1 /* UINavigationBar+Awesome.m in Sources */ = {isa = PBXBuildFile; fileRef = D554EACD1CBD3C26001466E1 /* UINavigationBar+Awesome.m */; };
 		D554EAD21CBD3C3F001466E1 /* UIImage+ImageEffects.m in Sources */ = {isa = PBXBuildFile; fileRef = D554EAD11CBD3C3F001466E1 /* UIImage+ImageEffects.m */; };
+		D554EAD51CBD5345001466E1 /* HomePageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D554EAD41CBD5345001466E1 /* HomePageCell.swift */; };
 		D5E4BE141CBD2BC800851D44 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D5E4BE131CBD2BC800851D44 /* Assets.xcassets */; };
 		D5E4BE171CBD2BC800851D44 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D5E4BE151CBD2BC800851D44 /* LaunchScreen.storyboard */; };
 		D5E4BE241CBD2EB400851D44 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D5E4BE231CBD2EB400851D44 /* Default-568h@2x.png */; };
@@ -65,6 +66,7 @@
 		D554EAD01CBD3C3F001466E1 /* UIImage+ImageEffects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+ImageEffects.h"; sourceTree = "<group>"; };
 		D554EAD11CBD3C3F001466E1 /* UIImage+ImageEffects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+ImageEffects.m"; sourceTree = "<group>"; };
 		D554EAD31CBD3CA3001466E1 /* ZhiHuSwift-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ZhiHuSwift-Bridging-Header.h"; sourceTree = "<group>"; };
+		D554EAD41CBD5345001466E1 /* HomePageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomePageCell.swift; sourceTree = "<group>"; };
 		D5E4BE091CBD2BC800851D44 /* ZHIHU.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ZHIHU.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D5E4BE131CBD2BC800851D44 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D5E4BE161CBD2BC800851D44 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -106,6 +108,7 @@
 			isa = PBXGroup;
 			children = (
 				D554EAA01CBD3513001466E1 /* HomePageController.swift */,
+				D554EAD41CBD5345001466E1 /* HomePageCell.swift */,
 			);
 			path = HomePage;
 			sourceTree = "<group>";
@@ -372,6 +375,7 @@
 				D554EAA31CBD3578001466E1 /* Commom.swift in Sources */,
 				D554EAD21CBD3C3F001466E1 /* UIImage+ImageEffects.m in Sources */,
 				D554EABE1CBD3C06001466E1 /* TAAnimatedDotView.m in Sources */,
+				D554EAD51CBD5345001466E1 /* HomePageCell.swift in Sources */,
 				D554EABF1CBD3C06001466E1 /* TADotView.m in Sources */,
 				D554EAC11CBD3C06001466E1 /* SDCollectionViewCell.m in Sources */,
 			);

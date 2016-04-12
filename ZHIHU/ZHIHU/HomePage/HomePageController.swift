@@ -27,6 +27,7 @@ struct Top_story{
         title = dic["title"] as? String ?? ""
         type = dic["type"] as? Int ?? 0
     }
+//    序列化
     func serialize() -> [String : AnyObject] {
         return ["image":image,"ga_prefix":ga_prefix,"id":id,"title":title,"type":type];
     }
@@ -88,11 +89,12 @@ class HomePageController: UITableViewController,Homeprotocol {
         }
     }
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        var cell = tableView.dequeueReusableCellWithIdentifier(homeCellIdentifier)
+        var cell = tableView.dequeueReusableCellWithIdentifier(homeCellIdentifier) as? HomePageCell
         if cell == nil {
-            cell = UITableViewCell(style: .Default, reuseIdentifier: homeCellIdentifier)
+            cell = HomePageCell(style: .Default, reuseIdentifier: homeCellIdentifier)
         }
-        cell?.textLabel?.text = stories[indexPath.item].title
+//        cell!.backgroundColor = Color("#343434")
+//        cell!.titleLabel?.text = stories[indexPath.item].title
         return cell!
     }
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
@@ -106,7 +108,8 @@ class HomePageController: UITableViewController,Homeprotocol {
     }
     override func  scrollViewDidScroll(scrollView: UIScrollView) {
         //Parallax效果
-        if scrollView != tableView {
+        guard scrollView == tableView else{
+            printLog("hahahah", logError: true)
             return
         }
         let header = tableView.tableHeaderView as! ParallaxHeaderView
@@ -124,7 +127,6 @@ class HomePageController: UITableViewController,Homeprotocol {
     func lockDirection() {
         tableView.contentOffset.y = -154
     }
-    
     // MARK:懒加载headerView
     lazy private  var headerView: SDCycleScrollView = {
         let runloopView = SDCycleScrollView(frame: CGRect(origin: CGPointZero, size: CGSize(width: self.tableView.frame.width, height: 154)), imageURLStringsGroup: nil)
