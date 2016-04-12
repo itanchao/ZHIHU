@@ -23,7 +23,6 @@
 		D554EACA1CBD3C1B001466E1 /* ParallaxHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = D554EAC81CBD3C1B001466E1 /* ParallaxHeaderView.m */; };
 		D554EACE1CBD3C26001466E1 /* UINavigationBar+Awesome.m in Sources */ = {isa = PBXBuildFile; fileRef = D554EACD1CBD3C26001466E1 /* UINavigationBar+Awesome.m */; };
 		D554EAD21CBD3C3F001466E1 /* UIImage+ImageEffects.m in Sources */ = {isa = PBXBuildFile; fileRef = D554EAD11CBD3C3F001466E1 /* UIImage+ImageEffects.m */; };
-		D5E4BE0F1CBD2BC800851D44 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5E4BE0E1CBD2BC800851D44 /* ViewController.swift */; };
 		D5E4BE141CBD2BC800851D44 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D5E4BE131CBD2BC800851D44 /* Assets.xcassets */; };
 		D5E4BE171CBD2BC800851D44 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D5E4BE151CBD2BC800851D44 /* LaunchScreen.storyboard */; };
 		D5E4BE241CBD2EB400851D44 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D5E4BE231CBD2EB400851D44 /* Default-568h@2x.png */; };
@@ -67,7 +66,6 @@
 		D554EAD11CBD3C3F001466E1 /* UIImage+ImageEffects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+ImageEffects.m"; sourceTree = "<group>"; };
 		D554EAD31CBD3CA3001466E1 /* ZhiHuSwift-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ZhiHuSwift-Bridging-Header.h"; sourceTree = "<group>"; };
 		D5E4BE091CBD2BC800851D44 /* ZHIHU.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ZHIHU.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		D5E4BE0E1CBD2BC800851D44 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		D5E4BE131CBD2BC800851D44 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D5E4BE161CBD2BC800851D44 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D5E4BE231CBD2EB400851D44 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
@@ -211,7 +209,6 @@
 				D554EA9F1CBD34F3001466E1 /* HomePage */,
 				D5E4BE251CBD325800851D44 /* Other */,
 				D5E4BE201CBD2D9700851D44 /* Sauce */,
-				D5E4BE0E1CBD2BC800851D44 /* ViewController.swift */,
 				D5E4BE131CBD2BC800851D44 /* Assets.xcassets */,
 				D5E4BE151CBD2BC800851D44 /* LaunchScreen.storyboard */,
 				D5E4BE2A1CBD329D00851D44 /* Info.plist */,
@@ -365,7 +362,6 @@
 				D554EABC1CBD3C06001466E1 /* NSData+SDDataCache.m in Sources */,
 				D554EABD1CBD3C06001466E1 /* TAAbstractDotView.m in Sources */,
 				D5E4BE271CBD325800851D44 /* AppDelegate.swift in Sources */,
-				D5E4BE0F1CBD2BC800851D44 /* ViewController.swift in Sources */,
 				D554EAC21CBD3C06001466E1 /* SDCycleScrollView.m in Sources */,
 				D554EAA61CBD35FC001466E1 /* LauchImageViewController.swift in Sources */,
 				D554EAA11CBD3513001466E1 /* HomePageController.swift in Sources */,
