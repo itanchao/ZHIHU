@@ -7,7 +7,15 @@
 //
 
 import UIKit
-
+struct Urls {
+    static let launchUrl = "http://news-at.zhihu.com/api/4/start-image/1080*1776"
+    static let homeUrl = "http://news-at.zhihu.com/api/4/news/latest"
+    //    static let launchimgData = "launchimgData"
+}
+struct Keys {
+    static let launchKey = "launchKey"
+    static let launchimgData = "launchimgData"
+}
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
@@ -15,10 +23,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-        // Override point for customization after application launch.
+        window = UIWindow(frame: kScreenBounds)
+        let rootVc = UINavigationController(rootViewController: HomePageController())
+        window?.rootViewController = rootVc;
+        window?.makeKeyAndVisible()
+        window?.showLauchPage()
         return true
     }
-
     func applicationWillResignActive(application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
         // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
@@ -43,4 +54,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
 }
-
+extension UIWindow{
+    func showLauchPage(){
+        let lauchVC = LauchImageViewController()
+        self .addSubview(lauchVC.view);
+    }
+}
