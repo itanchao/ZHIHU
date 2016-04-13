@@ -73,12 +73,21 @@ class DetailStoryViewController: UIViewController,UIWebViewDelegate,UIGestureRec
     }
     func webView(webView: UIWebView, shouldStartLoadWithRequest request: NSURLRequest, navigationType: UIWebViewNavigationType) -> Bool {
         print(request.URL?.absoluteString)
+        if request.URLString.hasPrefix("myweb:imageClick:") {
+            print(request.URLString)
+        }
+//        if request.URLString == "about:blank" {
+//            print(request.URLString)
+//            return false
+//        }
+        UIApplication.sharedApplication().networkActivityIndicatorVisible = true
         return true
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.addSubview(webView)
-        webView.frame = view.frame
+        view = webView
+////        view.addSubview(webView)
+//        webView.frame = view.frame
         print(navigationController)
         navigationController?.interactivePopGestureRecognizer?.enabled = true
         navigationController?.interactivePopGestureRecognizer?.delegate = self
