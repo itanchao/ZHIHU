@@ -2,7 +2,7 @@
 //  DetailStoryViewController.swift
 //  ZHIHU
 //
-//  Created by wzh on 16/4/13.
+//  Created by tanchao on 16/4/13.
 //  Copyright © 2016年 谈超. All rights reserved.
 //
 
@@ -54,53 +54,43 @@ struct DetailStory {
     func serialize() -> [String : AnyObject] {
         return ["body":body,"css":css,"ga_prefix":ga_prefix,"id":id,"image":image,"image_source":image_source,"images":images,"js":js,"section":section.serialize(),"share_url":share_url,"title":title,"type":type,"htmlStr":htmlStr]
     }
-    static func getDetailStory(storyId:NSNumber)->Request{
-        return Alamofire.request(.GET, Urls.detailStoryUrl+storyId.stringValue)
-    }
 }
-class DetailStoryViewController: UIViewController,UIWebViewDelegate {
-    lazy private  var webView: UIWebView = {
-        let viewWeb = UIWebView()
-        viewWeb.delegate = self
-        return viewWeb
-    }()
+class DetailStoryViewController: UIViewController,UIWebViewDelegate,UIGestureRecognizerDelegate {
     var storyID : NSNumber?{
         didSet{
-            DetailStory.getDetailStory(storyID!).responseJSON { (responsData) in
+            getDetailStory(storyID!).responseJSON { (responsData) in
                 guard responsData.result.error == nil else{
                     printLog(responsData.result.error)
                     return
                 }
                 let detail = DetailStory(dict: responsData.result.value as? [String : AnyObject] ?? [:])
-                print(detail.htmlStr)
                 self.webView.loadHTMLString(detail.htmlStr, baseURL: NSURL())
             }
-
         }
     }
-    
+    func webView(webView: UIWebView, shouldStartLoadWithRequest request: NSURLRequest, navigationType: UIWebViewNavigationType) -> Bool {
+        print(request.URL?.absoluteString)
+        return true
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         view.addSubview(webView)
         webView.frame = view.frame
-//        webView.loadHTMLString(<#T##string: String##String#>, baseURL: <#T##NSURL?#>)
-        // Do any additional setup after loading the view.
+        print(navigationController)
+        navigationController?.interactivePopGestureRecognizer?.enabled = true
+        navigationController?.interactivePopGestureRecognizer?.delegate = self
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    func gestureRecognizerShouldBegin(gestureRecognizer: UIGestureRecognizer) -> Bool {
+        if webView.canGoBack {
+            webView.goBack()
+            return false
+        }
+        return true
     }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
+    // MARK:懒加载webView
+    lazy private  var webView: UIWebView = {
+        let viewWeb = UIWebView()
+        viewWeb.delegate = self
+        return viewWeb
+    }()
 }

@@ -64,9 +64,6 @@ class HomePageController: UITableViewController,Homeprotocol {
         super.viewDidLoad()
         navigationController?.navigationBarHidden = true
         self.automaticallyAdjustsScrollViewInsets = false
-//        navigationController?.navigationBar.lt_setBackgroundColor(UIColor.clearColor())
-//        navigationController?.navigationBar.shadowImage = UIImage()
-//        automaticallyAdjustsScrollViewInsets = false
         //将其添加到ParallaxView
         let headerSubview: ParallaxHeaderView = ParallaxHeaderView.parallaxHeaderViewWithSubView(headerView, forSize: CGSize(width: tableView.frame.width, height: 154)) as! ParallaxHeaderView
         headerSubview.delegate  = self
@@ -104,6 +101,13 @@ class HomePageController: UITableViewController,Homeprotocol {
     }
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return stories.count
+    }
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+        let top = stories[indexPath.item]
+        let detailVc = DetailStoryViewController()
+        detailVc.storyID = top.id
+        navigationController?.pushViewController(detailVc, animated: true)
     }
     override func viewDidAppear(animated: Bool) {
         tableView.reloadData()
