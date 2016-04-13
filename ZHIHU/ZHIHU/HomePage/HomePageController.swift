@@ -7,7 +7,6 @@
 //
 
 import UIKit
-
 import Alamofire
 let rowHeight :CGFloat = 90.0
 let sectionHeight :CGFloat = 35.0
@@ -93,8 +92,10 @@ class HomePageController: UITableViewController,Homeprotocol {
         if cell == nil {
             cell = HomePageCell(style: .Default, reuseIdentifier: homeCellIdentifier)
         }
+        cell?.story = stories[indexPath.item]
 //        cell!.backgroundColor = Color("#343434")
 //        cell!.titleLabel?.text = stories[indexPath.item].title
+//        cell!.iconView?.sd_setImageWithURL(NSURL(string: stories[indexPath.item].images[0]))
         return cell!
     }
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
