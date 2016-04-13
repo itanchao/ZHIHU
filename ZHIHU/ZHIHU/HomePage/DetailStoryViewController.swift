@@ -54,11 +54,14 @@ struct DetailStory {
     func serialize() -> [String : AnyObject] {
         return ["body":body,"css":css,"ga_prefix":ga_prefix,"id":id,"image":image,"image_source":image_source,"images":images,"js":js,"section":section.serialize(),"share_url":share_url,"title":title,"type":type,"htmlStr":htmlStr]
     }
+    static func getDetailStory(storyId:NSNumber)->Request{
+        return Alamofire.request(.GET, Urls.detailStoryUrl+storyId.stringValue)
+    }
 }
 class DetailStoryViewController: UIViewController,UIWebViewDelegate,UIGestureRecognizerDelegate {
     var storyID : NSNumber?{
         didSet{
-            getDetailStory(storyID!).responseJSON { (responsData) in
+            DetailStory.getDetailStory(storyID!).responseJSON { (responsData) in
                 guard responsData.result.error == nil else{
                     printLog(responsData.result.error)
                     return

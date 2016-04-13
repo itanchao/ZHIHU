@@ -11,17 +11,15 @@ import Alamofire
 // MARK:URL管理
 struct Urls {
     static let launchUrl = "http://news-at.zhihu.com/api/4/start-image/1080*1776"
-    static let homeUrl = "http://news-at.zhihu.com/api/4/news/latest"
-    static let detailStoryUrl = "http://news-at.zhihu.com/api/4/news/"
+    static let  homeUrl = "http://news-at.zhihu.com/api/4/news/latest"
+    static let  detailStoryUrl = "http://news-at.zhihu.com/api/4/news/"
 }
 // MARK:静态变量
 struct Keys {
     static let launchKey = "launchKey"
     static let launchimgData = "launchimgData"
 }
-func getDetailStory(storyId:NSNumber)->Request{
-    return Alamofire.request(.GET, Urls.detailStoryUrl+storyId.stringValue)
-}
+
 // MARK:启动页展示
 extension UIWindow{
     func showLauchPage(){
