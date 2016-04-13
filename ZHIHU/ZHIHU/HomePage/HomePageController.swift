@@ -12,6 +12,7 @@ let rowHeight :CGFloat = 90.0
 let sectionHeight :CGFloat = 35.0
 let homeCellIdentifier:String = "HomeCell"
 typealias Homeprotocol = protocol<SDCycleScrollViewDelegate,ParallaxHeaderViewDelegate>
+
 // MARK:轮播图数据模型
 struct Top_story{
     var image : String
@@ -61,9 +62,11 @@ class HomePageController: UITableViewController,Homeprotocol {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationController?.navigationBar.lt_setBackgroundColor(UIColor.clearColor())
-        navigationController?.navigationBar.shadowImage = UIImage()
-        automaticallyAdjustsScrollViewInsets = false
+        navigationController?.navigationBarHidden = true
+        self.automaticallyAdjustsScrollViewInsets = false
+//        navigationController?.navigationBar.lt_setBackgroundColor(UIColor.clearColor())
+//        navigationController?.navigationBar.shadowImage = UIImage()
+//        automaticallyAdjustsScrollViewInsets = false
         //将其添加到ParallaxView
         let headerSubview: ParallaxHeaderView = ParallaxHeaderView.parallaxHeaderViewWithSubView(headerView, forSize: CGSize(width: tableView.frame.width, height: 154)) as! ParallaxHeaderView
         headerSubview.delegate  = self
@@ -94,8 +97,6 @@ class HomePageController: UITableViewController,Homeprotocol {
         }
         cell?.story = stories[indexPath.item]
 //        cell!.backgroundColor = Color("#343434")
-//        cell!.titleLabel?.text = stories[indexPath.item].title
-//        cell!.iconView?.sd_setImageWithURL(NSURL(string: stories[indexPath.item].images[0]))
         return cell!
     }
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
@@ -121,7 +122,9 @@ class HomePageController: UITableViewController,Homeprotocol {
     // MARK:SDCycleScrollViewDelegate
     func cycleScrollView(cycleScrollView: SDCycleScrollView!, didSelectItemAtIndex index: Int) {
         let top = top_stories[index]
-        print(top.serialize())
+        let detailVc = DetailStoryViewController()
+        detailVc.storyID = top.id
+        navigationController?.pushViewController(detailVc, animated: true)
     }
     
     // MARK: ParallaxHeaderViewDelegate

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2107E8C71CBE2C0B0040F2F2 /* DetailStoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2107E8C61CBE2C0B0040F2F2 /* DetailStoryViewController.swift */; };
 		D554EAA11CBD3513001466E1 /* HomePageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D554EAA01CBD3513001466E1 /* HomePageController.swift */; };
 		D554EAA31CBD3578001466E1 /* Commom.swift in Sources */ = {isa = PBXBuildFile; fileRef = D554EAA21CBD3578001466E1 /* Commom.swift */; };
 		D554EAA61CBD35FC001466E1 /* LauchImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D554EAA51CBD35FC001466E1 /* LauchImageViewController.swift */; };
@@ -34,6 +35,7 @@
 
 /* Begin PBXFileReference section */
 		1786E098ABA5D5E70918EFA5 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		2107E8C61CBE2C0B0040F2F2 /* DetailStoryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailStoryViewController.swift; sourceTree = "<group>"; };
 		81190A93E11610A53A44BB17 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE42BB0759349AD29A2D3822 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		D554EAA01CBD3513001466E1 /* HomePageController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomePageController.swift; sourceTree = "<group>"; };
@@ -109,6 +111,7 @@
 			children = (
 				D554EAA01CBD3513001466E1 /* HomePageController.swift */,
 				D554EAD41CBD5345001466E1 /* HomePageCell.swift */,
+				2107E8C61CBE2C0B0040F2F2 /* DetailStoryViewController.swift */,
 			);
 			path = HomePage;
 			sourceTree = "<group>";
@@ -368,6 +371,7 @@
 				D554EAC21CBD3C06001466E1 /* SDCycleScrollView.m in Sources */,
 				D554EAA61CBD35FC001466E1 /* LauchImageViewController.swift in Sources */,
 				D554EAA11CBD3513001466E1 /* HomePageController.swift in Sources */,
+				2107E8C71CBE2C0B0040F2F2 /* DetailStoryViewController.swift in Sources */,
 				D554EACA1CBD3C1B001466E1 /* ParallaxHeaderView.m in Sources */,
 				D554EAC31CBD3C06001466E1 /* UIView+SDExtension.m in Sources */,
 				D554EAC01CBD3C06001466E1 /* TAPageControl.m in Sources */,

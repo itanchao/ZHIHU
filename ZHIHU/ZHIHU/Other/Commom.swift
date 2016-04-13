@@ -75,6 +75,10 @@ func Color(colrStr:String) -> UIColor {
     NSScanner(string: bString).scanInt(&b)
     return UIColor(red: CGFloat(r)/255.0 , green: CGFloat(g)/255.0, blue:CGFloat(b)/255.0, alpha: 1.0)
 }
+//获取总代理
+func appCloud() -> AppDelegate {
+    return UIApplication.sharedApplication().delegate as! AppDelegate
+}
 // MARK: - 输出日志
 /// 输出日志
 ///

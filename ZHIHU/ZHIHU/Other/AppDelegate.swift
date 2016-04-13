@@ -7,11 +7,12 @@
 //
 
 import UIKit
+import Alamofire
 // MARK:URL管理
 struct Urls {
     static let launchUrl = "http://news-at.zhihu.com/api/4/start-image/1080*1776"
     static let homeUrl = "http://news-at.zhihu.com/api/4/news/latest"
-    //    static let launchimgData = "launchimgData"
+    static let detailStoryUrl = "http://news-at.zhihu.com/api/4/news/"
 }
 // MARK:静态变量
 struct Keys {
@@ -25,6 +26,7 @@ extension UIWindow{
         self .addSubview(lauchVC.view);
     }
 }
+
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
