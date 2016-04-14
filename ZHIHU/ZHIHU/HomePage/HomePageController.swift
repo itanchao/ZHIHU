@@ -32,31 +32,6 @@ struct Top_story{
         return ["image":image,"ga_prefix":ga_prefix,"id":id,"title":title,"type":type];
     }
 }
-class Top_storyA:NSObject{
-    var image : String = ""
-    var ga_prefix : String = ""
-    var id : NSNumber = 0
-    var title : String = ""
-    var type : Int = 0
-    //    序列化
-    func serialize() -> [String : AnyObject] {
-        var  count : UInt32 = 0
-        let properties = class_copyPropertyList(self.dynamicType, &count)
-        var list : [String] = []
-        class_operationPropertyList_map(properties,list_pointer: &list)
-        return dictionaryWithValuesForKeys(list)
-    }
-    func class_operationPropertyList_map(objc_property_t_pointer : UnsafeMutablePointer<objc_property_t>,
-                                         list_pointer : UnsafeMutablePointer<[String]>)
-    {
-        guard objc_property_t_pointer.memory == nil else{
-            let name =  NSString.init(UTF8String: property_getName(objc_property_t_pointer.memory))! as String
-            if name != "description" { list_pointer.memory.append(name) }
-            class_operationPropertyList_map(objc_property_t_pointer.successor(),list_pointer: list_pointer)
-            return;
-        }
-    }
-}
 // MARK:cell数据模型
 struct Story {
     var images:[String]
@@ -88,8 +63,6 @@ class HomePageController: UITableViewController,Homeprotocol {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        let str = Top_storyA()
-//        print(str.toString())
         navigationController?.navigationBarHidden = true
         self.automaticallyAdjustsScrollViewInsets = false
         //将其添加到ParallaxView
