@@ -88,16 +88,16 @@ func appCloud() -> AppDelegate {
 /// - parameter method:   方法名
 /// - parameter line:     代码行数
 func printLog<T>(message: T,
-    logError: Bool = false,
-    file: String = #file,
-    method: String = #function,
-    line: Int = #line)
+              logError: Bool = false,
+              file: String = #file,
+              method: String = #function,
+              line: Int = #line)
 {
     if logError {
-        print("\((file as NSString).lastPathComponent)[\(line)], \(method): \(message)")
+        print("\((file as NSString).lastPathComponent) <line:\(line)> <function: \(method)>{\n\(message)\n}")
     } else {
         #if DEBUG
-            print("\((file as NSString).lastPathComponent)[\(line)], \(method): \(message)")
+            print("\((file as NSString).lastPathComponent) <line:\(line)> <function: \(method)>{\n\(message)\n}")
         #endif
     }
 }

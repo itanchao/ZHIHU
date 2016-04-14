@@ -72,14 +72,10 @@ class DetailStoryViewController: UIViewController,UIWebViewDelegate,UIGestureRec
         }
     }
     func webView(webView: UIWebView, shouldStartLoadWithRequest request: NSURLRequest, navigationType: UIWebViewNavigationType) -> Bool {
-        print(request.URL?.absoluteString)
         if request.URLString.hasPrefix("myweb:imageClick:") {
-            print(request.URLString)
+            printLog(request.URLString)
         }
-//        if request.URLString == "about:blank" {
-//            print(request.URLString)
-//            return false
-//        }
+        printLog(request.URLString)
         UIApplication.sharedApplication().networkActivityIndicatorVisible = true
         return true
     }
