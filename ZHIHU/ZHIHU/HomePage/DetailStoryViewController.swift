@@ -82,8 +82,6 @@ class DetailStoryViewController: UIViewController,UIWebViewDelegate,UIGestureRec
     override func viewDidLoad() {
         super.viewDidLoad()
         view = webView
-////        view.addSubview(webView)
-//        webView.frame = view.frame
         print(navigationController)
         navigationController?.interactivePopGestureRecognizer?.enabled = true
         navigationController?.interactivePopGestureRecognizer?.delegate = self

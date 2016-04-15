@@ -105,8 +105,8 @@ extension NSObject{
      // MARK:NSObject序列化
     func serialize() -> [String : AnyObject] {
         var list : [String] = []
-        class_operationPropertyList_map(class_copyPropertyList(self.dynamicType, UnsafeMutablePointer<UInt32>.alloc(0)), list_pointer: &list)
-                return dictionaryWithValuesForKeys(list)
+        class_propertyList_recursivelyFetch(class_copyPropertyList(self.dynamicType, UnsafeMutablePointer<UInt32>.alloc(0)), list_pointer: &list)
+        return dictionaryWithValuesForKeys(list)
     }
     /*!
      获取当前类的属性
@@ -114,12 +114,12 @@ extension NSObject{
      - parameter objc_property_t_pointer:  class_copyPropertyList(self.dynamicType, UnsafeMutablePointer<UInt32>.alloc(0))
      - parameter list_pointer:            list_pointer description
      */
-    private func class_operationPropertyList_map(objc_property_t_pointer : UnsafeMutablePointer<objc_property_t>,list_pointer : UnsafeMutablePointer<[String]>)
+    private func class_propertyList_recursivelyFetch(objc_property_t_pointer : UnsafeMutablePointer<objc_property_t>,list_pointer : UnsafeMutablePointer<[String]>)
     {
         guard objc_property_t_pointer.memory == nil else{
             let name =  NSString.init(UTF8String: property_getName(objc_property_t_pointer.memory))! as String
             if name != "description" { list_pointer.memory.append(name) }
-            class_operationPropertyList_map(objc_property_t_pointer.successor(),list_pointer: list_pointer)
+            class_propertyList_recursivelyFetch(objc_property_t_pointer.successor(),list_pointer: list_pointer)
             return;
         }
     }

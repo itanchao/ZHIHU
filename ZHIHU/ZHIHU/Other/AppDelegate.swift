@@ -12,6 +12,7 @@ import Alamofire
 struct Urls {
     static let launchUrl = "http://news-at.zhihu.com/api/4/start-image/1080*1776"
     static let  homeUrl = "http://news-at.zhihu.com/api/4/news/latest"
+    static let  getMorehomedataUrl = "http://news-at.zhihu.com/api/4/news/before/"
     static let  detailStoryUrl = "http://news-at.zhihu.com/api/4/news/"
 }
 // MARK:静态变量

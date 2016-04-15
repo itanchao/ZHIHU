@@ -46,25 +46,40 @@ struct Story {
         ga_prefix = dict["ga_prefix"] as? String ?? ""
         title = dict["title"] as? String ?? ""
     }
-
     func serialize() -> [String : AnyObject] {
         return ["images":images,"type":type,"id":id,"ga_prefix":ga_prefix,"title":title];
     }
 }
-// MARK:控制器
-class HomePageController: UITableViewController,Homeprotocol {
-    var top_stories : [Top_story] = []{
-        didSet{
-            headerView.titlesGroup = top_stories.map { (top)  in top.title }
-            headerView.imageURLStringsGroup = top_stories.map { (top)  in top.image }
+struct SectionModel {
+    var date : String?
+    var stories : [Story]=[]
+    var top_stories : [Top_story]=[]
+    init(dict:[String : AnyObject]) {
+        date = dict["date"] as? String ?? ""
+        let top_storieslist = dict["top_stories"] as? [[String:AnyObject]] ?? [[:]]
+        top_stories = top_storieslist.map({ (dic) in Top_story(dic:dic)})
+        let storieslist = dict["stories"] as? [[String:AnyObject]] ?? [[:]]
+        stories = storieslist.map({ (dic) in Story(dict:dic)})
         }
     }
-    var stories : [Story] = []
-    
+// MARK:控制器
+class HomePageController: UITableViewController,Homeprotocol {
+    var sectionModels : [SectionModel] = []
+        {
+        didSet{
+            guard sectionModels.count == 0 else{
+                headerView.titlesGroup = sectionModels[0].top_stories.map { (top)  in top.title }
+                headerView.imageURLStringsGroup = sectionModels[0].top_stories.map { (top)  in top.image }
+                return
+
+            }
+        }
+    }
+    var loading :Bool = false
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationController?.navigationBarHidden = true
-        self.automaticallyAdjustsScrollViewInsets = false
+//        self.automaticallyAdjustsScrollViewInsets = false
         //将其添加到ParallaxView
         let headerSubview: ParallaxHeaderView = ParallaxHeaderView.parallaxHeaderViewWithSubView(headerView, forSize: CGSize(width: tableView.frame.width, height: 154)) as! ParallaxHeaderView
         headerSubview.delegate  = self
@@ -73,19 +88,40 @@ class HomePageController: UITableViewController,Homeprotocol {
         tableView.showsVerticalScrollIndicator = false
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 50
-        prepareForData()
+        loadNewData()
     }
-    func prepareForData() {
-        Alamofire.request(.GET, Urls.homeUrl).responseJSON { (resultData) in
+    func loadNewData() {
+        guard loading else{
+            loading = true
+            Alamofire.request(.GET, Urls.homeUrl).responseJSON { (resultData) in
+                guard resultData.result.error == nil else{
+                    print("网络失败")
+                    return
+                }
+                self.sectionModels.removeAll()
+                let datalist = resultData.result.value as? [String:AnyObject] ?? [:]
+                self.sectionModels.append(SectionModel(dict: datalist))
+                self.tableView.reloadData()
+                self.loading = false
+            }
+            return
+        }
+    }
+    func loadMoreData() {
+    guard loading else{
+        loading = true
+        let date = sectionModels.last?.date
+        Alamofire.request(.GET, Urls.getMorehomedataUrl+date!).responseJSON { (resultData) in
             guard resultData.result.error == nil else{
                 print("网络失败")
                 return
             }
-            let top_stories = resultData.result.value!["top_stories"] as? [[String:AnyObject]] ?? [[:]]
-            self.top_stories = top_stories.map({ (dic) in Top_story(dic:dic)})
-            let stories = resultData.result.value!["stories"] as? [[String:AnyObject]] ?? [[:]]
-            self.stories = stories.map({ (dic) in Story(dict:dic)})
-            self.tableView.reloadData()
+            let datalist = resultData.result.value as? [String:AnyObject] ?? [:]
+            self.sectionModels.append(SectionModel(dict: datalist))
+            self.tableView.insertSections(NSIndexSet(index: self.sectionModels.count-1), withRowAnimation: UITableViewRowAnimation.Fade)
+            self.loading = false
+        }
+        return
         }
     }
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -93,19 +129,38 @@ class HomePageController: UITableViewController,Homeprotocol {
         if cell == nil {
             cell = HomePageCell(style: .Default, reuseIdentifier: homeCellIdentifier)
         }
-        cell?.story = stories[indexPath.item]
-//        cell!.backgroundColor = Color("#343434")
+        cell?.story = sectionModels[indexPath.section].stories[indexPath.item]
         return cell!
     }
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return 1
+        return sectionModels.count
     }
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return stories.count
+        return sectionModels[section].stories.count
+    }
+//    override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+//        
+//        return section>0 ? sectionModels[section].date : nil
+//    }
+    override func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        if section == 0 {
+            return headerView;
+        }else{
+            var titleView = tableView.dequeueReusableHeaderFooterViewWithIdentifier("titleView") as? TitleView
+            if titleView == nil {
+                titleView = TitleView(reuseIdentifier: "titleView")
+            }
+//            titleView?.title = sectionModels[section].date
+            titleView?.textLabel?.text = sectionModels[section].date
+        return titleView
+        }
+    }
+    override func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return section == 0 ? 0 : 64
     }
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
-        let top = stories[indexPath.item]
+        let top = sectionModels[indexPath.section].stories[indexPath.item]
         let detailVc = DetailStoryViewController()
         detailVc.storyID = top.id
         navigationController!.pushViewController(detailVc, animated: true)
@@ -114,6 +169,17 @@ class HomePageController: UITableViewController,Homeprotocol {
         tableView.reloadData()
     }
     override func  scrollViewDidScroll(scrollView: UIScrollView) {
+        if scrollView.contentOffset.y > scrollView.contentSize.height - 1.5 * kScreenHeight {
+            loadMoreData()
+        }
+        if scrollView.contentOffset.y < -150 {
+            loadNewData()
+        }
+        
+        navigationController?.navigationBarHidden = !(scrollView.contentOffset.y > 154)
+        self.title = "今日热闻"
+        navigationController?.navigationBar.backgroundColor = UIColor.blueColor()
+        print(scrollView.contentOffset.y)
         //Parallax效果
         guard scrollView == tableView else{
             printLog("hahahah", logError: true)
@@ -126,7 +192,8 @@ class HomePageController: UITableViewController,Homeprotocol {
     }
     // MARK:SDCycleScrollViewDelegate
     func cycleScrollView(cycleScrollView: SDCycleScrollView!, didSelectItemAtIndex index: Int) {
-        let top = top_stories[index]
+        
+        let top = sectionModels[0].top_stories[index]
         printLog(top, logError: true)
         let detailVc = DetailStoryViewController()
         detailVc.storyID = top.id
@@ -152,4 +219,32 @@ class HomePageController: UITableViewController,Homeprotocol {
         runloopView.titleLabelAlpha = 1
         return runloopView
     }()
+    
+}
+class TitleView: UITableViewHeaderFooterView {
+//    var title : String?{
+//        didSet{
+//            titleLabel.text = title
+//        }
+//    }
+//    lazy private  var titleLabel: UILabel = {
+//        let view = UILabel()
+////        titileView.frame = CGRect(x: 0, y: -20, width: kScreenWidth, height: 64)
+//        view.text = "今日热闻"
+//        view.textAlignment = NSTextAlignment.Center
+//        view.backgroundColor = UIColor.blueColor()
+//        view.sizeToFit()
+//        
+//        return view
+//    }()
+    override init(reuseIdentifier: String?) {
+        super.init(reuseIdentifier: reuseIdentifier)
+//        titleLabel.frame = self.frame
+//        titleLabel.center = self.center
+//        self.addSubview(titleLabel)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
 }
