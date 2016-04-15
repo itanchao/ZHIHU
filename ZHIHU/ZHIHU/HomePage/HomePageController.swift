@@ -118,7 +118,9 @@ class HomePageController: UITableViewController,Homeprotocol {
             }
             let datalist = resultData.result.value as? [String:AnyObject] ?? [:]
             self.sectionModels.append(SectionModel(dict: datalist))
-            self.tableView.insertSections(NSIndexSet(index: self.sectionModels.count-1), withRowAnimation: UITableViewRowAnimation.Fade)
+            self.tableView.reloadData()
+//            self.tableView.reloadSections(NSIndexSet(index: self.sectionModels.count-2), withRowAnimation: UITableViewRowAnimation.Fade)
+//            self.tableView.insertSections(NSIndexSet(index: self.sectionModels.count-1), withRowAnimation: UITableViewRowAnimation.Fade)
             self.loading = false
         }
         return
@@ -146,9 +148,9 @@ class HomePageController: UITableViewController,Homeprotocol {
         if section == 0 {
             return headerView;
         }else{
-            var titleView = tableView.dequeueReusableHeaderFooterViewWithIdentifier("titleView") as? TitleView
+            var titleView = tableView.dequeueReusableHeaderFooterViewWithIdentifier("titleView")
             if titleView == nil {
-                titleView = TitleView(reuseIdentifier: "titleView")
+                titleView = UITableViewHeaderFooterView(reuseIdentifier: "titleView")
             }
 //            titleView?.title = sectionModels[section].date
             titleView?.textLabel?.text = sectionModels[section].date
@@ -220,31 +222,4 @@ class HomePageController: UITableViewController,Homeprotocol {
         return runloopView
     }()
     
-}
-class TitleView: UITableViewHeaderFooterView {
-//    var title : String?{
-//        didSet{
-//            titleLabel.text = title
-//        }
-//    }
-//    lazy private  var titleLabel: UILabel = {
-//        let view = UILabel()
-////        titileView.frame = CGRect(x: 0, y: -20, width: kScreenWidth, height: 64)
-//        view.text = "今日热闻"
-//        view.textAlignment = NSTextAlignment.Center
-//        view.backgroundColor = UIColor.blueColor()
-//        view.sizeToFit()
-//        
-//        return view
-//    }()
-    override init(reuseIdentifier: String?) {
-        super.init(reuseIdentifier: reuseIdentifier)
-//        titleLabel.frame = self.frame
-//        titleLabel.center = self.center
-//        self.addSubview(titleLabel)
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
 }
