@@ -9,7 +9,7 @@
 #ifndef ZhiHuSwift_Bridging_Header_h
 #define ZhiHuSwift_Bridging_Header_h
 #import "SDCycleScrollView.h"
-#import "UINavigationBar+Awesome.h"
+//#import "UINavigationBar+Awesome.h"
 #import "ParallaxHeaderView.h"
 //#import "UIImageView+WebCache.h"
 #endif /* ZhiHuSwift_Bridging_Header_h */

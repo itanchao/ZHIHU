@@ -25,6 +25,7 @@ class HomePageCell: UITableViewCell {
     private var iconView: UIImageView!
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
+//        backgroundColor = UIColor.Color("#fe4438")
         titleLabel = UILabel()
         titleLabel.font = UIFont.boldSystemFontOfSize(20)
         titleLabel.numberOfLines = 0;

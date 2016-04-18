@@ -78,7 +78,14 @@ class HomePageController: UITableViewController,Homeprotocol {
     var loading :Bool = false
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationController?.navigationBarHidden = true
+        tableView.scrollsToTop = true
+        //创建leftBarButtonItem以及添加手势识别
+        let leftButton = UIBarButtonItem(image: UIImage(named: "menu"), style: .Plain, target: self, action: "revealToggle:")
+        leftButton.tintColor = UIColor.whiteColor()
+        navigationItem.setLeftBarButtonItem(leftButton, animated: false)
+        navigationController?.navigationBar.tc_setBackgroundColor(UIColor.clearColor())
+//        appTopWindow().scrollsToTop = true
+//        TopWindow.scrollsToTop(true)
 //        self.automaticallyAdjustsScrollViewInsets = false
         //将其添加到ParallaxView
         let headerSubview: ParallaxHeaderView = ParallaxHeaderView.parallaxHeaderViewWithSubView(headerView, forSize: CGSize(width: tableView.frame.width, height: 154)) as! ParallaxHeaderView
@@ -158,7 +165,7 @@ class HomePageController: UITableViewController,Homeprotocol {
         }
     }
     override func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return section == 0 ? 0 : 64
+        return section == 0 ? 0 : 44
     }
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
@@ -177,11 +184,6 @@ class HomePageController: UITableViewController,Homeprotocol {
         if scrollView.contentOffset.y < -150 {
             loadNewData()
         }
-        
-        navigationController?.navigationBarHidden = !(scrollView.contentOffset.y > 154)
-        self.title = "今日热闻"
-        navigationController?.navigationBar.backgroundColor = UIColor.blueColor()
-        print(scrollView.contentOffset.y)
         //Parallax效果
         guard scrollView == tableView else{
             printLog("hahahah", logError: true)
@@ -191,6 +193,20 @@ class HomePageController: UITableViewController,Homeprotocol {
         header.layoutHeaderViewForScrollViewOffset(scrollView.contentOffset)
         header.delegate = self
         tableView.tableHeaderView = header
+        //NavBar及titleLabel透明度渐变
+        let color = UIColor(red: 1/255.0, green: 131/255.0, blue: 209/255.0, alpha: 1)
+        let offsetY = scrollView.contentOffset.y
+        let prelude: CGFloat = 90
+        
+        if offsetY >= -64 {
+            let alpha = min(1, (64 + offsetY) / (64 + prelude))
+            //titleLabel透明度渐变
+            (header.subviews[0].subviews[0] as! SDCycleScrollView).titleLabelAlpha = 1 - alpha
+            (header.subviews[0].subviews[0].subviews[0] as! UICollectionView).reloadData()
+            //NavBar透明度渐变
+            navigationController?.navigationBar.tc_setBackgroundColor(color.colorWithAlphaComponent(alpha))
+           
+        }
     }
     // MARK:SDCycleScrollViewDelegate
     func cycleScrollView(cycleScrollView: SDCycleScrollView!, didSelectItemAtIndex index: Int) {

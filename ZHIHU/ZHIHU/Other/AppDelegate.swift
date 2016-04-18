@@ -28,7 +28,6 @@ extension UIWindow{
         self .addSubview(lauchVC.view);
     }
 }
-
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
@@ -36,10 +35,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
+        
         window = UIWindow(frame: kScreenBounds)
+        window?.scrollsToTop(true)
         let rootVc = UINavigationController(rootViewController: HomePageController())
         window?.rootViewController = rootVc;
         window?.makeKeyAndVisible()
+        window?.scrollsToTop(true)
         window?.showLauchPage()
         return true
     }

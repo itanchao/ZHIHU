@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		2107E8C71CBE2C0B0040F2F2 /* DetailStoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2107E8C61CBE2C0B0040F2F2 /* DetailStoryViewController.swift */; };
+		21B653E21CC4CF9700E3926A /* UIWindowExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21B653E11CC4CF9700E3926A /* UIWindowExtension.swift */; };
+		21B653E41CC4D14D00E3926A /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21B653E31CC4D14D00E3926A /* UIColorExtension.swift */; };
+		21B653E61CC4D31400E3926A /* UINavigationBarAwesome.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21B653E51CC4D31400E3926A /* UINavigationBarAwesome.swift */; };
 		D554EAA11CBD3513001466E1 /* HomePageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D554EAA01CBD3513001466E1 /* HomePageController.swift */; };
 		D554EAA31CBD3578001466E1 /* Commom.swift in Sources */ = {isa = PBXBuildFile; fileRef = D554EAA21CBD3578001466E1 /* Commom.swift */; };
 		D554EAA61CBD35FC001466E1 /* LauchImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D554EAA51CBD35FC001466E1 /* LauchImageViewController.swift */; };
@@ -22,7 +25,6 @@
 		D554EAC31CBD3C06001466E1 /* UIView+SDExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = D554EABA1CBD3C06001466E1 /* UIView+SDExtension.m */; };
 		D554EAC91CBD3C1B001466E1 /* myUILabel.m in Sources */ = {isa = PBXBuildFile; fileRef = D554EAC61CBD3C1B001466E1 /* myUILabel.m */; };
 		D554EACA1CBD3C1B001466E1 /* ParallaxHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = D554EAC81CBD3C1B001466E1 /* ParallaxHeaderView.m */; };
-		D554EACE1CBD3C26001466E1 /* UINavigationBar+Awesome.m in Sources */ = {isa = PBXBuildFile; fileRef = D554EACD1CBD3C26001466E1 /* UINavigationBar+Awesome.m */; };
 		D554EAD21CBD3C3F001466E1 /* UIImage+ImageEffects.m in Sources */ = {isa = PBXBuildFile; fileRef = D554EAD11CBD3C3F001466E1 /* UIImage+ImageEffects.m */; };
 		D554EAD51CBD5345001466E1 /* HomePageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D554EAD41CBD5345001466E1 /* HomePageCell.swift */; };
 		D5E4BE141CBD2BC800851D44 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D5E4BE131CBD2BC800851D44 /* Assets.xcassets */; };
@@ -36,6 +38,9 @@
 /* Begin PBXFileReference section */
 		1786E098ABA5D5E70918EFA5 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		2107E8C61CBE2C0B0040F2F2 /* DetailStoryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailStoryViewController.swift; sourceTree = "<group>"; };
+		21B653E11CC4CF9700E3926A /* UIWindowExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIWindowExtension.swift; sourceTree = "<group>"; };
+		21B653E31CC4D14D00E3926A /* UIColorExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColorExtension.swift; sourceTree = "<group>"; };
+		21B653E51CC4D31400E3926A /* UINavigationBarAwesome.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UINavigationBarAwesome.swift; sourceTree = "<group>"; };
 		81190A93E11610A53A44BB17 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE42BB0759349AD29A2D3822 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		D554EAA01CBD3513001466E1 /* HomePageController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomePageController.swift; sourceTree = "<group>"; };
@@ -63,8 +68,6 @@
 		D554EAC61CBD3C1B001466E1 /* myUILabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = myUILabel.m; sourceTree = "<group>"; };
 		D554EAC71CBD3C1B001466E1 /* ParallaxHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ParallaxHeaderView.h; sourceTree = "<group>"; };
 		D554EAC81CBD3C1B001466E1 /* ParallaxHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ParallaxHeaderView.m; sourceTree = "<group>"; };
-		D554EACC1CBD3C26001466E1 /* UINavigationBar+Awesome.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINavigationBar+Awesome.h"; sourceTree = "<group>"; };
-		D554EACD1CBD3C26001466E1 /* UINavigationBar+Awesome.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationBar+Awesome.m"; sourceTree = "<group>"; };
 		D554EAD01CBD3C3F001466E1 /* UIImage+ImageEffects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+ImageEffects.h"; sourceTree = "<group>"; };
 		D554EAD11CBD3C3F001466E1 /* UIImage+ImageEffects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+ImageEffects.m"; sourceTree = "<group>"; };
 		D554EAD31CBD3CA3001466E1 /* ZhiHuSwift-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ZhiHuSwift-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -168,15 +171,6 @@
 			path = ParallaxHeaderView;
 			sourceTree = "<group>";
 		};
-		D554EACB1CBD3C26001466E1 /* AwsomeNavigationBar */ = {
-			isa = PBXGroup;
-			children = (
-				D554EACC1CBD3C26001466E1 /* UINavigationBar+Awesome.h */,
-				D554EACD1CBD3C26001466E1 /* UINavigationBar+Awesome.m */,
-			);
-			path = AwsomeNavigationBar;
-			sourceTree = "<group>";
-		};
 		D554EACF1CBD3C3F001466E1 /* AeroEffect */ = {
 			isa = PBXGroup;
 			children = (
@@ -208,7 +202,6 @@
 			isa = PBXGroup;
 			children = (
 				D554EACF1CBD3C3F001466E1 /* AeroEffect */,
-				D554EACB1CBD3C26001466E1 /* AwsomeNavigationBar */,
 				D554EAC41CBD3C1B001466E1 /* ParallaxHeaderView */,
 				D554EAA71CBD3C06001466E1 /* SDCycleScrollView */,
 				D554EAA41CBD35E3001466E1 /* LauchView */,
@@ -234,8 +227,11 @@
 			isa = PBXGroup;
 			children = (
 				D554EAA21CBD3578001466E1 /* Commom.swift */,
+				21B653E31CC4D14D00E3926A /* UIColorExtension.swift */,
 				D5E4BE261CBD325800851D44 /* AppDelegate.swift */,
 				D554EAD31CBD3CA3001466E1 /* ZhiHuSwift-Bridging-Header.h */,
+				21B653E11CC4CF9700E3926A /* UIWindowExtension.swift */,
+				21B653E51CC4D31400E3926A /* UINavigationBarAwesome.swift */,
 			);
 			path = Other;
 			sourceTree = "<group>";
@@ -363,13 +359,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D554EACE1CBD3C26001466E1 /* UINavigationBar+Awesome.m in Sources */,
+				21B653E21CC4CF9700E3926A /* UIWindowExtension.swift in Sources */,
 				D554EAC91CBD3C1B001466E1 /* myUILabel.m in Sources */,
 				D554EABC1CBD3C06001466E1 /* NSData+SDDataCache.m in Sources */,
 				D554EABD1CBD3C06001466E1 /* TAAbstractDotView.m in Sources */,
+				21B653E61CC4D31400E3926A /* UINavigationBarAwesome.swift in Sources */,
 				D5E4BE271CBD325800851D44 /* AppDelegate.swift in Sources */,
 				D554EAC21CBD3C06001466E1 /* SDCycleScrollView.m in Sources */,
 				D554EAA61CBD35FC001466E1 /* LauchImageViewController.swift in Sources */,
+				21B653E41CC4D14D00E3926A /* UIColorExtension.swift in Sources */,
 				D554EAA11CBD3513001466E1 /* HomePageController.swift in Sources */,
 				2107E8C71CBE2C0B0040F2F2 /* DetailStoryViewController.swift in Sources */,
 				D554EACA1CBD3C1B001466E1 /* ParallaxHeaderView.m in Sources */,
