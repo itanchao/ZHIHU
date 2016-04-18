@@ -35,9 +35,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-        
         window = UIWindow(frame: kScreenBounds)
-        window?.scrollsToTop(true)
         let rootVc = UINavigationController(rootViewController: HomePageController())
         window?.rootViewController = rootVc;
         window?.makeKeyAndVisible()

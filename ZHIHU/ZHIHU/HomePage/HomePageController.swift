@@ -11,7 +11,7 @@ import Alamofire
 let rowHeight :CGFloat = 90.0
 let sectionHeight :CGFloat = 35.0
 let homeCellIdentifier:String = "HomeCell"
-typealias Homeprotocol = protocol<SDCycleScrollViewDelegate,ParallaxHeaderViewDelegate>
+typealias Homeprotocol = protocol<SDCycleScrollViewDelegate,ParallaxHeaderViewDelegate,UITableViewDelegate,UITableViewDataSource>
 
 // MARK:轮播图数据模型
 struct Top_story{
@@ -63,7 +63,7 @@ struct SectionModel {
         }
     }
 // MARK:控制器
-class HomePageController: UITableViewController,Homeprotocol {
+class HomePageController: UIViewController,Homeprotocol {
     var sectionModels : [SectionModel] = []
         {
         didSet{
@@ -75,27 +75,37 @@ class HomePageController: UITableViewController,Homeprotocol {
             }
         }
     }
+    lazy private  var tableView: UITableView = {
+        let view = UITableView(frame: CGRect(x: 0, y: 20, width: kScreenWidth, height: kScreenHeight-20), style: .Plain)
+        view.tableHeaderView = UIView(frame: CGRect(x: 0, y: 0, width: kScreenWidth, height: 200))
+        view.delegate = self
+        view.dataSource = self
+        return view
+    }()
+
     var loading :Bool = false
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.addSubview(tableView)
         tableView.scrollsToTop = true
         //创建leftBarButtonItem以及添加手势识别
-        let leftButton = UIBarButtonItem(image: UIImage(named: "menu"), style: .Plain, target: self, action: "revealToggle:")
+        let leftButton = UIBarButtonItem(image: UIImage(named: "menu"), style: .Plain, target: self, action: #selector(HomePageController.revealToggle(_:)))
         leftButton.tintColor = UIColor.whiteColor()
         navigationItem.setLeftBarButtonItem(leftButton, animated: false)
         navigationController?.navigationBar.tc_setBackgroundColor(UIColor.clearColor())
-//        appTopWindow().scrollsToTop = true
-//        TopWindow.scrollsToTop(true)
-//        self.automaticallyAdjustsScrollViewInsets = false
+        navigationController?.navigationBar.shadowImage = UIImage()
         //将其添加到ParallaxView
-        let headerSubview: ParallaxHeaderView = ParallaxHeaderView.parallaxHeaderViewWithSubView(headerView, forSize: CGSize(width: tableView.frame.width, height: 154)) as! ParallaxHeaderView
-        headerSubview.delegate  = self
+//        let headerSubview: ParallaxHeaderView = ParallaxHeaderView.parallaxHeaderViewWithSubView(headerView, forSize: CGSize(width: tableView.frame.width, height: 154)) as! ParallaxHeaderView
+//        headerSubview.delegate  = self
         //将ParallaxView设置为tableHeaderView
-        tableView.tableHeaderView = headerSubview
+//        tableView.tableHeaderView = headerSubview
         tableView.showsVerticalScrollIndicator = false
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 50
         loadNewData()
+    }
+    func revealToggle(sender:UIButton) {
+        print("------------")
     }
     func loadNewData() {
         guard loading else{
@@ -127,13 +137,12 @@ class HomePageController: UITableViewController,Homeprotocol {
             self.sectionModels.append(SectionModel(dict: datalist))
             self.tableView.reloadData()
 //            self.tableView.reloadSections(NSIndexSet(index: self.sectionModels.count-2), withRowAnimation: UITableViewRowAnimation.Fade)
-//            self.tableView.insertSections(NSIndexSet(index: self.sectionModels.count-1), withRowAnimation: UITableViewRowAnimation.Fade)
             self.loading = false
         }
         return
         }
     }
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         var cell = tableView.dequeueReusableCellWithIdentifier(homeCellIdentifier) as? HomePageCell
         if cell == nil {
             cell = HomePageCell(style: .Default, reuseIdentifier: homeCellIdentifier)
@@ -141,17 +150,17 @@ class HomePageController: UITableViewController,Homeprotocol {
         cell?.story = sectionModels[indexPath.section].stories[indexPath.item]
         return cell!
     }
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return sectionModels.count
     }
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return sectionModels[section].stories.count
     }
 //    override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
 //        
 //        return section>0 ? sectionModels[section].date : nil
 //    }
-    override func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+     func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         if section == 0 {
             return headerView;
         }else{
@@ -164,10 +173,10 @@ class HomePageController: UITableViewController,Homeprotocol {
         return titleView
         }
     }
-    override func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+     func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return section == 0 ? 0 : 44
     }
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
         let top = sectionModels[indexPath.section].stories[indexPath.item]
         let detailVc = DetailStoryViewController()
@@ -177,7 +186,7 @@ class HomePageController: UITableViewController,Homeprotocol {
     override func viewDidAppear(animated: Bool) {
         tableView.reloadData()
     }
-    override func  scrollViewDidScroll(scrollView: UIScrollView) {
+     func  scrollViewDidScroll(scrollView: UIScrollView) {
         if scrollView.contentOffset.y > scrollView.contentSize.height - 1.5 * kScreenHeight {
             loadMoreData()
         }
@@ -189,10 +198,10 @@ class HomePageController: UITableViewController,Homeprotocol {
             printLog("hahahah", logError: true)
             return
         }
-        let header = tableView.tableHeaderView as! ParallaxHeaderView
-        header.layoutHeaderViewForScrollViewOffset(scrollView.contentOffset)
-        header.delegate = self
-        tableView.tableHeaderView = header
+//        let header = tableView.tableHeaderView as! ParallaxHeaderView
+//        header.layoutHeaderViewForScrollViewOffset(scrollView.contentOffset)
+//        header.delegate = self
+//        tableView.tableHeaderView = header
         //NavBar及titleLabel透明度渐变
         let color = UIColor(red: 1/255.0, green: 131/255.0, blue: 209/255.0, alpha: 1)
         let offsetY = scrollView.contentOffset.y
@@ -201,18 +210,15 @@ class HomePageController: UITableViewController,Homeprotocol {
         if offsetY >= -64 {
             let alpha = min(1, (64 + offsetY) / (64 + prelude))
             //titleLabel透明度渐变
-            (header.subviews[0].subviews[0] as! SDCycleScrollView).titleLabelAlpha = 1 - alpha
-            (header.subviews[0].subviews[0].subviews[0] as! UICollectionView).reloadData()
+//            (header.subviews[0].subviews[0] as! SDCycleScrollView).titleLabelAlpha = 1 - alpha
+//            (header.subviews[0].subviews[0].subviews[0] as! UICollectionView).reloadData()
             //NavBar透明度渐变
             navigationController?.navigationBar.tc_setBackgroundColor(color.colorWithAlphaComponent(alpha))
-           
         }
     }
     // MARK:SDCycleScrollViewDelegate
     func cycleScrollView(cycleScrollView: SDCycleScrollView!, didSelectItemAtIndex index: Int) {
-        
         let top = sectionModels[0].top_stories[index]
-        printLog(top, logError: true)
         let detailVc = DetailStoryViewController()
         detailVc.storyID = top.id
         navigationController?.pushViewController(detailVc, animated: true)
@@ -224,7 +230,8 @@ class HomePageController: UITableViewController,Homeprotocol {
     }
     // MARK:懒加载headerView
     lazy private  var headerView: SDCycleScrollView = {
-        let runloopView = SDCycleScrollView(frame: CGRect(origin: CGPointZero, size: CGSize(width: self.tableView.frame.width, height: 154)), imageURLStringsGroup: nil)
+//        let runloopView = SDCycleScrollView(frame: CGRect(origin: CGPointZero, size: CGSize(width: self.tableView.frame.width, height: 200)), imageURLStringsGroup: nil)
+        let runloopView = SDCycleScrollView(frame: CGRect(origin: CGPointZero, size: CGSize(width: self.tableView.frame.width, height: 200)), imageURLStringsGroup: nil)
         runloopView.infiniteLoop = true
         runloopView.delegate = self
         runloopView.pageControlStyle = SDCycleScrollViewPageContolStyleAnimated

@@ -17,7 +17,6 @@ extension UIWindow{
         objc_setAssociatedObject(self, &statusBar, statuswindow, objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN_NONATOMIC)
     }
     func scrollsToTop(enabel:Bool){
-        print(getStatusBar())
         if getStatusBar() == nil {
             let window = UIWindow(frame: UIApplication.sharedApplication().statusBarFrame)
             window.windowLevel = UIWindowLevelStatusBar
@@ -26,7 +25,6 @@ extension UIWindow{
             window.rootViewController = UIViewController()
             setStatusBar(window)
         }
-        print(getStatusBar())
         getStatusBar()?.hidden = !enabel
     }
     @objc func topWindowClick() {
