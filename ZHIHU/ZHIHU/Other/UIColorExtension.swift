@@ -9,13 +9,11 @@
 import Foundation
 import UIKit
 extension UIColor{
-    /*!
-     颜色
-     
-     - parameter colrStr: 色值
-     
-     - returns: 颜色
-     */
+    /// 取色
+    ///
+    /// - parameter colrStr: 色值
+    ///
+    /// - returns: 颜色
     class func Color(colrStr:String) -> UIColor {
         var cString = colrStr.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet()).uppercaseString as NSString
         if (cString.length < 6) {

@@ -65,12 +65,10 @@ extension NSObject{
         class_propertyList_recursivelyFetch(class_copyPropertyList(self.dynamicType, UnsafeMutablePointer<UInt32>.alloc(0)), list_pointer: &list)
         return dictionaryWithValuesForKeys(list)
     }
-    /*!
-     获取当前类的属性
-     
-     - parameter objc_property_t_pointer:  class_copyPropertyList(self.dynamicType, UnsafeMutablePointer<UInt32>.alloc(0))
-     - parameter list_pointer:            list_pointer description
-     */
+    /// 获取当前类的属性
+    ///
+    /// - parameter objc_property_t_pointer: class_copyPropertyList(self.dynamicType,UnsafeMutablePointer<UInt32>.alloc(0))
+    /// - parameter list_pointer:            list_pointer description
     private func class_propertyList_recursivelyFetch(objc_property_t_pointer : UnsafeMutablePointer<objc_property_t>,list_pointer : UnsafeMutablePointer<[String]>)
     {
         guard objc_property_t_pointer.memory == nil else{

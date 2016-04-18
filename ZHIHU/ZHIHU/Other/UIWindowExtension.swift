@@ -6,16 +6,9 @@
 //  Copyright © 2016年 谈超. All rights reserved.
 //
 
-import Foundation
 import UIKit
-private var statusBar:String = "Created by tanchao on 16/4/18.UIWindow为了防止重复我多写了点"
+// MARK: - UIStatusBar设置
 extension UIWindow{
-   private func getStatusBar() -> UIWindow? {
-        return objc_getAssociatedObject(self, &statusBar) as? UIWindow ?? nil
-    }
-    private func setStatusBar(statuswindow:UIWindow?) {
-        objc_setAssociatedObject(self, &statusBar, statuswindow, objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN_NONATOMIC)
-    }
     func scrollsToTop(enabel:Bool){
         if getStatusBar() == nil {
             let window = UIWindow(frame: UIApplication.sharedApplication().statusBarFrame)
@@ -45,9 +38,15 @@ extension UIWindow{
             searchAllowScrollViewInView(subview)
         }
     }
-    
+    private func getStatusBar() -> UIWindow? {
+        return objc_getAssociatedObject(self, &statusBar) as? UIWindow ?? nil
+    }
+    private func setStatusBar(statuswindow:UIWindow?) {
+        objc_setAssociatedObject(self, &statusBar, statuswindow, objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+    }
 }
-///  对UIView的一个扩展
+private var statusBar:String = "Created by tanchao on 16/4/18.UIWindow为了防止重复我多写了点"
+// MARK: - view是否在keyWindow中
 extension UIView {
     ///  判断调用方法的view是否在keyWindow中
     func viewIsInKeyWindow() -> Bool {
@@ -61,7 +60,7 @@ extension UIView {
         return !self.hidden && self.alpha > 0.01 && self.window == keyWindow && isIntersects
     }
 }
-// MARK:设置farme相关
+// MARK: - 设置farme相关
 extension UIView{
     func setX(x:CGFloat){
         var frame = self.frame
