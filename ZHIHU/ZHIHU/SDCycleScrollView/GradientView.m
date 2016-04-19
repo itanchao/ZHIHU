@@ -7,7 +7,6 @@
 //
 
 #import "GradientView.h"
-
 @implementation GradientView
 
 - (id)initWithFrame:(CGRect)frame type:(int) type{

@@ -11,7 +11,7 @@ import Alamofire
 let rowHeight :CGFloat = 90.0
 let sectionHeight :CGFloat = 35.0
 let homeCellIdentifier:String = "HomeCell"
-typealias Homeprotocol = protocol<SDCycleScrollViewDelegate,ParallaxHeaderViewDelegate,UITableViewDelegate,UITableViewDataSource>
+typealias Homeprotocol = protocol<RunLoopSwiftViewDelegate,ParallaxHeaderViewDelegate,UITableViewDelegate,UITableViewDataSource>
 
 // MARK:轮播图数据模型
 struct Top_story{
@@ -68,15 +68,18 @@ class HomePageController: UIViewController,Homeprotocol {
         {
         didSet{
             guard sectionModels.count == 0 else{
-                headerView.titlesGroup = sectionModels[0].top_stories.map { (top)  in top.title }
-                headerView.imageURLStringsGroup = sectionModels[0].top_stories.map { (top)  in top.image }
+//                headerView.titlesGroup = sectionModels[0].top_stories.map { (top)  in top.title }
+                headerView.urls = sectionModels[0].top_stories.map { (top)  in top.image }
                 return
 
             }
         }
     }
+    func runLoopSwiftViewDidClick(loopView: RunLoopSwiftView, didSelectRowAtIndex index: NSInteger) {
+        print(index)
+    }
     lazy private  var tableView: UITableView = {
-        let view = UITableView(frame: CGRect(x: 0, y: 20, width: kScreenWidth, height: kScreenHeight-20), style: .Plain)
+        let view = UITableView(frame: CGRect(x: 0, y: 0, width: kScreenWidth, height: kScreenHeight), style: .Plain)
         view.tableHeaderView = UIView(frame: CGRect(x: 0, y: 0, width: kScreenWidth, height: 200))
         view.delegate = self
         view.dataSource = self
@@ -88,6 +91,7 @@ class HomePageController: UIViewController,Homeprotocol {
         super.viewDidLoad()
         view.addSubview(tableView)
         tableView.scrollsToTop = true
+        addsubViews()
         //创建leftBarButtonItem以及添加手势识别
         let leftButton = UIBarButtonItem(image: UIImage(named: "menu"), style: .Plain, target: self, action: #selector(HomePageController.revealToggle(_:)))
         leftButton.tintColor = UIColor.whiteColor()
@@ -95,14 +99,13 @@ class HomePageController: UIViewController,Homeprotocol {
         navigationController?.navigationBar.tc_setBackgroundColor(UIColor.clearColor())
         navigationController?.navigationBar.shadowImage = UIImage()
         //将其添加到ParallaxView
-//        let headerSubview: ParallaxHeaderView = ParallaxHeaderView.parallaxHeaderViewWithSubView(headerView, forSize: CGSize(width: tableView.frame.width, height: 154)) as! ParallaxHeaderView
-//        headerSubview.delegate  = self
-        //将ParallaxView设置为tableHeaderView
-//        tableView.tableHeaderView = headerSubview
         tableView.showsVerticalScrollIndicator = false
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 50
         loadNewData()
+    }
+    func addsubViews(){
+        tableView.addSubview(headerView)
     }
     func revealToggle(sender:UIButton) {
         print("------------")
@@ -217,32 +220,38 @@ class HomePageController: UIViewController,Homeprotocol {
         }
     }
     // MARK:SDCycleScrollViewDelegate
-    func cycleScrollView(cycleScrollView: SDCycleScrollView!, didSelectItemAtIndex index: Int) {
-        let top = sectionModels[0].top_stories[index]
-        let detailVc = DetailStoryViewController()
-        detailVc.storyID = top.id
-        navigationController?.pushViewController(detailVc, animated: true)
-    }
+//    func cycleScrollView(cycleScrollView: SDCycleScrollView!, didSelectItemAtIndex index: Int) {
+//        let top = sectionModels[0].top_stories[index]
+//        let detailVc = DetailStoryViewController()
+//        detailVc.storyID = top.id
+//        navigationController?.pushViewController(detailVc, animated: true)
+//    }
     
     // MARK: ParallaxHeaderViewDelegate
     func lockDirection() {
         tableView.contentOffset.y = -154
     }
-    // MARK:懒加载headerView
-    lazy private  var headerView: SDCycleScrollView = {
-//        let runloopView = SDCycleScrollView(frame: CGRect(origin: CGPointZero, size: CGSize(width: self.tableView.frame.width, height: 200)), imageURLStringsGroup: nil)
-        let runloopView = SDCycleScrollView(frame: CGRect(origin: CGPointZero, size: CGSize(width: self.tableView.frame.width, height: 200)), imageURLStringsGroup: nil)
-        runloopView.infiniteLoop = true
-        runloopView.delegate = self
-        runloopView.pageControlStyle = SDCycleScrollViewPageContolStyleAnimated
-        runloopView.autoScrollTimeInterval = 3.0;
-        runloopView.pageControlStyle = SDCycleScrollViewPageContolStyleClassic
-        runloopView.titleLabelTextFont = UIFont(name: "STHeitiSC-Medium", size: 21)
-        runloopView.titleLabelBackgroundColor = UIColor.clearColor()
-        runloopView.titleLabelHeight = 60
-        //alpha在未设置的状态下默认为0
-        runloopView.titleLabelAlpha = 1
-        return runloopView
+    lazy private  var headerView: RunLoopSwiftView = {
+        let object = RunLoopSwiftView(frame: CGRect(x: 0, y: -36, width: kScreenWidth, height: 200))
+        object.delegate = self
+        return object
     }()
+
+//    // MARK:懒加载headerView
+//    lazy private  var headerView: SDCycleScrollView = {
+////        let runloopView = SDCycleScrollView(frame: CGRect(origin: CGPointZero, size: CGSize(width: self.tableView.frame.width, height: 200)), imageURLStringsGroup: nil)
+//        let runloopView = SDCycleScrollView(frame: CGRect(origin: CGPointZero, size: CGSize(width: self.tableView.frame.width, height: 200)), imageURLStringsGroup: nil)
+//        runloopView.infiniteLoop = true
+//        runloopView.delegate = self
+//        runloopView.pageControlStyle = SDCycleScrollViewPageContolStyleAnimated
+//        runloopView.autoScrollTimeInterval = 3.0;
+//        runloopView.pageControlStyle = SDCycleScrollViewPageContolStyleClassic
+//        runloopView.titleLabelTextFont = UIFont(name: "STHeitiSC-Medium", size: 21)
+//        runloopView.titleLabelBackgroundColor = UIColor.clearColor()
+//        runloopView.titleLabelHeight = 60
+//        //alpha在未设置的状态下默认为0
+//        runloopView.titleLabelAlpha = 1
+//        return runloopView
+//    }()
     
 }

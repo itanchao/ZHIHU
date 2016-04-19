@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		2107E8C71CBE2C0B0040F2F2 /* DetailStoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2107E8C61CBE2C0B0040F2F2 /* DetailStoryViewController.swift */; };
+		2192A18A1CC63BD900A763B0 /* RunLoopSwiftView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2192A1891CC63BD900A763B0 /* RunLoopSwiftView.swift */; };
 		D554EAA11CBD3513001466E1 /* HomePageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D554EAA01CBD3513001466E1 /* HomePageController.swift */; };
 		D554EAA61CBD35FC001466E1 /* LauchImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D554EAA51CBD35FC001466E1 /* LauchImageViewController.swift */; };
 		D554EABB1CBD3C06001466E1 /* GradientView.m in Sources */ = {isa = PBXBuildFile; fileRef = D554EAA91CBD3C06001466E1 /* GradientView.m */; };
@@ -38,6 +39,7 @@
 /* Begin PBXFileReference section */
 		1786E098ABA5D5E70918EFA5 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		2107E8C61CBE2C0B0040F2F2 /* DetailStoryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailStoryViewController.swift; sourceTree = "<group>"; };
+		2192A1891CC63BD900A763B0 /* RunLoopSwiftView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RunLoopSwiftView.swift; sourceTree = "<group>"; };
 		81190A93E11610A53A44BB17 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE42BB0759349AD29A2D3822 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		D554EAA01CBD3513001466E1 /* HomePageController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomePageController.swift; sourceTree = "<group>"; };
@@ -183,6 +185,7 @@
 		D56C9B3F1CC541A600F72C18 /* EXTENSION(扩展) */ = {
 			isa = PBXGroup;
 			children = (
+				2192A1891CC63BD900A763B0 /* RunLoopSwiftView.swift */,
 				D56C9B401CC541A600F72C18 /* Commom.swift */,
 				D56C9B411CC541A600F72C18 /* TC_UIColor.swift */,
 				D56C9B421CC541A600F72C18 /* TC_UINavigationBar.swift */,
@@ -377,6 +380,7 @@
 				D554EAA61CBD35FC001466E1 /* LauchImageViewController.swift in Sources */,
 				D56C9B461CC541A700F72C18 /* TC_UINavigationBar.swift in Sources */,
 				D554EAA11CBD3513001466E1 /* HomePageController.swift in Sources */,
+				2192A18A1CC63BD900A763B0 /* RunLoopSwiftView.swift in Sources */,
 				2107E8C71CBE2C0B0040F2F2 /* DetailStoryViewController.swift in Sources */,
 				D554EACA1CBD3C1B001466E1 /* ParallaxHeaderView.m in Sources */,
 				D554EAC31CBD3C06001466E1 /* UIView+SDExtension.m in Sources */,

@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ZHIHU/HomePage/HomePageController.swift"
-            timestampString = "482668479.590818"
+            timestampString = "482755435.43474"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "250"
-            endingLineNumber = "250"
+            startingLineNumber = "249"
+            endingLineNumber = "249"
             landmarkName = "HomePageController"
             landmarkType = "3">
          </BreakpointContent>
