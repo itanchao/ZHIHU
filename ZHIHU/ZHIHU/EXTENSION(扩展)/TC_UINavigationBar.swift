@@ -1,5 +1,5 @@
 //
-//  UINavigationBarAwesome.swift
+//  TC_UINavigationBar.swift
 //  ZHIHU
 //
 //  Created by tanchao on 16/4/18.

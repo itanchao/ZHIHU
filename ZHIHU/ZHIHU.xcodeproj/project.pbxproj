@@ -24,9 +24,9 @@
 		D554EAD21CBD3C3F001466E1 /* UIImage+ImageEffects.m in Sources */ = {isa = PBXBuildFile; fileRef = D554EAD11CBD3C3F001466E1 /* UIImage+ImageEffects.m */; };
 		D554EAD51CBD5345001466E1 /* HomePageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D554EAD41CBD5345001466E1 /* HomePageCell.swift */; };
 		D56C9B441CC541A700F72C18 /* Commom.swift in Sources */ = {isa = PBXBuildFile; fileRef = D56C9B401CC541A600F72C18 /* Commom.swift */; };
-		D56C9B451CC541A700F72C18 /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D56C9B411CC541A600F72C18 /* UIColorExtension.swift */; };
-		D56C9B461CC541A700F72C18 /* UINavigationBarAwesome.swift in Sources */ = {isa = PBXBuildFile; fileRef = D56C9B421CC541A600F72C18 /* UINavigationBarAwesome.swift */; };
-		D56C9B471CC541A700F72C18 /* UIWindowExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D56C9B431CC541A700F72C18 /* UIWindowExtension.swift */; };
+		D56C9B451CC541A700F72C18 /* TC_UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = D56C9B411CC541A600F72C18 /* TC_UIColor.swift */; };
+		D56C9B461CC541A700F72C18 /* TC_UINavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = D56C9B421CC541A600F72C18 /* TC_UINavigationBar.swift */; };
+		D56C9B471CC541A700F72C18 /* TC_scrollsToTop.swift in Sources */ = {isa = PBXBuildFile; fileRef = D56C9B431CC541A700F72C18 /* TC_scrollsToTop.swift */; };
 		D5E4BE141CBD2BC800851D44 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D5E4BE131CBD2BC800851D44 /* Assets.xcassets */; };
 		D5E4BE171CBD2BC800851D44 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D5E4BE151CBD2BC800851D44 /* LaunchScreen.storyboard */; };
 		D5E4BE241CBD2EB400851D44 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D5E4BE231CBD2EB400851D44 /* Default-568h@2x.png */; };
@@ -69,9 +69,9 @@
 		D554EAD31CBD3CA3001466E1 /* ZhiHuSwift-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ZhiHuSwift-Bridging-Header.h"; sourceTree = "<group>"; };
 		D554EAD41CBD5345001466E1 /* HomePageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomePageCell.swift; sourceTree = "<group>"; };
 		D56C9B401CC541A600F72C18 /* Commom.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Commom.swift; sourceTree = "<group>"; };
-		D56C9B411CC541A600F72C18 /* UIColorExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColorExtension.swift; sourceTree = "<group>"; };
-		D56C9B421CC541A600F72C18 /* UINavigationBarAwesome.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UINavigationBarAwesome.swift; sourceTree = "<group>"; };
-		D56C9B431CC541A700F72C18 /* UIWindowExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIWindowExtension.swift; sourceTree = "<group>"; };
+		D56C9B411CC541A600F72C18 /* TC_UIColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TC_UIColor.swift; sourceTree = "<group>"; };
+		D56C9B421CC541A600F72C18 /* TC_UINavigationBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TC_UINavigationBar.swift; sourceTree = "<group>"; };
+		D56C9B431CC541A700F72C18 /* TC_scrollsToTop.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TC_scrollsToTop.swift; sourceTree = "<group>"; };
 		D5E4BE091CBD2BC800851D44 /* ZHIHU.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ZHIHU.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D5E4BE131CBD2BC800851D44 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D5E4BE161CBD2BC800851D44 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -184,9 +184,9 @@
 			isa = PBXGroup;
 			children = (
 				D56C9B401CC541A600F72C18 /* Commom.swift */,
-				D56C9B411CC541A600F72C18 /* UIColorExtension.swift */,
-				D56C9B421CC541A600F72C18 /* UINavigationBarAwesome.swift */,
-				D56C9B431CC541A700F72C18 /* UIWindowExtension.swift */,
+				D56C9B411CC541A600F72C18 /* TC_UIColor.swift */,
+				D56C9B421CC541A600F72C18 /* TC_UINavigationBar.swift */,
+				D56C9B431CC541A700F72C18 /* TC_scrollsToTop.swift */,
 			);
 			path = "EXTENSION(扩展)";
 			sourceTree = "<group>";
@@ -370,12 +370,12 @@
 				D554EAC91CBD3C1B001466E1 /* myUILabel.m in Sources */,
 				D554EABC1CBD3C06001466E1 /* NSData+SDDataCache.m in Sources */,
 				D554EABD1CBD3C06001466E1 /* TAAbstractDotView.m in Sources */,
-				D56C9B471CC541A700F72C18 /* UIWindowExtension.swift in Sources */,
+				D56C9B471CC541A700F72C18 /* TC_scrollsToTop.swift in Sources */,
 				D5E4BE271CBD325800851D44 /* AppDelegate.swift in Sources */,
-				D56C9B451CC541A700F72C18 /* UIColorExtension.swift in Sources */,
+				D56C9B451CC541A700F72C18 /* TC_UIColor.swift in Sources */,
 				D554EAC21CBD3C06001466E1 /* SDCycleScrollView.m in Sources */,
 				D554EAA61CBD35FC001466E1 /* LauchImageViewController.swift in Sources */,
-				D56C9B461CC541A700F72C18 /* UINavigationBarAwesome.swift in Sources */,
+				D56C9B461CC541A700F72C18 /* TC_UINavigationBar.swift in Sources */,
 				D554EAA11CBD3513001466E1 /* HomePageController.swift in Sources */,
 				2107E8C71CBE2C0B0040F2F2 /* DetailStoryViewController.swift in Sources */,
 				D554EACA1CBD3C1B001466E1 /* ParallaxHeaderView.m in Sources */,

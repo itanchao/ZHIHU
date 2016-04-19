@@ -80,3 +80,72 @@ extension NSObject{
     }
 
 }
+// MARK: - 设置farme相关
+extension UIView{
+    func setX(x:CGFloat){
+        var frame = self.frame
+        frame.origin.x = x
+        self.frame = frame;
+    }
+    func setY(y:CGFloat){
+        var frame = self.frame
+        frame.origin.y = y
+        self.frame = frame;
+    }
+    func getX() ->CGFloat{
+        return self.frame.origin.x;
+    }
+    func getY() ->CGFloat{
+        return self.frame.origin.y;
+    }
+    
+    func setCenterX(centerX:CGFloat){
+        var center = self.center
+        center.x = centerX
+        self.center = center
+    }
+    func setCenterY(centerY:CGFloat){
+        var center = self.center
+        center.y = centerY
+        self.center = center
+    }
+    func getCenterX() -> CGFloat{
+        return self.center.x
+    }
+    func getCenterY() -> CGFloat{
+        return self.center.y
+    }
+    func setWidth(width:CGFloat){
+        var frame = self.frame
+        frame.size.width = width;
+        self.frame = frame
+    }
+    func setHeight(height:CGFloat){
+        var frame = self.frame
+        frame.size.height = height;
+        self.frame = frame
+    }
+    func getHeight()->CGFloat{
+        return self.frame.size.height
+    }
+    func getWidth()->CGFloat{
+        return self.frame.size.width
+    }
+    func setSize(size:CGSize){
+        var frame = self.frame;
+        frame.size = size
+        self.frame = frame
+    }
+    func getSize()->CGSize{
+        return self.frame.size
+    }
+    func setOrigin(origin:CGPoint){
+        var frame = self.frame
+        frame.origin = origin
+        self.frame = frame
+    }
+    func getOrigin()->CGPoint{
+        return self.frame.origin
+    }
+}
+
