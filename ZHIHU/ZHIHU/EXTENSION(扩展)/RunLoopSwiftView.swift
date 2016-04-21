@@ -28,7 +28,6 @@ class RunLoopSwiftView: UIView,UIScrollViewDelegate {
             pageControl.numberOfPages = loopDataGroup.count
         }
     }
-    
     private var currIndex : Int = 0{
         didSet{
             pageControl.currentPage = currIndex
@@ -83,6 +82,7 @@ class RunLoopSwiftView: UIView,UIScrollViewDelegate {
             leftImageView.frame = frame
             centerImageView.frame = CGRect(origin: CGPoint(x: CGRectGetMaxX(leftImageView.frame), y: 0), size: frame.size)
             rightImageView.frame = CGRect(origin: CGPoint(x: CGRectGetMaxX(centerImageView.frame), y: 0), size: frame.size)
+            scrollView.bringSubviewToFront(centerImageView)
             scrollView.frame = frame
             pageControl.setCenterX(getCenterX())
             pageControl.setY(frame.maxY - 20)
@@ -180,6 +180,7 @@ class ImageLabelView: UIView {
     }
     lazy private  var iconView: UIImageView = {
         let object = UIImageView()
+        object.contentMode = .ScaleAspectFill
         self.addSubview(object)
         return object
     }()
@@ -188,8 +189,8 @@ class ImageLabelView: UIView {
         label.font = UIFont.boldSystemFontOfSize(20)
         label.textColor = UIColor.whiteColor()
         label.numberOfLines = 0;
-        label.textAlignment = NSTextAlignment.Left;
-        label.lineBreakMode = NSLineBreakMode.ByCharWrapping;
+        label.textAlignment = .Left;
+        label.lineBreakMode = .ByCharWrapping;
         label.sizeToFit()
         self.addSubview(label)
         return label
