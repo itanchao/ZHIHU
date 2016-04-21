@@ -68,18 +68,19 @@ class ParallaxScrollView: UIView {
             headerTitleLabel?.alpha = 1 - (delta) * 1 / kMaxTitleAlphaOffset
         }
     }
-   private func initialSetupForCustomSubView(subV:UIView) {
-    let images =  UIScrollView(frame: bounds)
-    
+   
+    private func initialSetupForCustomSubView(subV:UIView) {
+        let images =  UIScrollView(frame: bounds)
         imageScrollView = images
         subView = subV
+        subView?.contentMode = .ScaleAspectFill
         subV.autoresizingMask = [.FlexibleLeftMargin,.FlexibleRightMargin,.FlexibleTopMargin,.FlexibleBottomMargin,.FlexibleHeight,.FlexibleWidth]
         imageScrollView?.addSubview(subV)
         bluredImageView = UIImageView(frame: subV.frame)
         bluredImageView?.autoresizingMask = subV.autoresizingMask
         bluredImageView?.alpha = 0
         imageScrollView?.addSubview(bluredImageView!)
-    addSubview(imageScrollView!)
+        addSubview(imageScrollView!)
         refreshBlurViewForNewImage()
     }
     private func initialSetupForDefaultHeader() {
@@ -87,6 +88,7 @@ class ParallaxScrollView: UIView {
         imageScrollView = imageS
         let imageV = UIImageView(frame: imageS.bounds)
         imageView = imageV
+        imageView?.contentMode = .ScaleAspectFill
         imageView?.image = headerImage
         imageView?.autoresizingMask = [.FlexibleLeftMargin,.FlexibleRightMargin,.FlexibleTopMargin,.FlexibleBottomMargin,.FlexibleHeight,.FlexibleWidth]
         imageScrollView!.addSubview(imageView!)
