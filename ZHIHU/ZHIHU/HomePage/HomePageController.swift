@@ -68,17 +68,12 @@ class HomePageController: UIViewController,Homeprotocol {
         {
         didSet{
             guard sectionModels.count == 0 else{
-//                headerView.titlesGroup = sectionModels[0].top_stories.map { (top)  in top.title }
-                headerView.urls = sectionModels[0].top_stories.map { (top)  in top.image }
+                headerView.imageGroup = sectionModels[0].top_stories.map { (top)  in top.image }
+                headerView.titleGroup = sectionModels[0].top_stories.map { (top)  in top.title }
                 return
-
             }
         }
     }
-    func runLoopSwiftViewDidClick(loopView: RunLoopSwiftView, didSelectRowAtIndex index: NSInteger) {
-        print(index)
-    }
-
     var loading :Bool = false
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -175,15 +170,19 @@ class HomePageController: UIViewController,Homeprotocol {
         detailVc.storyID = top.id
         navigationController!.pushViewController(detailVc, animated: true)
     }
-
+    func runLoopSwiftViewDidClick(loopView: RunLoopSwiftView, didSelectRowAtIndex index: NSInteger) {
+        let top = sectionModels[0].top_stories[index]
+        let detailVc = DetailStoryViewController()
+        detailVc.storyID = top.id
+        navigationController!.pushViewController(detailVc, animated: true)
+    }
     func  scrollViewDidScroll(scrollView: UIScrollView) {
         if scrollView.contentOffset.y > scrollView.contentSize.height - 1.5 * kScreenHeight {
             loadMoreData()
         }
         if scrollView.contentOffset.y < -150 {
-            loadNewData()
+//            loadNewData()
         }
-        //Parallax效果
         guard scrollView == tableView else{
             printLog("hahahah", logError: true)
             return
@@ -192,12 +191,8 @@ class HomePageController: UIViewController,Homeprotocol {
         let color = UIColor(red: 1/255.0, green: 131/255.0, blue: 209/255.0, alpha: 1)
         let offsetY = scrollView.contentOffset.y
         let prelude: CGFloat = 90
-        
         if offsetY >= -64 {
             let alpha = min(1, (64 + offsetY) / (64 + prelude))
-            //titleLabel透明度渐变
-//            (header.subviews[0].subviews[0] as! SDCycleScrollView).titleLabelAlpha = 1 - alpha
-//            (header.subviews[0].subviews[0].subviews[0] as! UICollectionView).reloadData()
             //NavBar透明度渐变
             navigationController?.navigationBar.tc_setBackgroundColor(color.colorWithAlphaComponent(alpha))
         }
@@ -206,7 +201,6 @@ class HomePageController: UIViewController,Homeprotocol {
         let view = UITableView(frame: CGRect(x: 0, y: 0, width: kScreenWidth, height: kScreenHeight), style: .Plain)
         let parallaxScrollView = ParallaxScrollView.creatParallaxScrollViewWithSubView(self.headerView, referView: view)
         view.tableHeaderView = parallaxScrollView
-        //        view.tableHeaderView = UIView(frame: CGRect(x: 0, y: 0, width: kScreenWidth, height: 200))
         view.delegate = self
         view.dataSource = self
         return view
