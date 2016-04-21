@@ -75,15 +75,10 @@ class RunLoopSwiftView: UIView,UIScrollViewDelegate {
         delegate?.runLoopSwiftViewDidClick(self, didSelectRowAtIndex: currIndex)
     }
     override func layoutSubviews() {
-        scrollView.translatesAutoresizingMaskIntoConstraints = false
+        scrollView.frame = frame
         scrollView.contentSize = CGSize(width: self.bounds.width * 3, height: 0)
-        addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|[view]|", options: NSLayoutFormatOptions.AlignAllBaseline, metrics: nil, views: ["view" : scrollView]))
-        addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|[view]|", options: NSLayoutFormatOptions.AlignAllBaseline, metrics: nil, views: ["view" : scrollView]))
-        pageControl.translatesAutoresizingMaskIntoConstraints = false
-        addConstraint(NSLayoutConstraint(item: pageControl, attribute: .CenterX, relatedBy: .Equal, toItem: self, attribute: .CenterX, multiplier: 1, constant: 0))
-        addConstraint(NSLayoutConstraint(item: pageControl, attribute: .Bottom, relatedBy: .Equal, toItem: self, attribute: .Bottom, multiplier: 1, constant: -0.005 * bounds.height))
-        print(-0.005 * bounds.height)
-        
+        pageControl.setCenterX(getCenterX())
+        pageControl.setY(frame.maxY - 20)
     }
     func timeAction() {
         if urls.count < 2 { return }

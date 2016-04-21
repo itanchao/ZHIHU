@@ -8,21 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		2107E8C71CBE2C0B0040F2F2 /* DetailStoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2107E8C61CBE2C0B0040F2F2 /* DetailStoryViewController.swift */; };
+		2134746E1CC8B05B009C5389 /* ParallaxScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2134746C1CC8B05B009C5389 /* ParallaxScrollView.swift */; };
+		2134746F1CC8B05B009C5389 /* UIImage+ImageEffects.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2134746D1CC8B05B009C5389 /* UIImage+ImageEffects.swift */; };
 		2192A18A1CC63BD900A763B0 /* RunLoopSwiftView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2192A1891CC63BD900A763B0 /* RunLoopSwiftView.swift */; };
 		D554EAA11CBD3513001466E1 /* HomePageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D554EAA01CBD3513001466E1 /* HomePageController.swift */; };
 		D554EAA61CBD35FC001466E1 /* LauchImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D554EAA51CBD35FC001466E1 /* LauchImageViewController.swift */; };
-		D554EABB1CBD3C06001466E1 /* GradientView.m in Sources */ = {isa = PBXBuildFile; fileRef = D554EAA91CBD3C06001466E1 /* GradientView.m */; };
-		D554EABC1CBD3C06001466E1 /* NSData+SDDataCache.m in Sources */ = {isa = PBXBuildFile; fileRef = D554EAAB1CBD3C06001466E1 /* NSData+SDDataCache.m */; };
-		D554EABD1CBD3C06001466E1 /* TAAbstractDotView.m in Sources */ = {isa = PBXBuildFile; fileRef = D554EAAE1CBD3C06001466E1 /* TAAbstractDotView.m */; };
-		D554EABE1CBD3C06001466E1 /* TAAnimatedDotView.m in Sources */ = {isa = PBXBuildFile; fileRef = D554EAB01CBD3C06001466E1 /* TAAnimatedDotView.m */; };
-		D554EABF1CBD3C06001466E1 /* TADotView.m in Sources */ = {isa = PBXBuildFile; fileRef = D554EAB21CBD3C06001466E1 /* TADotView.m */; };
-		D554EAC01CBD3C06001466E1 /* TAPageControl.m in Sources */ = {isa = PBXBuildFile; fileRef = D554EAB41CBD3C06001466E1 /* TAPageControl.m */; };
-		D554EAC11CBD3C06001466E1 /* SDCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D554EAB61CBD3C06001466E1 /* SDCollectionViewCell.m */; };
-		D554EAC21CBD3C06001466E1 /* SDCycleScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = D554EAB81CBD3C06001466E1 /* SDCycleScrollView.m */; };
-		D554EAC31CBD3C06001466E1 /* UIView+SDExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = D554EABA1CBD3C06001466E1 /* UIView+SDExtension.m */; };
-		D554EAC91CBD3C1B001466E1 /* myUILabel.m in Sources */ = {isa = PBXBuildFile; fileRef = D554EAC61CBD3C1B001466E1 /* myUILabel.m */; };
-		D554EACA1CBD3C1B001466E1 /* ParallaxHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = D554EAC81CBD3C1B001466E1 /* ParallaxHeaderView.m */; };
-		D554EAD21CBD3C3F001466E1 /* UIImage+ImageEffects.m in Sources */ = {isa = PBXBuildFile; fileRef = D554EAD11CBD3C3F001466E1 /* UIImage+ImageEffects.m */; };
 		D554EAD51CBD5345001466E1 /* HomePageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D554EAD41CBD5345001466E1 /* HomePageCell.swift */; };
 		D56C9B441CC541A700F72C18 /* Commom.swift in Sources */ = {isa = PBXBuildFile; fileRef = D56C9B401CC541A600F72C18 /* Commom.swift */; };
 		D56C9B451CC541A700F72C18 /* TC_UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = D56C9B411CC541A600F72C18 /* TC_UIColor.swift */; };
@@ -39,35 +29,13 @@
 /* Begin PBXFileReference section */
 		1786E098ABA5D5E70918EFA5 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		2107E8C61CBE2C0B0040F2F2 /* DetailStoryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailStoryViewController.swift; sourceTree = "<group>"; };
+		2134746C1CC8B05B009C5389 /* ParallaxScrollView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParallaxScrollView.swift; sourceTree = "<group>"; };
+		2134746D1CC8B05B009C5389 /* UIImage+ImageEffects.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+ImageEffects.swift"; sourceTree = "<group>"; };
 		2192A1891CC63BD900A763B0 /* RunLoopSwiftView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RunLoopSwiftView.swift; sourceTree = "<group>"; };
 		81190A93E11610A53A44BB17 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE42BB0759349AD29A2D3822 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		D554EAA01CBD3513001466E1 /* HomePageController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomePageController.swift; sourceTree = "<group>"; };
 		D554EAA51CBD35FC001466E1 /* LauchImageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LauchImageViewController.swift; sourceTree = "<group>"; };
-		D554EAA81CBD3C06001466E1 /* GradientView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GradientView.h; sourceTree = "<group>"; };
-		D554EAA91CBD3C06001466E1 /* GradientView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GradientView.m; sourceTree = "<group>"; };
-		D554EAAA1CBD3C06001466E1 /* NSData+SDDataCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+SDDataCache.h"; sourceTree = "<group>"; };
-		D554EAAB1CBD3C06001466E1 /* NSData+SDDataCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+SDDataCache.m"; sourceTree = "<group>"; };
-		D554EAAD1CBD3C06001466E1 /* TAAbstractDotView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TAAbstractDotView.h; sourceTree = "<group>"; };
-		D554EAAE1CBD3C06001466E1 /* TAAbstractDotView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TAAbstractDotView.m; sourceTree = "<group>"; };
-		D554EAAF1CBD3C06001466E1 /* TAAnimatedDotView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TAAnimatedDotView.h; sourceTree = "<group>"; };
-		D554EAB01CBD3C06001466E1 /* TAAnimatedDotView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TAAnimatedDotView.m; sourceTree = "<group>"; };
-		D554EAB11CBD3C06001466E1 /* TADotView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TADotView.h; sourceTree = "<group>"; };
-		D554EAB21CBD3C06001466E1 /* TADotView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TADotView.m; sourceTree = "<group>"; };
-		D554EAB31CBD3C06001466E1 /* TAPageControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TAPageControl.h; sourceTree = "<group>"; };
-		D554EAB41CBD3C06001466E1 /* TAPageControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TAPageControl.m; sourceTree = "<group>"; };
-		D554EAB51CBD3C06001466E1 /* SDCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDCollectionViewCell.h; sourceTree = "<group>"; };
-		D554EAB61CBD3C06001466E1 /* SDCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDCollectionViewCell.m; sourceTree = "<group>"; };
-		D554EAB71CBD3C06001466E1 /* SDCycleScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDCycleScrollView.h; sourceTree = "<group>"; };
-		D554EAB81CBD3C06001466E1 /* SDCycleScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDCycleScrollView.m; sourceTree = "<group>"; };
-		D554EAB91CBD3C06001466E1 /* UIView+SDExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+SDExtension.h"; sourceTree = "<group>"; };
-		D554EABA1CBD3C06001466E1 /* UIView+SDExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+SDExtension.m"; sourceTree = "<group>"; };
-		D554EAC51CBD3C1B001466E1 /* myUILabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = myUILabel.h; sourceTree = "<group>"; };
-		D554EAC61CBD3C1B001466E1 /* myUILabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = myUILabel.m; sourceTree = "<group>"; };
-		D554EAC71CBD3C1B001466E1 /* ParallaxHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ParallaxHeaderView.h; sourceTree = "<group>"; };
-		D554EAC81CBD3C1B001466E1 /* ParallaxHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ParallaxHeaderView.m; sourceTree = "<group>"; };
-		D554EAD01CBD3C3F001466E1 /* UIImage+ImageEffects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+ImageEffects.h"; sourceTree = "<group>"; };
-		D554EAD11CBD3C3F001466E1 /* UIImage+ImageEffects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+ImageEffects.m"; sourceTree = "<group>"; };
 		D554EAD31CBD3CA3001466E1 /* ZhiHuSwift-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ZhiHuSwift-Bridging-Header.h"; sourceTree = "<group>"; };
 		D554EAD41CBD5345001466E1 /* HomePageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomePageCell.swift; sourceTree = "<group>"; };
 		D56C9B401CC541A600F72C18 /* Commom.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Commom.swift; sourceTree = "<group>"; };
@@ -94,6 +62,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2134746B1CC8B05B009C5389 /* ParallaxHeaderView */ = {
+			isa = PBXGroup;
+			children = (
+				2134746C1CC8B05B009C5389 /* ParallaxScrollView.swift */,
+				2134746D1CC8B05B009C5389 /* UIImage+ImageEffects.swift */,
+			);
+			name = ParallaxHeaderView;
+			path = Sauces;
+			sourceTree = "<group>";
+		};
 		CF27AA378D052AE5312ECDD2 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -129,59 +107,6 @@
 			path = LauchView;
 			sourceTree = "<group>";
 		};
-		D554EAA71CBD3C06001466E1 /* SDCycleScrollView */ = {
-			isa = PBXGroup;
-			children = (
-				D554EAA81CBD3C06001466E1 /* GradientView.h */,
-				D554EAA91CBD3C06001466E1 /* GradientView.m */,
-				D554EAAA1CBD3C06001466E1 /* NSData+SDDataCache.h */,
-				D554EAAB1CBD3C06001466E1 /* NSData+SDDataCache.m */,
-				D554EAAC1CBD3C06001466E1 /* PageControl */,
-				D554EAB51CBD3C06001466E1 /* SDCollectionViewCell.h */,
-				D554EAB61CBD3C06001466E1 /* SDCollectionViewCell.m */,
-				D554EAB71CBD3C06001466E1 /* SDCycleScrollView.h */,
-				D554EAB81CBD3C06001466E1 /* SDCycleScrollView.m */,
-				D554EAB91CBD3C06001466E1 /* UIView+SDExtension.h */,
-				D554EABA1CBD3C06001466E1 /* UIView+SDExtension.m */,
-			);
-			path = SDCycleScrollView;
-			sourceTree = "<group>";
-		};
-		D554EAAC1CBD3C06001466E1 /* PageControl */ = {
-			isa = PBXGroup;
-			children = (
-				D554EAAD1CBD3C06001466E1 /* TAAbstractDotView.h */,
-				D554EAAE1CBD3C06001466E1 /* TAAbstractDotView.m */,
-				D554EAAF1CBD3C06001466E1 /* TAAnimatedDotView.h */,
-				D554EAB01CBD3C06001466E1 /* TAAnimatedDotView.m */,
-				D554EAB11CBD3C06001466E1 /* TADotView.h */,
-				D554EAB21CBD3C06001466E1 /* TADotView.m */,
-				D554EAB31CBD3C06001466E1 /* TAPageControl.h */,
-				D554EAB41CBD3C06001466E1 /* TAPageControl.m */,
-			);
-			path = PageControl;
-			sourceTree = "<group>";
-		};
-		D554EAC41CBD3C1B001466E1 /* ParallaxHeaderView */ = {
-			isa = PBXGroup;
-			children = (
-				D554EAC51CBD3C1B001466E1 /* myUILabel.h */,
-				D554EAC61CBD3C1B001466E1 /* myUILabel.m */,
-				D554EAC71CBD3C1B001466E1 /* ParallaxHeaderView.h */,
-				D554EAC81CBD3C1B001466E1 /* ParallaxHeaderView.m */,
-			);
-			path = ParallaxHeaderView;
-			sourceTree = "<group>";
-		};
-		D554EACF1CBD3C3F001466E1 /* AeroEffect */ = {
-			isa = PBXGroup;
-			children = (
-				D554EAD01CBD3C3F001466E1 /* UIImage+ImageEffects.h */,
-				D554EAD11CBD3C3F001466E1 /* UIImage+ImageEffects.m */,
-			);
-			path = AeroEffect;
-			sourceTree = "<group>";
-		};
 		D56C9B3F1CC541A600F72C18 /* EXTENSION(扩展) */ = {
 			isa = PBXGroup;
 			children = (
@@ -215,10 +140,8 @@
 		D5E4BE0B1CBD2BC800851D44 /* ZHIHU */ = {
 			isa = PBXGroup;
 			children = (
+				2134746B1CC8B05B009C5389 /* ParallaxHeaderView */,
 				D56C9B3F1CC541A600F72C18 /* EXTENSION(扩展) */,
-				D554EACF1CBD3C3F001466E1 /* AeroEffect */,
-				D554EAC41CBD3C1B001466E1 /* ParallaxHeaderView */,
-				D554EAA71CBD3C06001466E1 /* SDCycleScrollView */,
 				D554EAA41CBD35E3001466E1 /* LauchView */,
 				D554EA9F1CBD34F3001466E1 /* HomePage */,
 				D5E4BE251CBD325800851D44 /* Other */,
@@ -370,28 +293,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D554EAC91CBD3C1B001466E1 /* myUILabel.m in Sources */,
-				D554EABC1CBD3C06001466E1 /* NSData+SDDataCache.m in Sources */,
-				D554EABD1CBD3C06001466E1 /* TAAbstractDotView.m in Sources */,
 				D56C9B471CC541A700F72C18 /* TC_scrollsToTop.swift in Sources */,
 				D5E4BE271CBD325800851D44 /* AppDelegate.swift in Sources */,
 				D56C9B451CC541A700F72C18 /* TC_UIColor.swift in Sources */,
-				D554EAC21CBD3C06001466E1 /* SDCycleScrollView.m in Sources */,
 				D554EAA61CBD35FC001466E1 /* LauchImageViewController.swift in Sources */,
 				D56C9B461CC541A700F72C18 /* TC_UINavigationBar.swift in Sources */,
 				D554EAA11CBD3513001466E1 /* HomePageController.swift in Sources */,
 				2192A18A1CC63BD900A763B0 /* RunLoopSwiftView.swift in Sources */,
 				2107E8C71CBE2C0B0040F2F2 /* DetailStoryViewController.swift in Sources */,
-				D554EACA1CBD3C1B001466E1 /* ParallaxHeaderView.m in Sources */,
-				D554EAC31CBD3C06001466E1 /* UIView+SDExtension.m in Sources */,
-				D554EAC01CBD3C06001466E1 /* TAPageControl.m in Sources */,
-				D554EABB1CBD3C06001466E1 /* GradientView.m in Sources */,
-				D554EAD21CBD3C3F001466E1 /* UIImage+ImageEffects.m in Sources */,
+				2134746E1CC8B05B009C5389 /* ParallaxScrollView.swift in Sources */,
 				D56C9B441CC541A700F72C18 /* Commom.swift in Sources */,
-				D554EABE1CBD3C06001466E1 /* TAAnimatedDotView.m in Sources */,
+				2134746F1CC8B05B009C5389 /* UIImage+ImageEffects.swift in Sources */,
 				D554EAD51CBD5345001466E1 /* HomePageCell.swift in Sources */,
-				D554EABF1CBD3C06001466E1 /* TADotView.m in Sources */,
-				D554EAC11CBD3C06001466E1 /* SDCollectionViewCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
