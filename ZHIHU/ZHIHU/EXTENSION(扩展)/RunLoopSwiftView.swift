@@ -12,22 +12,20 @@ import SDWebImage
 protocol RunLoopSwiftViewDelegate {
     func runLoopSwiftViewDidClick(loopView: RunLoopSwiftView, didSelectRowAtIndex index: NSInteger)
 }
+struct LoopData {
+    var imageUrl : String = ""
+    var desc : String = ""
+    init(image:String = "",des:String = ""){
+        imageUrl = image
+        desc = des
+    }
+}
 class RunLoopSwiftView: UIView,UIScrollViewDelegate {
     var delegate : RunLoopSwiftViewDelegate?
-    
-    var imageGroup : [String] = []{
+    var loopDataGroup : [LoopData] = []{
         didSet{
-            descGroup = Array(count: imageGroup.count, repeatedValue: "")
             setUpRunloopView()
-            pageControl.numberOfPages = imageGroup.count
-        }
-    }
-    private var descGroup: [String] = []
-    var titleGroup : [String] = [] {
-        didSet{
-            for i in 0 ... titleGroup.count-1 {
-                descGroup[i] = titleGroup[i]
-            }
+            pageControl.numberOfPages = loopDataGroup.count
         }
     }
     
@@ -37,25 +35,21 @@ class RunLoopSwiftView: UIView,UIScrollViewDelegate {
         }
     }
     private func setUpRunloopView() {
-        if imageGroup.count < 2 {
+        if loopDataGroup.count < 2 {
             scrollView.contentSize = bounds.size
             singleImageView.frame = frame
-            singleImageView.imageUrl = imageGroup[0]
-            singleImageView.desText = descGroup[0]
+            singleImageView.loopData = loopDataGroup[0]
         }else{
             scrollView.contentSize = CGSize(width: self.bounds.width * 3, height: 0)
             runloopViewFire()
-            mapImage(imageGroup.count - 1, center: 0, right: 1)
+            mapImage(loopDataGroup.count - 1, center: 0, right: 1)
         }
     }
     private func mapImage(left:NSInteger,center:NSInteger,right:NSInteger) {
         scrollView.setContentOffset(CGPoint(x: bounds.width, y: 0), animated: false)
-        leftImageView.imageUrl = imageGroup[left]
-        centerImageView.imageUrl = imageGroup[center]
-        rightImageView.imageUrl = imageGroup[right]
-        leftImageView.desText = descGroup[left]
-        centerImageView.desText = descGroup[center]
-        rightImageView.desText = descGroup[right]
+        leftImageView.loopData = loopDataGroup[left]
+        centerImageView.loopData = loopDataGroup[center]
+        rightImageView.loopData = loopDataGroup[right]
     }
     @objc internal func scrollViewWillBeginDragging(scrollView: UIScrollView) {
         stop()
@@ -64,12 +58,12 @@ class RunLoopSwiftView: UIView,UIScrollViewDelegate {
         runloopViewFire()
     }
     func stop() {
-        if imageGroup.count < 2 { return }
+        if loopDataGroup.count < 2 { return }
         getTime().invalidate()
         timer = nil
     }
     func runloopViewFire() {
-        if imageGroup.count < 2 { return }
+        if loopDataGroup.count < 2 { return }
         NSRunLoop.currentRunLoop().addTimer(getTime(), forMode: NSDefaultRunLoopMode)
     }
     private var timer : NSTimer?
@@ -83,7 +77,7 @@ class RunLoopSwiftView: UIView,UIScrollViewDelegate {
         delegate?.runLoopSwiftViewDidClick(self, didSelectRowAtIndex: currIndex)
     }
     override func layoutSubviews() {
-        if  imageGroup.count < 2 {
+        if  loopDataGroup.count < 2 {
            singleImageView.frame = frame
         }else{
             leftImageView.frame = frame
@@ -95,7 +89,7 @@ class RunLoopSwiftView: UIView,UIScrollViewDelegate {
         }
     }
     func timeAction() {
-        if imageGroup.count < 2 { return }
+        if loopDataGroup.count < 2 { return }
         scrollView.setContentOffset(CGPoint(x:scrollView.contentOffset.x + bounds.width, y: 0), animated: true)
     }
     @objc internal func scrollViewDidScroll(scrollView: UIScrollView) {
@@ -104,12 +98,12 @@ class RunLoopSwiftView: UIView,UIScrollViewDelegate {
     private func loadImage(offX:CGFloat) {
         if offX >= bounds.width * 2 {
             currIndex = currIndex + 1
-            if currIndex == imageGroup.count - 1  {
+            if currIndex == loopDataGroup.count - 1  {
                 mapImage(currIndex - 1, center: currIndex, right: 0)
             }
-            else if currIndex == imageGroup.count {
+            else if currIndex == loopDataGroup.count {
                 currIndex = 0
-                mapImage(imageGroup.count - 1, center: currIndex, right: currIndex+1)
+                mapImage(loopDataGroup.count - 1, center: currIndex, right: currIndex+1)
             }
             else{
                 mapImage(currIndex - 1, center: currIndex, right: currIndex+1)
@@ -118,10 +112,10 @@ class RunLoopSwiftView: UIView,UIScrollViewDelegate {
         if offX <= 0 {
             currIndex = currIndex - 1
             if currIndex == 0 {
-                mapImage(imageGroup.count-1, center: 0, right: 1)
+                mapImage(loopDataGroup.count-1, center: 0, right: 1)
             }else
                 if currIndex == -1 {
-                    currIndex = imageGroup.count - 1
+                    currIndex = loopDataGroup.count - 1
                     mapImage(currIndex - 1, center: currIndex, right: 0)
                 }else{
                     mapImage(currIndex - 1, center: currIndex, right: currIndex+1)
@@ -169,19 +163,13 @@ class RunLoopSwiftView: UIView,UIScrollViewDelegate {
     }()
 }
 class ImageLabelView: UIView {
-    var imageUrl:String?{
+    var loopData : LoopData?{
         didSet{
-            iconView.sd_setImageWithURL(NSURL(string: imageUrl!))
+            iconView.sd_setImageWithURL(NSURL(string: (loopData?.imageUrl)!))
+            desLabel.text = loopData?.desc
         }
     }
-    var desText : String?{
-        didSet{
-            desLabel.text = desText
-        }
-    }
-    
     override func layoutSubviews() {
-//        iconView.frame = frame
         iconView.translatesAutoresizingMaskIntoConstraints = false
         addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|[view]|", options: NSLayoutFormatOptions.AlignAllBaseline, metrics: nil, views: ["view" : iconView]))
         addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|[view]|", options: NSLayoutFormatOptions.AlignAllBaseline, metrics: nil, views: ["view" : iconView]))
@@ -206,8 +194,6 @@ class ImageLabelView: UIView {
         self.addSubview(label)
         return label
     }()
-
-
 }
 extension UIView {
     func addOnClickListener(target: AnyObject, action: Selector) {

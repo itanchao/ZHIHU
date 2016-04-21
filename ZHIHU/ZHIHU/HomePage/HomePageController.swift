@@ -68,8 +68,7 @@ class HomePageController: UIViewController,Homeprotocol {
         {
         didSet{
             guard sectionModels.count == 0 else{
-                headerView.imageGroup = sectionModels[0].top_stories.map { (top)  in top.image }
-                headerView.titleGroup = sectionModels[0].top_stories.map { (top)  in top.title }
+                headerView.loopDataGroup = sectionModels[0].top_stories.map { (top)  in LoopData(image: top.image, des: top.title) }
                 return
             }
         }
