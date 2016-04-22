@@ -75,7 +75,7 @@ class RunLoopSwiftView: UIView,UIScrollViewDelegate {
     @objc func pageAction() {
         delegate?.runLoopSwiftViewDidClick(self, didSelectRowAtIndex: currIndex)
     }
-    override func layoutSubviews() {
+    internal override func layoutSubviews() {
         if  loopDataGroup.count < 2 {
            singleImageView.frame = frame
         }else{
@@ -88,7 +88,7 @@ class RunLoopSwiftView: UIView,UIScrollViewDelegate {
             pageControl.setY(frame.maxY - 20)
         }
     }
-    func timeAction() {
+    @objc private func timeAction() {
         if loopDataGroup.count < 2 { return }
         scrollView.setContentOffset(CGPoint(x:scrollView.contentOffset.x + bounds.width, y: 0), animated: true)
     }
