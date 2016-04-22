@@ -65,6 +65,7 @@ class HomePageController: UIViewController,Homeprotocol {
         view.addSubview(naviTitle)
         naviTitle.setCenterY(44)
         naviTitle.setCenterX(view.getCenterX())
+        view.addSubview(circleChart)
         tableView.showsVerticalScrollIndicator = false
         loadNewData()
     }
@@ -88,6 +89,8 @@ class HomePageController: UIViewController,Homeprotocol {
                 self.sectionModels.append(SectionModel(dict: datalist))
                 self.tableView.reloadData()
                 self.loading = false
+                self.circleChart.stopAnimating()
+//                self.circleChart.activityView.stopAnimating()
             }
             return
         }
@@ -109,26 +112,8 @@ class HomePageController: UIViewController,Homeprotocol {
             return
         }
     }
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = HomePageCell.homePageCellWithTableView(tableView)
-        cell.story = sectionModels[indexPath.section].stories[indexPath.item]
-        return cell
-    }
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return sectionModels.count
-    }
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return sectionModels[section].stories.count
-    }
-    func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        if section == 0 {
-            return nil;
-        }else{
-            let titleView = HomePageHeaderView.homePageHeaderViewWithTableView(tableView)
-            titleView.date = sectionModels[section].date
-        return titleView
-        }
-    }
+
+    // MARK:设置navgationBar高度
     func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return section == 0 ? CGFloat.min : 44
     }
@@ -145,6 +130,24 @@ class HomePageController: UIViewController,Homeprotocol {
         }
         
     }
+    // MARK:-UITableViewDataSource
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        let cell = HomePageCell.homePageCellWithTableView(tableView)
+        cell.story = sectionModels[indexPath.section].stories[indexPath.item]
+        return cell
+    }
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        return sectionModels.count
+    }
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return sectionModels[section].stories.count
+    }
+    func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let titleView = HomePageHeaderView.homePageHeaderViewWithTableView(tableView)
+        titleView.date = sectionModels[section].date
+        return section == 0 ? nil : titleView
+    }
+    // MARK:-UITableViewDelegate
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
         let top = sectionModels[indexPath.section].stories[indexPath.item]
@@ -152,6 +155,7 @@ class HomePageController: UIViewController,Homeprotocol {
         detailVc.storyID = top.id
         navigationController!.pushViewController(detailVc, animated: true)
     }
+    // MARK:-RunLoopSwiftViewDelegate
     func runLoopSwiftViewDidClick(loopView: RunLoopSwiftView, didSelectRowAtIndex index: NSInteger) {
         let top = sectionModels[0].top_stories[index]
         let detailVc = DetailStoryViewController()
@@ -216,8 +220,7 @@ class HomePageController: UIViewController,Homeprotocol {
     lazy private  var tableView: UITableView = {
         let view = UITableView(frame: CGRect(x: 0, y: 0, width: kScreenWidth, height: kScreenHeight), style: .Plain)
         view.rowHeight = 100
-        let parallaxScrollView = ParallaxScrollView.creatParallaxScrollViewWithSubView(self.headerView, referView: view)
-        view.tableHeaderView = parallaxScrollView
+        view.tableHeaderView = ParallaxScrollView.creatParallaxScrollViewWithSubView(self.headerView, referView: view)
         view.delegate = self
         view.dataSource = self
         return view
@@ -227,6 +230,14 @@ class HomePageController: UIViewController,Homeprotocol {
         object.delegate = self
         return object
     }()
+    lazy private  var circleChart: TCCircleChart = {
+        let view = TCCircleChart.attachObserveToScrollView(self.tableView, target: self, action: #selector(HomePageController.loadNewData))
+        view.frame = CGRect(x: 10, y: 20, width: 20, height: 20)
+        view.setCenterY(35)
+        view.setX(self.naviTitle.getX()-30)
+        return view
+    }()
+
 //    var criticaloffSetY : CGFloat = 152 - 20
     
 }
