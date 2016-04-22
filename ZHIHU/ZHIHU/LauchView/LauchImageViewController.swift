@@ -44,7 +44,7 @@ extension LauchData{
         NSUserDefaults.standardUserDefaults().setValue(self.serialize(), forKey: Keys.launchKey)
     }
 }
-class LauchImageViewController: UIViewController {
+class LauchImageViewController: UIViewController,Storage {
     var  lauchData  = LauchData(){
         didSet{
             lauchData.save()

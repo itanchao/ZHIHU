@@ -147,4 +147,24 @@ extension UIView{
         return self.frame.origin
     }
 }
+public protocol Storage {
+    func storageSaveObj(object:AnyObject,key:String)
+    func storageGetObjWithKey(key:String) -> AnyObject?
+    func StorageRemoveObjWithKey(key:String)
+}
+extension Storage{
+    func storageSaveObj(object:AnyObject,key:String) {
+        NSUserDefaults.standardUserDefaults().setObject(object, forKey: key)
+        NSUserDefaults.standardUserDefaults().synchronize()
+    }
+    func storageGetObjWithKey(key:String) -> AnyObject? {
+        return NSUserDefaults.standardUserDefaults().objectForKey(key)
+    }
+    func StorageRemoveObjWithKey(key:String){
+        NSUserDefaults.standardUserDefaults().removeObjectForKey(key)
+        NSUserDefaults.standardUserDefaults().synchronize()
+    }
+    
+    
+}
 

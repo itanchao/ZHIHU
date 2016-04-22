@@ -50,7 +50,7 @@ class HomePageController: UIViewController,Homeprotocol {
         didSet{
             guard sectionModels.count == 0 else{
                 headerView.loopDataGroup = sectionModels[0].top_stories.map { (top)  in LoopData(image: top.image, des: top.title) }
-                criticaloffSetY =  CGFloat(152) + CGFloat(sectionModels[0].stories.count * 101) - 20
+//                criticaloffSetY =  CGFloat(152) + CGFloat(sectionModels[0].stories.count * 101) - 20
                 return
             }
         }
@@ -93,46 +93,59 @@ class HomePageController: UIViewController,Homeprotocol {
         }
     }
     func loadMoreData() {
-    guard loading else{
-        loading = true
-        let date = sectionModels.last?.date
-        Alamofire.request(.GET, Urls.getMorehomedataUrl+date!).responseJSON { (resultData) in
-            guard resultData.result.error == nil else{
-                print("网络失败")
-                return
+        guard loading else{
+            loading = true
+            let date = sectionModels.last?.date
+            Alamofire.request(.GET, Urls.getMorehomedataUrl+date!).responseJSON { (resultData) in
+                guard resultData.result.error == nil else{
+                    print("网络失败")
+                    return
+                }
+                let datalist = resultData.result.value as? [String:AnyObject] ?? [:]
+                self.sectionModels.append(SectionModel(dict: datalist))
+                self.tableView.insertSections(NSIndexSet(index: self.sectionModels.count - 1), withRowAnimation: UITableViewRowAnimation.Fade)
+                self.loading = false
             }
-            let datalist = resultData.result.value as? [String:AnyObject] ?? [:]
-            self.sectionModels.append(SectionModel(dict: datalist))
-            self.tableView.insertSections(NSIndexSet(index: self.sectionModels.count - 1), withRowAnimation: UITableViewRowAnimation.Fade)
-            self.loading = false
-        }
-        return
+            return
         }
     }
-     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = HomePageCell.homePageCellWithTableView(tableView)
         cell.story = sectionModels[indexPath.section].stories[indexPath.item]
         return cell
     }
-     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return sectionModels.count
     }
-     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return sectionModels[section].stories.count
     }
-     func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+    func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         if section == 0 {
-            return headerView;
+            return nil;
         }else{
             let titleView = HomePageHeaderView.homePageHeaderViewWithTableView(tableView)
             titleView.date = sectionModels[section].date
         return titleView
         }
     }
-     func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return section == 0 ? 0 : 44
+    func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return section == 0 ? CGFloat.min : 44
     }
-     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    func tableView(tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
+        if (section == 0) {
+            navBar.setHeight(64)
+            naviTitle.alpha = 1
+        }
+    }
+    func tableView(tableView: UITableView, didEndDisplayingHeaderView view: UIView, forSection section: Int) {
+        if (section == 0) {
+            navBar.setHeight(20)
+            naviTitle.alpha = 0
+        }
+        
+    }
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
         let top = sectionModels[indexPath.section].stories[indexPath.item]
         let detailVc = DetailStoryViewController()
@@ -147,19 +160,19 @@ class HomePageController: UIViewController,Homeprotocol {
     }
     func  scrollViewDidScroll(scrollView: UIScrollView) {
         let offsetY = scrollView.contentOffset.y
-        naviTitle.alpha = 1
-        if offsetY>criticaloffSetY {
-            var h = offsetY - criticaloffSetY
-            if h > 44 {
-                h = 44
-                naviTitle.alpha = 0
-            }
-            navBar.setHeight(64-h)
-            naviTitle.setCenterY(44-h)
-        }else{
-            navBar.setHeight(64)
-            naviTitle.setCenterY(44)
-        }
+//        naviTitle.alpha = 1
+//        if offsetY>criticaloffSetY {
+//            var h = offsetY - criticaloffSetY
+//            if h > 44 {
+//                h = 44
+//                naviTitle.alpha = 0
+//            }
+//            navBar.setHeight(64-h)
+//            naviTitle.setCenterY(44-h)
+//        }else{
+//            navBar.setHeight(64)
+//            naviTitle.setCenterY(44)
+//        }
         if offsetY > scrollView.contentSize.height - 1.5 * kScreenHeight {
             loadMoreData()
         }
@@ -214,6 +227,6 @@ class HomePageController: UIViewController,Homeprotocol {
         object.delegate = self
         return object
     }()
-    var criticaloffSetY : CGFloat = 152 - 20
+//    var criticaloffSetY : CGFloat = 152 - 20
     
 }
