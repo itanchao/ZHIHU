@@ -2,7 +2,7 @@
 //  TCCircleChart.swift
 //  ZHIHU
 //
-//  Created by wzh on 16/4/22.
+//  Created by tanchao on 16/4/22.
 //  Copyright © 2016年 谈超. All rights reserved.
 //
 
