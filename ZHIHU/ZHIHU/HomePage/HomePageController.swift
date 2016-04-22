@@ -12,7 +12,6 @@ let rowHeight :CGFloat = 90.0
 let sectionHeight :CGFloat = 35.0
 let homeCellIdentifier:String = "HomeCell"
 typealias Homeprotocol = protocol<RunLoopSwiftViewDelegate,UITableViewDelegate,UITableViewDataSource>
-
 // MARK:轮播图数据模型
 struct Top_story{
     var image : String
@@ -30,24 +29,6 @@ struct Top_story{
 //    序列化
     func serialize() -> [String : AnyObject] {
         return ["image":image,"ga_prefix":ga_prefix,"id":id,"title":title,"type":type];
-    }
-}
-// MARK:cell数据模型
-struct Story {
-    var images:[String]
-    var type : Int
-    var id : NSNumber
-    var ga_prefix : String
-    var title : String
-    init(dict:[String : AnyObject]) {
-        images = dict["images"] as? [String] ?? [""]
-        type = dict["type"] as? Int ?? 0
-        id = dict["id"] as? NSNumber ?? 0
-        ga_prefix = dict["ga_prefix"] as? String ?? ""
-        title = dict["title"] as? String ?? ""
-    }
-    func serialize() -> [String : AnyObject] {
-        return ["images":images,"type":type,"id":id,"ga_prefix":ga_prefix,"title":title];
     }
 }
 struct SectionModel {
@@ -122,7 +103,6 @@ class HomePageController: UIViewController,Homeprotocol {
             }
             let datalist = resultData.result.value as? [String:AnyObject] ?? [:]
             self.sectionModels.append(SectionModel(dict: datalist))
-//            self.tableView.reloadData()
             self.tableView.insertSections(NSIndexSet(index: self.sectionModels.count - 1), withRowAnimation: UITableViewRowAnimation.Fade)
             self.loading = false
         }
@@ -130,12 +110,9 @@ class HomePageController: UIViewController,Homeprotocol {
         }
     }
      func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        var cell = tableView.dequeueReusableCellWithIdentifier(homeCellIdentifier) as? HomePageCell
-        if cell == nil {
-            cell = HomePageCell(style: .Default, reuseIdentifier: homeCellIdentifier)
-        }
-        cell?.story = sectionModels[indexPath.section].stories[indexPath.item]
-        return cell!
+        let cell = HomePageCell.homePageCellWithTableView(tableView)
+        cell.story = sectionModels[indexPath.section].stories[indexPath.item]
+        return cell
     }
      func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return sectionModels.count
@@ -189,10 +166,6 @@ class HomePageController: UIViewController,Homeprotocol {
         if offsetY < -150 {
 //            loadNewData()
         }
-        guard scrollView == tableView else{
-            printLog("hahahah", logError: true)
-            return
-        }
         //NavBar及titleLabel透明度渐变
         let color = UIColor(red: 1/255.0, green: 131/255.0, blue: 209/255.0, alpha: 1)
         let prelude: CGFloat = 90
@@ -204,6 +177,7 @@ class HomePageController: UIViewController,Homeprotocol {
             navBar.backgroundColor = UIColor.clearColor()
         }
     }
+    // MARK:- 懒加载控件
     lazy private  var navBar: UIView = {
         let object = UIView(frame: CGRect(origin: CGPointZero, size: CGSize(width: kScreenWidth, height: 64)))
         return object
@@ -240,6 +214,6 @@ class HomePageController: UIViewController,Homeprotocol {
         object.delegate = self
         return object
     }()
-    var criticaloffSetY : CGFloat = 199.9
+    var criticaloffSetY : CGFloat = 152 - 20
     
 }

@@ -8,13 +8,37 @@
 
 import UIKit
 import SDWebImage
+// MARK:cell数据模型
+struct Story {
+    var images:[String]
+    var type : Int
+    var id : NSNumber
+    var ga_prefix : String
+    var title : String
+    init(dict:[String : AnyObject]) {
+        images = dict["images"] as? [String] ?? [""]
+        type = dict["type"] as? Int ?? 0
+        id = dict["id"] as? NSNumber ?? 0
+        ga_prefix = dict["ga_prefix"] as? String ?? ""
+        title = dict["title"] as? String ?? ""
+    }
+    func serialize() -> [String : AnyObject] {
+        return ["images":images,"type":type,"id":id,"ga_prefix":ga_prefix,"title":title];
+    }
+}
 class HomePageCell: UITableViewCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
     }
-    
+    class func homePageCellWithTableView(tableView:UITableView) -> HomePageCell {
+        var tableViewCell = tableView.dequeueReusableCellWithIdentifier("HomePageCell") as? HomePageCell
+        if (tableViewCell == nil) {
+            tableViewCell = HomePageCell(style: .Default, reuseIdentifier: "HomePageCell")
+        }
+        return tableViewCell!
+    }
     var story: Story?{
         didSet{
             titleLabel.text = story?.title
