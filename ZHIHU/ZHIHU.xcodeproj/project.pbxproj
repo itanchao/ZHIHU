@@ -11,6 +11,7 @@
 		2134746E1CC8B05B009C5389 /* ParallaxScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2134746C1CC8B05B009C5389 /* ParallaxScrollView.swift */; };
 		2134746F1CC8B05B009C5389 /* UIImage+ImageEffects.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2134746D1CC8B05B009C5389 /* UIImage+ImageEffects.swift */; };
 		2192A18A1CC63BD900A763B0 /* RunLoopSwiftView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2192A1891CC63BD900A763B0 /* RunLoopSwiftView.swift */; };
+		219573DB1CC9C13300BBA710 /* HomePageHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 219573DA1CC9C13300BBA710 /* HomePageHeaderView.swift */; };
 		D554EAA11CBD3513001466E1 /* HomePageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D554EAA01CBD3513001466E1 /* HomePageController.swift */; };
 		D554EAA61CBD35FC001466E1 /* LauchImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D554EAA51CBD35FC001466E1 /* LauchImageViewController.swift */; };
 		D554EAD51CBD5345001466E1 /* HomePageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D554EAD41CBD5345001466E1 /* HomePageCell.swift */; };
@@ -32,6 +33,7 @@
 		2134746C1CC8B05B009C5389 /* ParallaxScrollView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParallaxScrollView.swift; sourceTree = "<group>"; };
 		2134746D1CC8B05B009C5389 /* UIImage+ImageEffects.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+ImageEffects.swift"; sourceTree = "<group>"; };
 		2192A1891CC63BD900A763B0 /* RunLoopSwiftView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RunLoopSwiftView.swift; sourceTree = "<group>"; };
+		219573DA1CC9C13300BBA710 /* HomePageHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomePageHeaderView.swift; sourceTree = "<group>"; };
 		81190A93E11610A53A44BB17 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE42BB0759349AD29A2D3822 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		D554EAA01CBD3513001466E1 /* HomePageController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomePageController.swift; sourceTree = "<group>"; };
@@ -95,6 +97,7 @@
 				D554EAA01CBD3513001466E1 /* HomePageController.swift */,
 				D554EAD41CBD5345001466E1 /* HomePageCell.swift */,
 				2107E8C61CBE2C0B0040F2F2 /* DetailStoryViewController.swift */,
+				219573DA1CC9C13300BBA710 /* HomePageHeaderView.swift */,
 			);
 			path = HomePage;
 			sourceTree = "<group>";
@@ -302,6 +305,7 @@
 				2192A18A1CC63BD900A763B0 /* RunLoopSwiftView.swift in Sources */,
 				2107E8C71CBE2C0B0040F2F2 /* DetailStoryViewController.swift in Sources */,
 				2134746E1CC8B05B009C5389 /* ParallaxScrollView.swift in Sources */,
+				219573DB1CC9C13300BBA710 /* HomePageHeaderView.swift in Sources */,
 				D56C9B441CC541A700F72C18 /* Commom.swift in Sources */,
 				2134746F1CC8B05B009C5389 /* UIImage+ImageEffects.swift in Sources */,
 				D554EAD51CBD5345001466E1 /* HomePageCell.swift in Sources */,

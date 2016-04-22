@@ -37,6 +37,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         window = UIWindow(frame: kScreenBounds)
         let rootVc = UINavigationController(rootViewController: HomePageController())
+        rootVc.navigationBarHidden = true
         window?.rootViewController = rootVc;
         window?.makeKeyAndVisible()
         window?.scrollsToTop(true)

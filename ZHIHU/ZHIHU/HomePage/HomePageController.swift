@@ -77,18 +77,11 @@ class HomePageController: UIViewController,Homeprotocol {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.addSubview(tableView)
-//        tableView.scrollsToTop = true
-//        addsubViews()
-        //创建leftBarButtonItem以及添加手势识别
-        let leftButton = UIBarButtonItem(image: UIImage(named: "menu"), style: .Plain, target: self, action: #selector(HomePageController.revealToggle(_:)))
-        leftButton.tintColor = UIColor.whiteColor()
-        navigationItem.setLeftBarButtonItem(leftButton, animated: false)
-        navigationController?.navigationBar.tc_setBackgroundColor(UIColor.clearColor())
-        navigationController?.navigationBar.shadowImage = UIImage()
-        //将其添加到ParallaxView
+        view.addSubview(navBar)
+        navBar.backgroundColor = UIColor.clearColor()
+        view.addSubview(barButtonItem)
+        view.addSubview(naviTitle)
         tableView.showsVerticalScrollIndicator = false
-        tableView.rowHeight = UITableViewAutomaticDimension
-        tableView.estimatedRowHeight = 50
         loadNewData()
     }
     override func viewDidAppear(animated: Bool) {
@@ -151,11 +144,8 @@ class HomePageController: UIViewController,Homeprotocol {
         if section == 0 {
             return headerView;
         }else{
-            var titleView = tableView.dequeueReusableHeaderFooterViewWithIdentifier("titleView")
-            if titleView == nil {
-                titleView = UITableViewHeaderFooterView(reuseIdentifier: "titleView")
-            }
-            titleView?.textLabel?.text = sectionModels[section].date
+            let titleView = HomePageHeaderView.homePageHeaderViewWithTableView(tableView)
+            titleView.date = sectionModels[section].date
         return titleView
         }
     }
@@ -176,10 +166,12 @@ class HomePageController: UIViewController,Homeprotocol {
         navigationController!.pushViewController(detailVc, animated: true)
     }
     func  scrollViewDidScroll(scrollView: UIScrollView) {
-        if scrollView.contentOffset.y > scrollView.contentSize.height - 1.5 * kScreenHeight {
+        let offsetY = scrollView.contentOffset.y
+
+        if offsetY > scrollView.contentSize.height - 1.5 * kScreenHeight {
             loadMoreData()
         }
-        if scrollView.contentOffset.y < -150 {
+        if offsetY < -150 {
 //            loadNewData()
         }
         guard scrollView == tableView else{
@@ -188,16 +180,42 @@ class HomePageController: UIViewController,Homeprotocol {
         }
         //NavBar及titleLabel透明度渐变
         let color = UIColor(red: 1/255.0, green: 131/255.0, blue: 209/255.0, alpha: 1)
-        let offsetY = scrollView.contentOffset.y
         let prelude: CGFloat = 90
-        if offsetY >= -64 {
-            let alpha = min(1, (64 + offsetY) / (64 + prelude))
+        if offsetY > -20 {
+            let alpha = min(1, (20 + offsetY) / (20 + prelude))
             //NavBar透明度渐变
-            navigationController?.navigationBar.tc_setBackgroundColor(color.colorWithAlphaComponent(alpha))
+            navBar.backgroundColor = color.colorWithAlphaComponent(alpha)
+        }else{
+            navBar.backgroundColor = UIColor.clearColor()
         }
     }
+    lazy private  var navBar: UIView = {
+        let object = UIView(frame: CGRect(origin: CGPointZero, size: CGSize(width: kScreenWidth, height: 64)))
+        return object
+    }()
+    lazy private  var barButtonItem: UIButton = {
+        let object = UIButton()
+        object.setBackgroundImage(UIImage(named: "menu"), forState: .Normal)
+        object.setCenterY(34)
+        object.setX(20)
+        object.tintColor = UIColor.whiteColor()
+        object.sizeToFit()
+        object.addTarget(self, action: #selector(HomePageController.revealToggle(_:)), forControlEvents: .TouchUpInside)
+        return object
+    }()
+    lazy private  var naviTitle: UILabel = {
+        let object = UILabel()
+        object.font = UIFont.systemFontOfSize(18)
+        object.textColor = UIColor.whiteColor()
+        object.text = "今日热闻"
+        object.sizeToFit()
+        object.setCenterY(self.barButtonItem.getCenterY())
+        object.setCenterX(self.view.getCenterX())
+        return object
+    }()
     lazy private  var tableView: UITableView = {
         let view = UITableView(frame: CGRect(x: 0, y: 0, width: kScreenWidth, height: kScreenHeight), style: .Plain)
+        view.rowHeight = 100
         let parallaxScrollView = ParallaxScrollView.creatParallaxScrollViewWithSubView(self.headerView, referView: view)
         view.tableHeaderView = parallaxScrollView
         view.delegate = self
