@@ -20,7 +20,10 @@ class HomePageHeaderView: UITableViewHeaderFooterView {
             textLabel?.sizeToFit()
         }
     }
-    
+    ///  类方法加载headerView
+    ///
+    ///  - parameter tableView: tableView description
+    ///
     class func homePageHeaderViewWithTableView(tableView:UITableView) -> HomePageHeaderView {
         var headerView = tableView.dequeueReusableHeaderFooterViewWithIdentifier("HomePageHeaderView") as? HomePageHeaderView
         if (headerView == nil) {

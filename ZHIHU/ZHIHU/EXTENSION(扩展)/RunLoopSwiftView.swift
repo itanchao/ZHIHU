@@ -171,8 +171,8 @@ class ImageLabelView: UIView {
     }
     override func layoutSubviews() {
         iconView.translatesAutoresizingMaskIntoConstraints = false
-        addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|[view]|", options: NSLayoutFormatOptions.AlignAllBaseline, metrics: nil, views: ["view" : iconView]))
-        addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|[view]|", options: NSLayoutFormatOptions.AlignAllBaseline, metrics: nil, views: ["view" : iconView]))
+        addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|[view]|", options: .AlignAllBaseline, metrics: nil, views: ["view" : iconView]))
+        addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|[view]|", options: .AlignAllBaseline, metrics: nil, views: ["view" : iconView]))
         desLabel.translatesAutoresizingMaskIntoConstraints = false
         addConstraint(NSLayoutConstraint(item: desLabel, attribute: .Bottom, relatedBy: .Equal, toItem: iconView, attribute: .Bottom, multiplier: 1, constant: -20))
         addConstraint(NSLayoutConstraint(item: desLabel, attribute: .Left, relatedBy: .Equal, toItem: iconView, attribute: .Left, multiplier: 1, constant: 20))
