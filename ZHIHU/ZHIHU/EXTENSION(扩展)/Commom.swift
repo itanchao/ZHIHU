@@ -98,7 +98,6 @@ extension UIView{
     func getY() ->CGFloat{
         return self.frame.origin.y;
     }
-    
     func setCenterX(centerX:CGFloat){
         var center = self.center
         center.x = centerX

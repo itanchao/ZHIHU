@@ -69,6 +69,7 @@ class HomePageController: UIViewController,Homeprotocol {
         didSet{
             guard sectionModels.count == 0 else{
                 headerView.loopDataGroup = sectionModels[0].top_stories.map { (top)  in LoopData(image: top.image, des: top.title) }
+                criticaloffSetY =  CGFloat(152) + CGFloat(sectionModels[0].stories.count * 101) - 20
                 return
             }
         }
@@ -81,6 +82,8 @@ class HomePageController: UIViewController,Homeprotocol {
         navBar.backgroundColor = UIColor.clearColor()
         view.addSubview(barButtonItem)
         view.addSubview(naviTitle)
+        naviTitle.setCenterY(44)
+        naviTitle.setCenterX(view.getCenterX())
         tableView.showsVerticalScrollIndicator = false
         loadNewData()
     }
@@ -119,8 +122,8 @@ class HomePageController: UIViewController,Homeprotocol {
             }
             let datalist = resultData.result.value as? [String:AnyObject] ?? [:]
             self.sectionModels.append(SectionModel(dict: datalist))
-            self.tableView.reloadData()
-//            self.tableView.reloadSections(NSIndexSet(index: self.sectionModels.count-2), withRowAnimation: UITableViewRowAnimation.Fade)
+//            self.tableView.reloadData()
+            self.tableView.insertSections(NSIndexSet(index: self.sectionModels.count - 1), withRowAnimation: UITableViewRowAnimation.Fade)
             self.loading = false
         }
         return
@@ -167,7 +170,19 @@ class HomePageController: UIViewController,Homeprotocol {
     }
     func  scrollViewDidScroll(scrollView: UIScrollView) {
         let offsetY = scrollView.contentOffset.y
-
+        naviTitle.alpha = 1
+        if offsetY>criticaloffSetY {
+            var h = offsetY - criticaloffSetY
+            if h > 44 {
+                h = 44
+                naviTitle.alpha = 0
+            }
+            navBar.setHeight(64-h)
+            naviTitle.setCenterY(44-h)
+        }else{
+            navBar.setHeight(64)
+            naviTitle.setCenterY(44)
+        }
         if offsetY > scrollView.contentSize.height - 1.5 * kScreenHeight {
             loadMoreData()
         }
@@ -196,7 +211,7 @@ class HomePageController: UIViewController,Homeprotocol {
     lazy private  var barButtonItem: UIButton = {
         let object = UIButton()
         object.setBackgroundImage(UIImage(named: "menu"), forState: .Normal)
-        object.setCenterY(34)
+        object.setCenterY(30)
         object.setX(20)
         object.tintColor = UIColor.whiteColor()
         object.sizeToFit()
@@ -209,8 +224,6 @@ class HomePageController: UIViewController,Homeprotocol {
         object.textColor = UIColor.whiteColor()
         object.text = "今日热闻"
         object.sizeToFit()
-        object.setCenterY(self.barButtonItem.getCenterY())
-        object.setCenterX(self.view.getCenterX())
         return object
     }()
     lazy private  var tableView: UITableView = {
@@ -227,5 +240,6 @@ class HomePageController: UIViewController,Homeprotocol {
         object.delegate = self
         return object
     }()
+    var criticaloffSetY : CGFloat = 199.9
     
 }

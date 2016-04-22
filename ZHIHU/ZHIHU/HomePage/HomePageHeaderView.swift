@@ -25,7 +25,7 @@ class HomePageHeaderView: UITableViewHeaderFooterView {
         var headerView = tableView.dequeueReusableHeaderFooterViewWithIdentifier("HomePageHeaderView") as? HomePageHeaderView
         if (headerView == nil) {
             headerView = HomePageHeaderView(reuseIdentifier: "HomePageHeaderView")
-            headerView?.contentView.backgroundColor = UIColor(red: 23/255, green: 144/255, blue: 211/255, alpha: 1)
+            headerView?.contentView.backgroundColor = UIColor(red: 1/255.0, green: 131/255.0, blue: 209/255.0, alpha: 1)
         }
         return  headerView!
     }
