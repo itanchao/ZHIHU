@@ -68,7 +68,7 @@ class RunLoopSwiftView: UIView,UIScrollViewDelegate {
     private var timer : NSTimer?
     private func getTime()->NSTimer{
         if (timer == nil)  {
-            timer = NSTimer.scheduledTimerWithTimeInterval(3.0, target: self, selector: #selector(RunLoopSwiftView.timeAction), userInfo: nil, repeats: true)
+            timer = NSTimer.scheduledTimerWithTimeInterval(5.0, target: self, selector: #selector(RunLoopSwiftView.timeAction), userInfo: nil, repeats: true)
         }
         return timer!
     }
@@ -197,7 +197,7 @@ class ImageLabelView: UIView {
     }()
 }
 extension UIView {
-    func addOnClickListener(target: AnyObject, action: Selector) {
+    private func addOnClickListener(target: AnyObject, action: Selector) {
         let gr = UITapGestureRecognizer(target: target, action: action)
         gr.numberOfTapsRequired = 1
         userInteractionEnabled = true
