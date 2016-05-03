@@ -68,7 +68,7 @@ class RunLoopSwiftView: UIView,UIScrollViewDelegate {
     private var timer : NSTimer?
     private func getTime()->NSTimer{
         if (timer == nil)  {
-            timer = NSTimer.scheduledTimerWithTimeInterval(2.0, target: self, selector: #selector(RunLoopSwiftView.timeAction), userInfo: nil, repeats: true)
+            timer = NSTimer.scheduledTimerWithTimeInterval(3.0, target: self, selector: #selector(RunLoopSwiftView.timeAction), userInfo: nil, repeats: true)
         }
         return timer!
     }
