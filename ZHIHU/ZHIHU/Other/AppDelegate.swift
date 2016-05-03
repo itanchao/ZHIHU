@@ -24,8 +24,7 @@ struct Keys {
 // MARK:启动页展示
 extension UIWindow{
     func showLauchPage(){
-        let lauchVC = LauchImageViewController()
-        self .addSubview(lauchVC.view);
+        addSubview(LauchImageViewController().view);
     }
 }
 @UIApplicationMain
