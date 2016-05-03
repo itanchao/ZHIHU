@@ -75,9 +75,22 @@ class DetailStoryViewController: UIViewController,UIWebViewDelegate,UIGestureRec
         if request.URLString.hasPrefix("myweb:imageClick:") {
             printLog(request.URLString)
         }
-        printLog(request.URLString)
         UIApplication.sharedApplication().networkActivityIndicatorVisible = true
         return true
+    }
+    func webViewDidFinishLoad(webView: UIWebView) {
+         UIApplication.sharedApplication().networkActivityIndicatorVisible = false
+//        调整字号
+        let str = "document.getElementsByTagName('body')[0].style.webkitTextSizeAdjust= '100%'"
+        webView.stringByEvaluatingJavaScriptFromString(str)
+        webView.stringByEvaluatingJavaScriptFromString(getImages()!)
+        webView.stringByEvaluatingJavaScriptFromString("getImages()")
+    }
+    func getImages() ->String? {
+        do {
+            return try! String(contentsOfURL:NSBundle.mainBundle().URLForResource("tools.js", withExtension: nil)!, encoding: NSUTF8StringEncoding)
+        }
+        
     }
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -99,4 +112,5 @@ class DetailStoryViewController: UIViewController,UIWebViewDelegate,UIGestureRec
         viewWeb.delegate = self
         return viewWeb
     }()
+
 }
