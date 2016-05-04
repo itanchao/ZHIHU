@@ -58,7 +58,7 @@ struct DetailStory {
         return Alamofire.request(.GET, Urls.detailStoryUrl+storyId.stringValue)
     }
 }
-class DetailStoryViewController: UIViewController,UIWebViewDelegate,UIGestureRecognizerDelegate {
+class DetailStoryViewController: UIViewController,UIWebViewDelegate,UIGestureRecognizerDelegate,UIScrollViewDelegate {
     var storyID : NSNumber?{
         didSet{
             DetailStory.getDetailStory(storyID!).responseJSON { (responsData) in
@@ -68,6 +68,7 @@ class DetailStoryViewController: UIViewController,UIWebViewDelegate,UIGestureRec
                 }
                 let detail = DetailStory(dict: responsData.result.value as? [String : AnyObject] ?? [:])
                 self.webView.loadHTMLString(detail.htmlStr, baseURL: NSURL())
+//                self.headerView.sd_setImageWithURL(NSURL(string: detail.image))
             }
         }
     }
@@ -95,9 +96,9 @@ class DetailStoryViewController: UIViewController,UIWebViewDelegate,UIGestureRec
     override func viewDidLoad() {
         super.viewDidLoad()
         view = webView
-        print(navigationController)
         navigationController?.interactivePopGestureRecognizer?.enabled = true
         navigationController?.interactivePopGestureRecognizer?.delegate = self
+        
     }
     func gestureRecognizerShouldBegin(gestureRecognizer: UIGestureRecognizer) -> Bool {
         if webView.canGoBack {
@@ -112,5 +113,15 @@ class DetailStoryViewController: UIViewController,UIWebViewDelegate,UIGestureRec
         viewWeb.delegate = self
         return viewWeb
     }()
+//    lazy private  var headerView: UIImageView = {
+//        let object = UIImageView(frame: CGRectMake(0, -35, kScreenWidth, 300))
+//        self.webView.addSubview(ParallaxScrollView.creatParallaxScrollViewWithSubView(object, referView: self.webView.scrollView))
+//        self.webView.addSubview(object)
+//        self.webView.bringSubviewToFront(object)
+//        
+//        return object
+//    }()
+
+
 
 }

@@ -14,9 +14,9 @@ class ParallaxScrollView: UIView {
     ///  - parameter image:     要展示的图片
     ///  - parameter forSize:   view大xiao
     ///  - parameter referView: 依赖view(headerView会依赖于这个view形变)
-    static func creatParallaxScrollViewWithImage(image:UIImage,forSize:CGSize,referView:UITableView?) -> ParallaxScrollView {
+    static func creatParallaxScrollViewWithImage(image:UIImage,forSize:CGSize,referView:UIScrollView?) -> ParallaxScrollView {
         let paraScrollView = ParallaxScrollView(frame: CGRect(origin: CGPointZero, size: forSize))
-        paraScrollView.dependTableView = referView
+        paraScrollView.dependScrollView = referView
         paraScrollView.headerImage = image
         paraScrollView.initialSetupForDefaultHeader()
         return paraScrollView
@@ -25,9 +25,9 @@ class ParallaxScrollView: UIView {
     ///
     ///  - parameter subView:   view
     ///  - parameter referView: 依赖view(headerView会依赖于这个view形变)
-    static func creatParallaxScrollViewWithSubView(subView:UIView,referView:UITableView) -> ParallaxScrollView {
+    static func creatParallaxScrollViewWithSubView(subView:UIView,referView:UIScrollView) -> ParallaxScrollView {
        let paraScrollView = ParallaxScrollView(frame: CGRect(origin: CGPointZero, size: subView.bounds.size))
-        paraScrollView.dependTableView = referView
+        paraScrollView.dependScrollView = referView
         paraScrollView.initialSetupForCustomSubView(subView)
         return paraScrollView
     }
@@ -122,14 +122,17 @@ class ParallaxScrollView: UIView {
     }
     ///  监听依赖View的滚动
     private func watchDependViewScrolled() {
-        dependTableView!.addObserver(self, forKeyPath: "contentOffset", options: [.New,.Old], context: UnsafeMutablePointer<Void>.alloc(0))
+        dependScrollView!.addObserver(self, forKeyPath: "contentOffset", options: [.New,.Old], context: UnsafeMutablePointer<Void>.alloc(0))
     }
     override func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [String : AnyObject]?, context: UnsafeMutablePointer<Void>) {
         if keyPath == "contentOffset" {
-            layoutHeaderViewForScrollViewOffset(dependTableView!.contentOffset)
+            layoutHeaderViewForScrollViewOffset(dependScrollView!.contentOffset)
         }
     }
-    private var dependTableView : UITableView?{
+    deinit{
+        dependScrollView?.removeObserver(self, forKeyPath: "contentOffset")
+    }
+    private var dependScrollView : UIScrollView?{
         didSet{
             watchDependViewScrolled()
         }
