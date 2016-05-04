@@ -72,9 +72,16 @@ class DetailStoryViewController: UIViewController,UIWebViewDelegate,UIGestureRec
             }
         }
     }
+        /// ImageUrlprefix
+    private var ImageUrlprefix:String = "imageurlprefix:"
+    func getImageSrcJs() -> String {
+        do {
+            return try! String(contentsOfURL:NSBundle.mainBundle().URLForResource("tools.js", withExtension: nil)!, encoding: NSUTF8StringEncoding)
+        }
+    }
     func webView(webView: UIWebView, shouldStartLoadWithRequest request: NSURLRequest, navigationType: UIWebViewNavigationType) -> Bool {
-        if request.URLString.hasPrefix("myweb:imageClick:") {
-            printLog(request.URLString)
+        if (request.URLString.hasPrefix(ImageUrlprefix)) {
+            print(request.URLString)
         }
         UIApplication.sharedApplication().networkActivityIndicatorVisible = true
         return true
@@ -84,14 +91,8 @@ class DetailStoryViewController: UIViewController,UIWebViewDelegate,UIGestureRec
 //        调整字号
         let str = "document.getElementsByTagName('body')[0].style.webkitTextSizeAdjust= '100%'"
         webView.stringByEvaluatingJavaScriptFromString(str)
-        webView.stringByEvaluatingJavaScriptFromString(getImages()!)
-        webView.stringByEvaluatingJavaScriptFromString("getImages()")
-    }
-    func getImages() ->String? {
-        do {
-            return try! String(contentsOfURL:NSBundle.mainBundle().URLForResource("tools.js", withExtension: nil)!, encoding: NSUTF8StringEncoding)
-        }
-        
+        webView.stringByEvaluatingJavaScriptFromString(getImageSrcJs())
+        webView.stringByEvaluatingJavaScriptFromString("getimageSrc('\(ImageUrlprefix)')")
     }
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -122,6 +123,5 @@ class DetailStoryViewController: UIViewController,UIWebViewDelegate,UIGestureRec
 //        return object
 //    }()
 
-
-
 }
+
