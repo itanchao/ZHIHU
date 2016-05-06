@@ -72,11 +72,8 @@ class DetailStoryViewController: UIViewController,UIWebViewDelegate,UIGestureRec
             }
         }
     }
-    var webPageimageList:[String] = []{
-        didSet{
-        print(webPageimageList.count)
-        }
-    }
+        /// 网页图片集合
+    var webPageimageList:[String] = []
     
         /// ImageUrlprefix
     private var ImageUrlprefix:String = "imageurlprefix:"
@@ -86,6 +83,7 @@ class DetailStoryViewController: UIViewController,UIWebViewDelegate,UIGestureRec
         }
     }
     func webView(webView: UIWebView, shouldStartLoadWithRequest request: NSURLRequest, navigationType: UIWebViewNavigationType) -> Bool {
+///    点击了其中一张图片
         if (request.URLString.hasPrefix(ImageUrlprefix)) {
             let iconUrl = (request.URLString as NSString).substringFromIndex(15)
             for i in 0...webPageimageList.count-1  {
@@ -96,11 +94,11 @@ class DetailStoryViewController: UIViewController,UIWebViewDelegate,UIGestureRec
             }
             return false
         }
+///     获取页面所有图片
         if request.URLString.hasPrefix("imagelist:") {
             webPageimageList = (request.URLString as NSString).substringFromIndex(10).componentsSeparatedByString(",")
             return false;
         }
-        print(request.URLString)
         UIApplication.sharedApplication().networkActivityIndicatorVisible = true
         return true
     }
@@ -114,7 +112,9 @@ class DetailStoryViewController: UIViewController,UIWebViewDelegate,UIGestureRec
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-        view = webView
+//        view = webView
+        view.addSubview(webView)
+        webView.frame = view.frame
         navigationController?.interactivePopGestureRecognizer?.enabled = true
         navigationController?.interactivePopGestureRecognizer?.delegate = self
         

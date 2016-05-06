@@ -6,6 +6,7 @@ var getimageSrc = function (prefixStr){
     {
         objs[i].onclick=function()
         {
+            alert(this.src);
             document.location= prefixStr+this.src;
         };
         imageList.push(objs[i].src);
