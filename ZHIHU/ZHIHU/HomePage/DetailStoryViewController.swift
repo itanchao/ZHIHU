@@ -84,7 +84,7 @@ class DetailStoryViewController: UIViewController,UIWebViewDelegate,UIGestureRec
     }
     func webView(webView: UIWebView, shouldStartLoadWithRequest request: NSURLRequest, navigationType: UIWebViewNavigationType) -> Bool {
 ///    点击了其中一张图片
-        if (request.URLString.hasPrefix(ImageUrlprefix)) {
+        if request.URLString.hasPrefix(ImageUrlprefix) {
             let iconUrl = (request.URLString as NSString).substringFromIndex(15)
             for i in 0...webPageimageList.count-1  {
                 if webPageimageList[i] == iconUrl {
