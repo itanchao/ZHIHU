@@ -72,6 +72,12 @@ class DetailStoryViewController: UIViewController,UIWebViewDelegate,UIGestureRec
             }
         }
     }
+    var webPageimageList:[String] = []{
+        didSet{
+        print(webPageimageList.count)
+        }
+    }
+    
         /// ImageUrlprefix
     private var ImageUrlprefix:String = "imageurlprefix:"
     func getImageSrcJs() -> String {
@@ -81,8 +87,20 @@ class DetailStoryViewController: UIViewController,UIWebViewDelegate,UIGestureRec
     }
     func webView(webView: UIWebView, shouldStartLoadWithRequest request: NSURLRequest, navigationType: UIWebViewNavigationType) -> Bool {
         if (request.URLString.hasPrefix(ImageUrlprefix)) {
-            print(request.URLString)
+            let iconUrl = (request.URLString as NSString).substringFromIndex(15)
+            for i in 0...webPageimageList.count-1  {
+                if webPageimageList[i] == iconUrl {
+                    print("第\(i)张图:\(webPageimageList[i])")
+                    break
+                }
+            }
+            return false
         }
+        if request.URLString.hasPrefix("imagelist:") {
+            webPageimageList = (request.URLString as NSString).substringFromIndex(10).componentsSeparatedByString(",")
+            return false;
+        }
+        print(request.URLString)
         UIApplication.sharedApplication().networkActivityIndicatorVisible = true
         return true
     }

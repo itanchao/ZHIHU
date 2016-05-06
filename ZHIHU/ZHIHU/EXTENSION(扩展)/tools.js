@@ -1,13 +1,16 @@
 
-function getimageSrc(prefixStr){
+var getimageSrc = function (prefixStr){
     var objs = document.getElementsByTagName("img");
-    alert(prefixStr);
+    var imageList = [];
     for(var i=0;i<objs.length;i++)
     {
         objs[i].onclick=function()
         {
             document.location= prefixStr+this.src;
         };
+        imageList.push(objs[i].src);
     };
-    return objs.length;
+    document.location= "imagelist:"+imageList;
+    return imageList;
+//    return objs.length;
 };
