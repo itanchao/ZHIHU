@@ -50,6 +50,7 @@ struct DetailStory {
         title = dict["title"] as? String ?? ""
         type = dict["type"] as? Int ?? 0
         htmlStr = "<html><head><link rel=\"stylesheet\" href="+css[0]+"></head><body>"+body+"</body></html>"
+        print(htmlStr)
     }
     func serialize() -> [String : AnyObject] {
         return ["body":body,"css":css,"ga_prefix":ga_prefix,"id":id,"image":image,"image_source":image_source,"images":images,"js":js,"section":section.serialize(),"share_url":share_url,"title":title,"type":type,"htmlStr":htmlStr]
