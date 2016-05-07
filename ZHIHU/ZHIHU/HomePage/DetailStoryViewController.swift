@@ -87,13 +87,6 @@ class DetailStoryViewController: UIViewController,UIWebViewDelegate,UIGestureRec
         if request.URLString.hasPrefix(ImageUrlprefix) {
             let iconUrl = (request.URLString as NSString).substringFromIndex(15)
             BrowseImagesView.showImageWithUrls(webPageimageList, currentImg: iconUrl)
-//            for i in 0...webPageimageList.count-1  {
-//                if webPageimageList[i] == iconUrl {
-//                    print("第\(i)张图:\(webPageimageList[i])")
-//                    BrowseImagesView.showImageWithUrl(iconUrl)
-//                    break
-//                }
-//            }
             return false
         }
 ///     获取页面所有图片
@@ -101,6 +94,12 @@ class DetailStoryViewController: UIViewController,UIWebViewDelegate,UIGestureRec
             webPageimageList = (request.URLString as NSString).substringFromIndex(10).componentsSeparatedByString(",")
             return false;
         }
+        if request.URLString  == "about:blank"{
+            webView.scrollView.addSubview(webHeaderView)
+            return true
+        }
+        print(request.URLString)
+        webHeaderView.removeFromSuperview()
         UIApplication.sharedApplication().networkActivityIndicatorVisible = true
         return true
     }
@@ -111,6 +110,9 @@ class DetailStoryViewController: UIViewController,UIWebViewDelegate,UIGestureRec
         webView.stringByEvaluatingJavaScriptFromString(str)
         webView.stringByEvaluatingJavaScriptFromString(getImageSrcJs())
         webView.stringByEvaluatingJavaScriptFromString("getimageSrc('\(ImageUrlprefix)')")
+    }
+    func webView(webView: UIWebView, didFailLoadWithError error: NSError?) {
+        print(error)
     }
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -143,7 +145,6 @@ class DetailStoryViewController: UIViewController,UIWebViewDelegate,UIGestureRec
     }()
     lazy private  var webHeaderView: ParallaxScrollView = {
         let object = (ParallaxScrollView.creatParallaxWebHeaderViewWithSubView(self.headerView, forSize: CGSize(width: kScreenWidth, height: 223), referView: self.webView))
-         self.webView.scrollView.addSubview(object)
         return object
     }()
 
