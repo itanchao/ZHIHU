@@ -172,7 +172,7 @@ class BrowseImagesView: UIView,UIScrollViewDelegate {
         return imageView!;
     }
     lazy private  var scrollView: UIScrollView = {
-        let object = UIScrollView(frame: CGRect(origin: CGPointZero, size: CGSize(width: kScreenWidth, height: kScreenHeight-40)))
+        let object = UIScrollView(frame: CGRect(origin: CGPointZero, size: CGSize(width: kScreenWidth, height: kScreenHeight)))
         object.showsVerticalScrollIndicator = false
         object.showsHorizontalScrollIndicator = false
         object.bouncesZoom = true
