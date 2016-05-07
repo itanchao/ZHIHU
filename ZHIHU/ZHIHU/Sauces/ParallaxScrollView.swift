@@ -21,6 +21,18 @@ class ParallaxScrollView: UIView {
         paraScrollView.initialSetupForDefaultHeader()
         return paraScrollView
     }
+    /// 创建一个Webview的headerView
+    ///
+    /// - parameter subView:   view
+    /// - parameter forSize:   view大小
+    /// - parameter referView: 依赖的webView
+    static func creatParallaxWebHeaderViewWithSubView(subView:UIView,forSize:CGSize,referView:UIWebView) -> ParallaxScrollView {
+        let paraScrollView = ParallaxScrollView(frame: CGRect(origin: CGPoint(x: 0, y: -20), size: forSize))
+        paraScrollView.initialSetupForCustomSubView(subView)
+        paraScrollView.dependScrollView = referView.scrollView
+        return paraScrollView;
+        
+    }
     ///  将一个view改造成ParallaxView
     ///
     ///  - parameter subView:   view

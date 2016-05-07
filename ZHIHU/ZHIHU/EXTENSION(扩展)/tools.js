@@ -12,9 +12,9 @@ var getimageSrc = function (prefixStr){
          */
         objs[i].onclick=function()
         {
-//            alert(this.src);
-            var rect = this.getBoundingClientRect();
-            alert(rect.top + '|' + rect.left + '|' + rect.right + '|' + rect.height);
+            alert(this.src);
+//            var rect = this.getBoundingClientRect();
+//            alert(rect.top + '|' + rect.left + '|' + rect.right + '|' + rect.height);
             document.location= prefixStr+this.src;
         };
         imageList.push(objs[i].src);

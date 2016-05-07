@@ -50,7 +50,6 @@ struct DetailStory {
         title = dict["title"] as? String ?? ""
         type = dict["type"] as? Int ?? 0
         htmlStr = "<html><head><link rel=\"stylesheet\" href="+css[0]+"></head><body>"+body+"</body></html>"
-        print(htmlStr)
     }
     func serialize() -> [String : AnyObject] {
         return ["body":body,"css":css,"ga_prefix":ga_prefix,"id":id,"image":image,"image_source":image_source,"images":images,"js":js,"section":section.serialize(),"share_url":share_url,"title":title,"type":type,"htmlStr":htmlStr]
@@ -69,7 +68,7 @@ class DetailStoryViewController: UIViewController,UIWebViewDelegate,UIGestureRec
                 }
                 let detail = DetailStory(dict: responsData.result.value as? [String : AnyObject] ?? [:])
                 self.webView.loadHTMLString(detail.htmlStr, baseURL: NSURL())
-//                self.headerView.sd_setImageWithURL(NSURL(string: detail.image))
+                self.headerView.sd_setImageWithURL(NSURL(string: detail.image))
             }
         }
     }
@@ -113,12 +112,13 @@ class DetailStoryViewController: UIViewController,UIWebViewDelegate,UIGestureRec
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-//        view = webView
-        view.addSubview(webView)
-        webView.frame = view.frame
+        view = webView
         navigationController?.interactivePopGestureRecognizer?.enabled = true
         navigationController?.interactivePopGestureRecognizer?.delegate = self
-        
+    }
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        webHeaderView.refreshBlurViewForNewImage()
     }
     func gestureRecognizerShouldBegin(gestureRecognizer: UIGestureRecognizer) -> Bool {
         if webView.canGoBack {
@@ -127,20 +127,23 @@ class DetailStoryViewController: UIViewController,UIWebViewDelegate,UIGestureRec
         }
         return true
     }
-    // MARK:懒加载webView
+    
+    // MARK:懒加载控件
     lazy private  var webView: UIWebView = {
         let viewWeb = UIWebView()
         viewWeb.delegate = self
         return viewWeb
     }()
-//    lazy private  var headerView: UIImageView = {
-//        let object = UIImageView(frame: CGRectMake(0, -35, kScreenWidth, 300))
-//        self.webView.addSubview(ParallaxScrollView.creatParallaxScrollViewWithSubView(object, referView: self.webView.scrollView))
-//        self.webView.addSubview(object)
-//        self.webView.bringSubviewToFront(object)
-//        
-//        return object
-//    }()
+    lazy private  var headerView: UIImageView = {
+        let  object = UIImageView(frame: CGRectMake(0, 0, self.view.frame.width, 223))
+        object.contentMode = .ScaleAspectFill
+        return object
+    }()
+    lazy private  var webHeaderView: ParallaxScrollView = {
+        let object = (ParallaxScrollView.creatParallaxWebHeaderViewWithSubView(self.headerView, forSize: CGSize(width: kScreenWidth, height: 223), referView: self.webView))
+         self.webView.scrollView.addSubview(object)
+        return object
+    }()
 
 }
 
