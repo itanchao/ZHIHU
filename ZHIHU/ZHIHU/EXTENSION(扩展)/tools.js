@@ -12,7 +12,7 @@ var getimageSrc = function (prefixStr){
          */
         objs[i].onclick=function()
         {
-            alert(this.src);
+//            alert(this.src);
 //            var rect = this.getBoundingClientRect();
 //            alert(rect.top + '|' + rect.left + '|' + rect.right + '|' + rect.height);
             document.location= prefixStr+this.src;

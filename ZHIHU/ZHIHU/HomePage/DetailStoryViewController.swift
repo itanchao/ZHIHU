@@ -86,12 +86,14 @@ class DetailStoryViewController: UIViewController,UIWebViewDelegate,UIGestureRec
 ///    点击了其中一张图片
         if request.URLString.hasPrefix(ImageUrlprefix) {
             let iconUrl = (request.URLString as NSString).substringFromIndex(15)
-            for i in 0...webPageimageList.count-1  {
-                if webPageimageList[i] == iconUrl {
-                    print("第\(i)张图:\(webPageimageList[i])")
-                    break
-                }
-            }
+            BrowseImagesView.showImageWithUrls(webPageimageList, currentImg: iconUrl)
+//            for i in 0...webPageimageList.count-1  {
+//                if webPageimageList[i] == iconUrl {
+//                    print("第\(i)张图:\(webPageimageList[i])")
+//                    BrowseImagesView.showImageWithUrl(iconUrl)
+//                    break
+//                }
+//            }
             return false
         }
 ///     获取页面所有图片
