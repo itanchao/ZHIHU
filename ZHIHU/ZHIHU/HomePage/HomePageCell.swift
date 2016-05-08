@@ -27,11 +27,6 @@ struct Story {
     }
 }
 class HomePageCell: UITableViewCell {
-
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
-    }
     ///  类方法创建cell
     ///
     ///  - parameter tableView: tableView
@@ -49,17 +44,11 @@ class HomePageCell: UITableViewCell {
             iconView.sd_setImageWithURL(NSURL(string: (story?.images[0])!))
         }
     }
-    private var titleLabel: UILabel!
-    private var iconView: UIImageView!
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        titleLabel = UILabel()
-        titleLabel.font = UIFont.boldSystemFontOfSize(16)
-        titleLabel.numberOfLines = 0;
-        titleLabel.textAlignment = NSTextAlignment.Left;
-        //自动折行设置
-        titleLabel.lineBreakMode = NSLineBreakMode.ByCharWrapping;
-        iconView = UIImageView()
         addSubview()
     }
     private func addSubview(){
@@ -75,15 +64,20 @@ class HomePageCell: UITableViewCell {
         contentView.addConstraint(NSLayoutConstraint(item: titleLabel, attribute: .Left, relatedBy: .Equal, toItem: contentView, attribute: .Left, multiplier: 1, constant: 20))
         contentView.addConstraint(NSLayoutConstraint(item: titleLabel, attribute: .Right, relatedBy: .Equal, toItem: iconView, attribute: .Left, multiplier: 1, constant: -20))
     }
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-
-    override func setSelected(selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
-    }
+    // MARK:懒加载控件
+    lazy private  var titleLabel: UILabel = {
+        let object = UILabel()
+        object.font = UIFont.boldSystemFontOfSize(16)
+        object.numberOfLines = 0
+        object.textAlignment = NSTextAlignment.Left
+        //自动折行设置
+        object.lineBreakMode = NSLineBreakMode.ByCharWrapping
+        return object
+    }()
+    lazy private  var iconView: UIImageView = {
+        let object = UIImageView()
+        return object
+    }()
 
 }
 
