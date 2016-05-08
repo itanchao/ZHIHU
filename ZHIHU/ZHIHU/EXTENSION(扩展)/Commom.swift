@@ -33,7 +33,7 @@ let KwhiteColor:UIColor = UIColor.whiteColor()
 let KblackColor:UIColor = UIColor.blackColor()
 let kblueColor:UIColor = UIColor.blueColor()
 //获取总代理
-func appCloud() -> AppDelegate {
+func appDelegate() -> AppDelegate {
     return UIApplication.sharedApplication().delegate as! AppDelegate
 }
 // MARK: - 输出日志
