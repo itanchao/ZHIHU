@@ -95,11 +95,11 @@ class DetailStoryViewController: UIViewController,UIWebViewDelegate,UIGestureRec
             return false;
         }
         if request.URLString  == "about:blank"{
-            webView.scrollView.addSubview(webHeaderView)
+//            webView.scrollView.addSubview(webHeaderView)
             return true
         }
         print(request.URLString)
-        webHeaderView.removeFromSuperview()
+//        webHeaderView.removeFromSuperview()
         UIApplication.sharedApplication().networkActivityIndicatorVisible = true
         return true
     }
@@ -145,6 +145,7 @@ class DetailStoryViewController: UIViewController,UIWebViewDelegate,UIGestureRec
     }()
     lazy private  var webHeaderView: ParallaxScrollView = {
         let object = (ParallaxScrollView.creatParallaxWebHeaderViewWithSubView(self.headerView, forSize: CGSize(width: kScreenWidth, height: 223), referView: self.webView))
+        self.webView.scrollView.addSubview(object)
         return object
     }()
 
