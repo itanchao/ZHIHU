@@ -26,6 +26,5 @@ var getimageSrc = function (prefixStr){
      */
     document.location= "imagelist:"+imageList;
     return imageList;
-//    return objs.length;
 };
 
