@@ -58,54 +58,7 @@ struct DetailStory {
         return Alamofire.request(.GET, Urls.detailStoryUrl+storyId.stringValue)
     }
 }
-class DetailStoryViewController: UIViewController,UIWebViewDelegate,UIGestureRecognizerDelegate,UIScrollViewDelegate {
-    var storyID : NSNumber?{
-        didSet{
-            DetailStory.getDetailStory(storyID!).responseJSON { (responsData) in
-                guard responsData.result.error == nil else{
-                    printLog(responsData.result.error)
-                    return
-                }
-                let detail = DetailStory(dict: responsData.result.value as? [String : AnyObject] ?? [:])
-                self.webView.loadHTMLString(detail.htmlStr, baseURL: NSURL())
-                self.headerView.sd_setImageWithURL(NSURL(string: detail.image))
-            }
-        }
-    }
-///     网页图片集合
-    var webPageimageList:[String] = []
-    func webView(webView: UIWebView, shouldStartLoadWithRequest request: NSURLRequest, navigationType: UIWebViewNavigationType) -> Bool {
-///     加载本地html
-        if request.URLString  == "about:blank"{return true}
-///     获取页面所有图片
-        if request.URLString.hasPrefix("imagelist:") {
-            webPageimageList = (request.URLString as NSString).substringFromIndex(10).componentsSeparatedByString(",")
-            return false;
-        }
-///    点击了其中一张图片
-        if request.URLString.hasPrefix(ImageUrlprefix) {
-            let iconUrl = (request.URLString as NSString).substringFromIndex(15)
-            BrowseImagesView.showImageWithUrls(webPageimageList, currentImg: iconUrl)
-            return false
-        }
-        UIApplication.sharedApplication().networkActivityIndicatorVisible = true
-        return true
-    }
-///     ImageUrlprefix
-    private var ImageUrlprefix:String = "imageurlprefix:"
-///     webJS方法
-    let ImageSrc_javascript : String = try! String(contentsOfURL:NSBundle.mainBundle().URLForResource("tools.js", withExtension: nil)!, encoding: NSUTF8StringEncoding)
-    func webViewDidFinishLoad(webView: UIWebView) {
-         UIApplication.sharedApplication().networkActivityIndicatorVisible = false
-///     调整字号
-        let str = "document.getElementsByTagName('body')[0].style.webkitTextSizeAdjust= '100%'"
-        webView.stringByEvaluatingJavaScriptFromString(str)
-        webView.stringByEvaluatingJavaScriptFromString(ImageSrc_javascript)
-        webView.stringByEvaluatingJavaScriptFromString("getimageSrc('\(ImageUrlprefix)')")
-    }
-    func webView(webView: UIWebView, didFailLoadWithError error: NSError?) {
-        print(error)
-    }
+class DetailStoryViewController: UIViewController,UIGestureRecognizerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         view = webView
@@ -123,7 +76,25 @@ class DetailStoryViewController: UIViewController,UIWebViewDelegate,UIGestureRec
         }
         return true
     }
-    
+    var storyID : NSNumber?{
+        didSet{
+            DetailStory.getDetailStory(storyID!).responseJSON { (responsData) in
+                guard responsData.result.error == nil else{
+                    printLog(responsData.result.error)
+                    return
+                }
+                let detail = DetailStory(dict: responsData.result.value as? [String : AnyObject] ?? [:])
+                self.webView.loadHTMLString(detail.htmlStr, baseURL: NSURL())
+                self.headerView.sd_setImageWithURL(NSURL(string: detail.image))
+            }
+        }
+    }
+    ///     网页图片集合
+    var webPageimageList:[String] = []
+    ///     ImageUrlprefix
+    private var ImageUrlprefix:String = "imageurlprefix:"
+    ///     webJS方法
+    let ImageSrc_javascript : String = try! String(contentsOfURL:NSBundle.mainBundle().URLForResource("tools.js", withExtension: nil)!, encoding: NSUTF8StringEncoding)
     // MARK:懒加载控件
     lazy private  var webView: UIWebView = {
         let viewWeb = UIWebView()
@@ -140,6 +111,36 @@ class DetailStoryViewController: UIViewController,UIWebViewDelegate,UIGestureRec
         self.webView.scrollView.addSubview(object)
         return object
     }()
+}
+extension DetailStoryViewController:UIWebViewDelegate{
+    func webView(webView: UIWebView, shouldStartLoadWithRequest request: NSURLRequest, navigationType: UIWebViewNavigationType) -> Bool {
+        ///     加载本地html
+        if request.URLString  == "about:blank"{return true}
+        ///     获取页面所有图片
+        if request.URLString.hasPrefix("imagelist:") {
+            webPageimageList = (request.URLString as NSString).substringFromIndex(10).componentsSeparatedByString(",")
+            return false;
+        }
+        ///    点击了其中一张图片
+        if request.URLString.hasPrefix(ImageUrlprefix) {
+            let iconUrl = (request.URLString as NSString).substringFromIndex(15)
+            BrowseImagesView.showImageWithUrls(webPageimageList, currentImg: iconUrl)
+            return false
+        }
+        UIApplication.sharedApplication().networkActivityIndicatorVisible = true
+        return true
+    }
+    func webViewDidFinishLoad(webView: UIWebView) {
+        UIApplication.sharedApplication().networkActivityIndicatorVisible = false
+        ///     调整字号
+        let str = "document.getElementsByTagName('body')[0].style.webkitTextSizeAdjust= '100%'"
+        webView.stringByEvaluatingJavaScriptFromString(str)
+        webView.stringByEvaluatingJavaScriptFromString(ImageSrc_javascript)
+        webView.stringByEvaluatingJavaScriptFromString("getimageSrc('\(ImageUrlprefix)')")
+    }
+    func webView(webView: UIWebView, didFailLoadWithError error: NSError?) {
+        print(error)
+    }
 
 }
 func getImageSrcJs() -> String {
