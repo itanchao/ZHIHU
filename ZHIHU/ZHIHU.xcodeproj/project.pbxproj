@@ -236,6 +236,7 @@
 				TargetAttributes = {
 					D5E4BE081CBD2BC800851D44 = {
 						CreatedOnToolsVersion = 7.3;
+						DevelopmentTeam = V7WD6F75VJ;
 					};
 				};
 			};
@@ -448,6 +449,7 @@
 			baseConfigurationReference = CE42BB0759349AD29A2D3822 /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = ZHIHU/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -462,6 +464,7 @@
 			baseConfigurationReference = 1786E098ABA5D5E70918EFA5 /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = ZHIHU/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
