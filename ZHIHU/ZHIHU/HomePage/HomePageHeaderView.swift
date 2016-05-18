@@ -7,19 +7,8 @@
 //
 
 import UIKit
-
-class HomePageHeaderView: UITableViewHeaderFooterView {
-    var date : String?{
-        didSet{
-            dateFormatter.dateFormat = "yyyyMMdd"
-            let datetempt = dateFormatter.dateFromString(date!)
-            dateFormatter.dateFormat = "MM月dd日 EEEE"
-            textLabel?.text = dateFormatter.stringFromDate(datetempt!)
-            textLabel?.font = UIFont.systemFontOfSize(18)
-            textLabel?.textColor = UIColor.whiteColor()
-            textLabel?.sizeToFit()
-        }
-    }
+// MARK: 类方法加载headerView
+extension HomePageHeaderView{
     ///  类方法加载headerView
     ///
     ///  - parameter tableView: tableView description
@@ -32,6 +21,19 @@ class HomePageHeaderView: UITableViewHeaderFooterView {
         }
         return  headerView!
     }
+}
+class HomePageHeaderView: UITableViewHeaderFooterView {
+    var date : String?{
+        didSet{
+            dateFormatter.dateFormat = "yyyyMMdd"
+            let datetempt = dateFormatter.dateFromString(date!)
+            dateFormatter.dateFormat = "MM月dd日 EEEE"
+            textLabel?.text = dateFormatter.stringFromDate(datetempt!)
+            textLabel?.font = UIFont.systemFontOfSize(18)
+            textLabel?.textColor = UIColor.whiteColor()
+            textLabel?.sizeToFit()
+        }
+    }
     override func layoutSubviews() {
         super.layoutSubviews()
         textLabel?.setCenterX(getCenterX())
@@ -41,5 +43,4 @@ class HomePageHeaderView: UITableViewHeaderFooterView {
         formatter.locale = NSLocale(localeIdentifier: "zh-CH")
         return formatter
     }()
-
 }

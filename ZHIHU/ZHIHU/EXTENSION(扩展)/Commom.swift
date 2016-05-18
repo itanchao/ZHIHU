@@ -75,7 +75,7 @@ extension NSObject{
             let name =  NSString.init(UTF8String: property_getName(objc_property_t_pointer.memory))! as String
             if name != "description" { list_pointer.memory.append(name) }
             class_propertyList_recursivelyFetch(objc_property_t_pointer.successor(),list_pointer: list_pointer)
-            return;
+            return
         }
     }
 
@@ -85,18 +85,18 @@ extension UIView{
     func setX(x:CGFloat){
         var frame = self.frame
         frame.origin.x = x
-        self.frame = frame;
+        self.frame = frame 
     }
     func setY(y:CGFloat){
         var frame = self.frame
         frame.origin.y = y
-        self.frame = frame;
+        self.frame = frame 
     }
     func getX() ->CGFloat{
-        return self.frame.origin.x;
+        return self.frame.origin.x 
     }
     func getY() ->CGFloat{
-        return self.frame.origin.y;
+        return self.frame.origin.y 
     }
     func setCenterX(centerX:CGFloat){
         var center = self.center
@@ -116,12 +116,12 @@ extension UIView{
     }
     func setWidth(width:CGFloat){
         var frame = self.frame
-        frame.size.width = width;
+        frame.size.width = width 
         self.frame = frame
     }
     func setHeight(height:CGFloat){
         var frame = self.frame
-        frame.size.height = height;
+        frame.size.height = height 
         self.frame = frame
     }
     func getHeight()->CGFloat{
@@ -131,7 +131,7 @@ extension UIView{
         return self.frame.size.width
     }
     func setSize(size:CGSize){
-        var frame = self.frame;
+        var frame = self.frame 
         frame.size = size
         self.frame = frame
     }

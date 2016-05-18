@@ -169,7 +169,7 @@ class BrowseImagesView: UIView,UIScrollViewDelegate {
             object.contentMode = .ScaleAspectFill
             imageView = object
         }
-        return imageView!;
+        return imageView!
     }
     lazy private  var scrollView: UIScrollView = {
         let object = UIScrollView(frame: CGRect(origin: CGPointZero, size: CGSize(width: kScreenWidth, height: kScreenHeight)))

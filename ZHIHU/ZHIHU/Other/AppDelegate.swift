@@ -24,7 +24,7 @@ struct Keys {
 // MARK:启动页展示
 extension UIWindow{
     func showLauchPage(){
-        addSubview(LauchImageViewController().view);
+        addSubview(LauchImageViewController().view)
     }
 }
 @UIApplicationMain
@@ -37,7 +37,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window = UIWindow(frame: kScreenBounds)
         let rootVc = UINavigationController(rootViewController: HomePageController())
         rootVc.navigationBarHidden = true
-        window?.rootViewController = rootVc;
+        window?.rootViewController = rootVc
         window?.makeKeyAndVisible()
         window?.scrollsToTop(true)
         window?.showLauchPage()

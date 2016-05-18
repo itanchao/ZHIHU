@@ -31,15 +31,15 @@ extension UIColor{
         }
         // Separate into r, g, b substrings
         var range = NSRange()
-        range.location = 0;
-        range.length = 2;
+        range.location = 0 
+        range.length = 2 
         //r
         let rString = cString.substringWithRange(range)
         //g
-        range.location = 2;
+        range.location = 2 
         let gString = cString.substringWithRange(range)
         //b
-        range.location = 4;
+        range.location = 4 
         let bString = cString.substringWithRange(range)
         // Scan values
         var r :Int32 = 0

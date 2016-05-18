@@ -9,7 +9,7 @@
 import UIKit
 import Alamofire
 struct Section {
-    var  id : NSNumber
+    var id   : NSNumber
     var name : String
     var thumbnail : String
     init(dic:[String:AnyObject]){
@@ -18,7 +18,7 @@ struct Section {
         thumbnail = dic["thumbnail"] as? String ?? ""
     }
     func serialize() -> [String : AnyObject] {
-        return ["id":id,"name":name,"thumbnail":thumbnail];
+        return ["id":id,"name":name,"thumbnail":thumbnail]
     }
 }
 struct DetailStory {
@@ -34,8 +34,9 @@ struct DetailStory {
     var share_url : String
     var title : String
     var type : Int
-    //    var recommenders : String
     var htmlStr : String
+}
+extension DetailStory{
     init(dict: [String : AnyObject]){
         body = dict["body"] as? String ?? ""
         css = dict["css"] as? [String] ?? []
@@ -58,7 +59,7 @@ struct DetailStory {
         return Alamofire.request(.GET, Urls.detailStoryUrl+storyId.stringValue)
     }
 }
-class DetailStoryViewController: UIViewController,UIGestureRecognizerDelegate {
+class DetailStoryViewController:UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view = webView
@@ -68,13 +69,6 @@ class DetailStoryViewController: UIViewController,UIGestureRecognizerDelegate {
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         webHeaderView.refreshBlurViewForNewImage()
-    }
-    func gestureRecognizerShouldBegin(gestureRecognizer: UIGestureRecognizer) -> Bool {
-        if webView.canGoBack {
-            webView.goBack()
-            return false
-        }
-        return true
     }
     var storyID : NSNumber?{
         didSet{
@@ -112,6 +106,17 @@ class DetailStoryViewController: UIViewController,UIGestureRecognizerDelegate {
         return object
     }()
 }
+// MARK:UIGestureRecognizerDelegate
+extension DetailStoryViewController:UIGestureRecognizerDelegate{
+    func gestureRecognizerShouldBegin(gestureRecognizer: UIGestureRecognizer) -> Bool {
+        if webView.canGoBack {
+            webView.goBack()
+            return false
+        }
+        return true
+    }
+}
+// MARK:UIWebViewDelegate
 extension DetailStoryViewController:UIWebViewDelegate{
     func webView(webView: UIWebView, shouldStartLoadWithRequest request: NSURLRequest, navigationType: UIWebViewNavigationType) -> Bool {
         ///     加载本地html
@@ -119,7 +124,7 @@ extension DetailStoryViewController:UIWebViewDelegate{
         ///     获取页面所有图片
         if request.URLString.hasPrefix("imagelist:") {
             webPageimageList = (request.URLString as NSString).substringFromIndex(10).componentsSeparatedByString(",")
-            return false;
+            return false
         }
         ///    点击了其中一张图片
         if request.URLString.hasPrefix(ImageUrlprefix) {
@@ -141,10 +146,10 @@ extension DetailStoryViewController:UIWebViewDelegate{
     func webView(webView: UIWebView, didFailLoadWithError error: NSError?) {
         print(error)
     }
-
-}
-func getImageSrcJs() -> String {
-    do {
-        return try! String(contentsOfURL:NSBundle.mainBundle().URLForResource("tools.js", withExtension: nil)!, encoding: NSUTF8StringEncoding)
+    func getImageSrcJs() -> String {
+        do {
+            return try! String(contentsOfURL:NSBundle.mainBundle().URLForResource("tools.js", withExtension: nil)!, encoding: NSUTF8StringEncoding)
+        }
     }
 }
+

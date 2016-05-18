@@ -7,8 +7,6 @@
 //
 import UIKit
 class ParallaxScrollView: UIView {
-    var headerImage:UIImage = UIImage()
-    @IBOutlet weak var headerTitleLabel: UILabel?
     ///  创建一个只有一张图片的headerView
     ///
     ///  - parameter image:     要展示的图片
@@ -30,7 +28,7 @@ class ParallaxScrollView: UIView {
         let paraScrollView = ParallaxScrollView(frame: CGRect(origin: CGPoint(x: 0, y: -20), size: forSize))
         paraScrollView.initialSetupForCustomSubView(subView)
         paraScrollView.dependScrollView = referView.scrollView
-        return paraScrollView;
+        return paraScrollView
         
     }
     ///  将一个view改造成ParallaxView
@@ -43,6 +41,23 @@ class ParallaxScrollView: UIView {
         paraScrollView.initialSetupForCustomSubView(subView)
         return paraScrollView
     }
+    deinit{
+        dependScrollView?.removeObserver(self, forKeyPath: "contentOffset")
+    }
+    var headerImage:UIImage = UIImage()
+    @IBOutlet weak var headerTitleLabel: UILabel?
+    @IBOutlet  private weak var  imageScrollView: UIScrollView?
+    @IBOutlet  private weak var imageView: UIImageView?
+    @IBOutlet  private weak var subView: UIView?
+    @IBOutlet  private var bluredImageView: UIImageView?
+    private var dependScrollView : UIScrollView?{
+        didSet{
+            watchDependViewScrolled()
+        }
+    }
+}
+
+extension ParallaxScrollView{
     ///  刷新
     func refreshBlurViewForNewImage() {
         var screenShot = screenShotOfView(self)
@@ -80,7 +95,7 @@ class ParallaxScrollView: UIView {
             headerTitleLabel?.alpha = 1 - (delta) * 1 / kMaxTitleAlphaOffset
         }
     }
-   
+    
     private func initialSetupForCustomSubView(subV:UIView) {
         let images =  UIScrollView(frame: bounds)
         imageScrollView = images
@@ -141,18 +156,6 @@ class ParallaxScrollView: UIView {
             layoutHeaderViewForScrollViewOffset(dependScrollView!.contentOffset)
         }
     }
-    deinit{
-        dependScrollView?.removeObserver(self, forKeyPath: "contentOffset")
-    }
-    private var dependScrollView : UIScrollView?{
-        didSet{
-            watchDependViewScrolled()
-        }
-    }
-    @IBOutlet  private weak var  imageScrollView: UIScrollView?
-    @IBOutlet  private weak var imageView: UIImageView?
-    @IBOutlet  private weak var subView: UIView?
-    @IBOutlet  private var bluredImageView: UIImageView?
 }
 private let kLabelPaddingDist : CGFloat = 8.0
 private let kParallaxDeltaFactor : CGFloat = 0.5

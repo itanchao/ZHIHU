@@ -23,7 +23,7 @@ struct Story {
         title = dict["title"] as? String ?? ""
     }
     func serialize() -> [String : AnyObject] {
-        return ["images":images,"type":type,"id":id,"ga_prefix":ga_prefix,"title":title];
+        return ["images":images,"type":type,"id":id,"ga_prefix":ga_prefix,"title":title]
     }
 }
 class HomePageCell: UITableViewCell {

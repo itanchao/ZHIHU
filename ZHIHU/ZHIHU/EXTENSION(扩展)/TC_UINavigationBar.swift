@@ -26,7 +26,7 @@ extension UINavigationBar{
     ///
     /// - parameter translationY: 高度偏移
     func tc_setTranslationY(translationY:CGFloat){
-        transform = CGAffineTransformMakeTranslation(0, translationY);
+        transform = CGAffineTransformMakeTranslation(0, translationY) 
     }
     /// 设置透明度
     ///

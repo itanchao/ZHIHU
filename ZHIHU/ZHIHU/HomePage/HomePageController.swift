@@ -28,7 +28,7 @@ struct Top_story{
     }
 //    序列化
     func serialize() -> [String : AnyObject] {
-        return ["image":image,"ga_prefix":ga_prefix,"id":id,"title":title,"type":type];
+        return ["image":image,"ga_prefix":ga_prefix,"id":id,"title":title,"type":type]
     }
 }
 struct SectionModel {

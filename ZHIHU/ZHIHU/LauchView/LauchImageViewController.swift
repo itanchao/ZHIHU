@@ -23,7 +23,7 @@ extension LauchData{
         text = dic!["text"]as? String ?? ""
     }
     func serialize() -> [String : AnyObject] {
-        return ["img":img,"text":text];
+        return ["img":img,"text":text] 
     }
     init(dic:[String : AnyObject]) {
         img = dic["img"] as? String ?? ""
@@ -56,7 +56,7 @@ class LauchImageViewController: UIViewController,Storage {
             { (response) in
                 guard response.result.error == nil else{
                     printLog(response.result.error, logError: true)
-                    return;
+                    return 
                 }
                 self.lauchData = LauchData(dic: response.result.value as? [String : AnyObject] ?? ["":""])
         }
