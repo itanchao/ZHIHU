@@ -11,7 +11,7 @@ import Alamofire
 let rowHeight :CGFloat = 90.0
 let sectionHeight :CGFloat = 35.0
 let homeCellIdentifier:String = "HomeCell"
-typealias Homeprotocol = protocol<RunLoopSwiftViewDelegate>
+//typealias Homeprotocol = protocol<RunLoopSwiftViewDelegate>
 // MARK:轮播图数据模型
 struct Top_story{
     var image : String
@@ -159,7 +159,6 @@ extension HomePageController{
     }
 }
 extension HomePageController:RunLoopSwiftViewDelegate{
-    
     func runLoopSwiftViewDidClick(loopView: RunLoopSwiftView, didSelectRowAtIndex index: NSInteger) {
         let top = sectionModels[0].top_stories[index]
         let detailVc = DetailStoryViewController()
