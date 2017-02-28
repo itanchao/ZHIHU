@@ -9,24 +9,24 @@
 import UIKit
 // MARK: - UIStatusBar设置
 extension UIWindow{
-    func scrollsToTop(enabel:Bool){
+    func scrollsToTop(_ enabel:Bool){
         if getStatusBar() == nil {
-            let window = UIWindow(frame: UIApplication.sharedApplication().statusBarFrame)
+            let window = UIWindow(frame: UIApplication.shared.statusBarFrame)
             window.windowLevel = UIWindowLevelStatusBar
-            window.backgroundColor = UIColor.clearColor()
+            window.backgroundColor = UIColor.clear
             window.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(topWindowClick)))
             window.rootViewController = UIViewController()
             setStatusBar(window)
         }
-        getStatusBar()?.hidden = !enabel
+        getStatusBar()?.isHidden = !enabel
     }
     @objc func topWindowClick() {
         // 遍历当前主窗口所有view,将满足条件的scrollView滚动回原位
-        UIWindow.searchAllowScrollViewInView(UIApplication.sharedApplication().keyWindow!)
+        UIWindow.searchAllowScrollViewInView(UIApplication.shared.keyWindow!)
     }
-    private class func searchAllowScrollViewInView(superView: UIView) {
+    fileprivate class func searchAllowScrollViewInView(_ superView: UIView) {
         for subview: UIView in superView.subviews {
-            if subview.isKindOfClass(UIScrollView.self) && superView.viewIsInKeyWindow() {
+            if subview.isKind(of: UIScrollView.self) && superView.viewIsInKeyWindow() {
                 // 拿到scrollView的contentOffset
                 var offest = (subview as! UIScrollView).contentOffset
                 // 将offest的y轴还原成最开始的值
@@ -38,10 +38,10 @@ extension UIWindow{
             searchAllowScrollViewInView(subview)
         }
     }
-    private func getStatusBar() -> UIWindow? {
+    fileprivate func getStatusBar() -> UIWindow? {
         return objc_getAssociatedObject(self, &statusBar) as? UIWindow ?? nil
     }
-    private func setStatusBar(statuswindow:UIWindow?) {
+    fileprivate func setStatusBar(_ statuswindow:UIWindow?) {
         objc_setAssociatedObject(self, &statusBar, statuswindow, objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN_NONATOMIC)
     }
 }
@@ -50,14 +50,14 @@ private var statusBar:String = "Created by tanchao on 16/4/18.UIWindow为了防�
 extension UIView {
     ///  判断调用方法的view是否在keyWindow中
     func viewIsInKeyWindow() -> Bool {
-        let keyWindow = UIApplication.sharedApplication().keyWindow!
+        let keyWindow = UIApplication.shared.keyWindow!
         // 将当前view的坐标系转换到window.bounds
-        let viewNewFrame = keyWindow.convertRect(self.frame, fromView: self.superview)
+        let viewNewFrame = keyWindow.convert(self.frame, from: self.superview)
         let keyWindowBounds = keyWindow.bounds
         // 判断当前view是否在keyWindow的范围内
-        let isIntersects = CGRectIntersectsRect(viewNewFrame, keyWindowBounds)
+        let isIntersects = viewNewFrame.intersects(keyWindowBounds)
         // 判断是否满足所有条件
-        return !self.hidden && self.alpha > 0.01 && self.window == keyWindow && isIntersects
+        return !self.isHidden && self.alpha > 0.01 && self.window == keyWindow && isIntersects
     }
 }
 

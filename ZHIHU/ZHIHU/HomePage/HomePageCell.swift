@@ -22,7 +22,7 @@ struct Story {
         ga_prefix = dict["ga_prefix"] as? String ?? ""
         title = dict["title"] as? String ?? ""
     }
-    func serialize() -> [String : AnyObject] {
+    func serialize() -> [String : Any] {
         return ["images":images,"type":type,"id":id,"ga_prefix":ga_prefix,"title":title]
     }
 }
@@ -31,17 +31,17 @@ class HomePageCell: UITableViewCell {
     ///
     ///  - parameter tableView: tableView
     ///
-    class func homePageCellWithTableView(tableView:UITableView) -> HomePageCell {
-        var tableViewCell = tableView.dequeueReusableCellWithIdentifier("HomePageCell") as? HomePageCell
+    class func homePageCellWithTableView(_ tableView:UITableView) -> HomePageCell {
+        var tableViewCell = tableView.dequeueReusableCell(withIdentifier: "HomePageCell") as? HomePageCell
         if (tableViewCell == nil) {
-            tableViewCell = HomePageCell(style: .Default, reuseIdentifier: "HomePageCell")
+            tableViewCell = HomePageCell(style: .default, reuseIdentifier: "HomePageCell")
         }
         return tableViewCell!
     }
     var story: Story?{
         didSet{
             titleLabel.text = story?.title
-            iconView.sd_setImageWithURL(NSURL(string: (story?.images[0])!))
+            iconView.sd_setImage(with: URL(string: (story?.images[0])!))
         }
     }
     required init?(coder aDecoder: NSCoder) {
@@ -51,30 +51,30 @@ class HomePageCell: UITableViewCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         addSubview()
     }
-    private func addSubview(){
+    fileprivate func addSubview(){
         contentView.addSubview(iconView)
         iconView.translatesAutoresizingMaskIntoConstraints = false
-        contentView.addConstraint(NSLayoutConstraint(item: iconView, attribute: .CenterY, relatedBy: .Equal, toItem: contentView, attribute: .CenterY, multiplier: 1, constant: 0))
-        contentView.addConstraint(NSLayoutConstraint(item: iconView, attribute: .Right, relatedBy: .Equal, toItem: contentView, attribute: .Right, multiplier: 1, constant: -20))
-        contentView.addConstraint(NSLayoutConstraint(item: iconView, attribute: .Width, relatedBy: .Equal, toItem: nil, attribute: .Width, multiplier: 1, constant: 60))
-        contentView.addConstraint(NSLayoutConstraint(item: iconView, attribute: .Height, relatedBy: .Equal, toItem: nil, attribute: .Height, multiplier: 1, constant: 60))
+        contentView.addConstraint(NSLayoutConstraint(item: iconView, attribute: .centerY, relatedBy: .equal, toItem: contentView, attribute: .centerY, multiplier: 1, constant: 0))
+        contentView.addConstraint(NSLayoutConstraint(item: iconView, attribute: .right, relatedBy: .equal, toItem: contentView, attribute: .right, multiplier: 1, constant: -20))
+        contentView.addConstraint(NSLayoutConstraint(item: iconView, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .width, multiplier: 1, constant: 60))
+        contentView.addConstraint(NSLayoutConstraint(item: iconView, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .height, multiplier: 1, constant: 60))
         contentView.addSubview(titleLabel)
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
-        contentView.addConstraint(NSLayoutConstraint(item: titleLabel, attribute: .CenterY, relatedBy: .Equal, toItem: iconView, attribute: .CenterY, multiplier: 1, constant: 0))
-        contentView.addConstraint(NSLayoutConstraint(item: titleLabel, attribute: .Left, relatedBy: .Equal, toItem: contentView, attribute: .Left, multiplier: 1, constant: 20))
-        contentView.addConstraint(NSLayoutConstraint(item: titleLabel, attribute: .Right, relatedBy: .Equal, toItem: iconView, attribute: .Left, multiplier: 1, constant: -20))
+        contentView.addConstraint(NSLayoutConstraint(item: titleLabel, attribute: .centerY, relatedBy: .equal, toItem: iconView, attribute: .centerY, multiplier: 1, constant: 0))
+        contentView.addConstraint(NSLayoutConstraint(item: titleLabel, attribute: .left, relatedBy: .equal, toItem: contentView, attribute: .left, multiplier: 1, constant: 20))
+        contentView.addConstraint(NSLayoutConstraint(item: titleLabel, attribute: .right, relatedBy: .equal, toItem: iconView, attribute: .left, multiplier: 1, constant: -20))
     }
     // MARK:懒加载控件
-    lazy private  var titleLabel: UILabel = {
+    lazy fileprivate  var titleLabel: UILabel = {
         let object = UILabel()
-        object.font = UIFont.boldSystemFontOfSize(16)
+        object.font = UIFont.boldSystemFont(ofSize: 16)
         object.numberOfLines = 0
-        object.textAlignment = NSTextAlignment.Left
+        object.textAlignment = NSTextAlignment.left
         //自动折行设置
-        object.lineBreakMode = NSLineBreakMode.ByCharWrapping
+        object.lineBreakMode = NSLineBreakMode.byCharWrapping
         return object
     }()
-    lazy private  var iconView: UIImageView = {
+    lazy fileprivate  var iconView: UIImageView = {
         let object = UIImageView()
         return object
     }()

@@ -27,7 +27,7 @@ struct Top_story{
         type = dic["type"] as? Int ?? 0
     }
 //    序列化
-    func serialize() -> [String : AnyObject] {
+    func serialize() -> [String : Any] {
         return ["image":image,"ga_prefix":ga_prefix,"id":id,"title":title,"type":type]
     }
 }
@@ -49,7 +49,7 @@ class HomePageController: UIViewController {
         super.viewDidLoad()
         view.addSubview(tableView)
         view.addSubview(navBar)
-        navBar.backgroundColor = UIColor.clearColor()
+        navBar.backgroundColor = UIColor.clear
         view.addSubview(barButtonItem)
         view.addSubview(naviTitle)
         naviTitle.setCenterY(44)
@@ -58,11 +58,11 @@ class HomePageController: UIViewController {
         tableView.showsVerticalScrollIndicator = false
         loadNewData()
     }
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         (tableView.tableHeaderView as! ParallaxScrollView).refreshBlurViewForNewImage()
     }
-    func revealToggle(sender:UIButton) {
+    func revealToggle(_ sender:UIButton) {
         print("------------")
     }
     var sectionModels : [SectionModel] = []
@@ -76,42 +76,42 @@ class HomePageController: UIViewController {
     }
     var loading :Bool = false
     // MARK:- 懒加载控件
-    lazy private  var navBar: UIView = {
-        let object = UIView(frame: CGRect(origin: CGPointZero, size: CGSize(width: kScreenWidth, height: 64)))
+    lazy fileprivate  var navBar: UIView = {
+        let object = UIView(frame: CGRect(origin: CGPoint.zero, size: CGSize(width: kScreenWidth, height: 64)))
         return object
     }()
-    lazy private  var barButtonItem: UIButton = {
+    lazy fileprivate  var barButtonItem: UIButton = {
         let object = UIButton()
-        object.setBackgroundImage(UIImage(named: "menu"), forState: .Normal)
+        object.setBackgroundImage(UIImage(named: "menu"), for: UIControlState())
         object.setCenterY(30)
         object.setX(20)
-        object.tintColor = UIColor.whiteColor()
+        object.tintColor = UIColor.white
         object.sizeToFit()
-        object.addTarget(self, action: #selector(HomePageController.revealToggle(_:)), forControlEvents: .TouchUpInside)
+        object.addTarget(self, action: #selector(HomePageController.revealToggle(_:)), for: .touchUpInside)
         return object
     }()
-    lazy private  var naviTitle: UILabel = {
+    lazy fileprivate  var naviTitle: UILabel = {
         let object = UILabel()
-        object.font = UIFont.systemFontOfSize(18)
-        object.textColor = UIColor.whiteColor()
+        object.font = UIFont.systemFont(ofSize: 18)
+        object.textColor = UIColor.white
         object.text = "今日热闻"
         object.sizeToFit()
         return object
     }()
-    lazy private  var tableView: UITableView = {
-        let view = UITableView(frame: CGRect(x: 0, y: 0, width: kScreenWidth, height: kScreenHeight), style: .Plain)
+    lazy fileprivate  var tableView: UITableView = {
+        let view = UITableView(frame: CGRect(x: 0, y: 0, width: kScreenWidth, height: kScreenHeight), style: .plain)
         view.rowHeight = 100
         view.tableHeaderView = ParallaxScrollView.creatParallaxScrollViewWithSubView(self.headerView, referView: view)
         view.delegate = self
         view.dataSource = self
         return view
     }()
-    lazy private  var headerView: RunLoopSwiftView = {
+    lazy fileprivate  var headerView: RunLoopSwiftView = {
         let object = RunLoopSwiftView(frame: CGRect(x: 0, y: 0, width: kScreenWidth, height: 200))
         object.delegate = self
         return object
     }()
-    lazy private  var circleChart: TCCircleChart = {
+    lazy fileprivate  var circleChart: TCCircleChart = {
         let view = TCCircleChart.attachObserveToScrollView(self.tableView, target: self, action: #selector(HomePageController.loadNewData))
         view.frame = CGRect(x: 10, y: 20, width: 20, height: 20)
         view.setCenterY(35)
@@ -124,7 +124,7 @@ extension HomePageController{
     func loadNewData() {
         guard loading else{
             loading = true
-            Alamofire.request(.GET, Urls.homeUrl).responseJSON { (resultData) in
+            Alamofire.request(Urls.homeUrl).responseJSON(completionHandler: { (resultData) in
                 guard resultData.result.error == nil else{
                     print("网络失败")
                     return
@@ -135,8 +135,21 @@ extension HomePageController{
                 self.tableView.reloadData()
                 self.loading = false
                 self.circleChart.stopAnimating()
-                //                self.circleChart.activityView.stopAnimating()
-            }
+
+            })
+//            Alamofire.request(.GET, Urls.homeUrl).responseJSON { (resultData) in
+//                guard resultData.result.error == nil else{
+//                    print("网络失败")
+//                    return
+//                }
+//                self.sectionModels.removeAll()
+//                let datalist = resultData.result.value as? [String:AnyObject] ?? [:]
+//                self.sectionModels.append(SectionModel(dict: datalist))
+//                self.tableView.reloadData()
+//                self.loading = false
+//                self.circleChart.stopAnimating()
+//                //                self.circleChart.activityView.stopAnimating()
+//            }
             return
         }
     }
@@ -144,22 +157,32 @@ extension HomePageController{
         guard loading else{
             loading = true
             let date = sectionModels.last?.date
-            Alamofire.request(.GET, Urls.getMorehomedataUrl+date!).responseJSON { (resultData) in
+            Alamofire.request(Urls.getMorehomedataUrl+date!).responseJSON(completionHandler: { (resultData) in
                 guard resultData.result.error == nil else{
                     print("网络失败")
                     return
                 }
                 let datalist = resultData.result.value as? [String:AnyObject] ?? [:]
                 self.sectionModels.append(SectionModel(dict: datalist))
-                self.tableView.insertSections(NSIndexSet(index: self.sectionModels.count - 1), withRowAnimation: UITableViewRowAnimation.Fade)
+                self.tableView.insertSections(IndexSet(integer: self.sectionModels.count - 1), with: UITableViewRowAnimation.fade)
                 self.loading = false
-            }
+            })
+//            Alamofire.request(.GET, Urls.getMorehomedataUrl+date!).responseJSON { (resultData) in
+//                guard resultData.result.error == nil else{
+//                    print("网络失败")
+//                    return
+//                }
+//                let datalist = resultData.result.value as? [String:AnyObject] ?? [:]
+//                self.sectionModels.append(SectionModel(dict: datalist))
+//                self.tableView.insertSections(IndexSet(integer: self.sectionModels.count - 1), with: UITableViewRowAnimation.fade)
+//                self.loading = false
+//            }
             return
         }
     }
 }
 extension HomePageController:RunLoopSwiftViewDelegate{
-    func runLoopSwiftViewDidClick(loopView: RunLoopSwiftView, didSelectRowAtIndex index: NSInteger) {
+    func runLoopSwiftViewDidClick(_ loopView: RunLoopSwiftView, didSelectRowAtIndex index: NSInteger) {
         let top = sectionModels[0].top_stories[index]
         let detailVc = DetailStoryViewController()
         detailVc.storyID = top.id
@@ -168,47 +191,47 @@ extension HomePageController:RunLoopSwiftViewDelegate{
 }
 extension HomePageController:UITableViewDelegate,UITableViewDataSource{
     // MARK:设置navgationBar高度
-    func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return section == 0 ? CGFloat.min : 44
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return section == 0 ? CGFloat.leastNormalMagnitude : 44
     }
-    func tableView(tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
+    func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
         if (section == 0) {
             navBar.setHeight(64)
             naviTitle.alpha = 1
         }
     }
-    func tableView(tableView: UITableView, didEndDisplayingHeaderView view: UIView, forSection section: Int) {
+    func tableView(_ tableView: UITableView, didEndDisplayingHeaderView view: UIView, forSection section: Int) {
         if (section == 0) {
             navBar.setHeight(20)
             naviTitle.alpha = 0
         }
     }
     // MARK:-UITableViewDataSource
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = HomePageCell.homePageCellWithTableView(tableView)
         cell.story = sectionModels[indexPath.section].stories[indexPath.item]
         return cell
     }
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
         return sectionModels.count
     }
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return sectionModels[section].stories.count
     }
-    func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let titleView = HomePageHeaderView.homePageHeaderViewWithTableView(tableView)
         titleView.date = sectionModels[section].date
         return section == 0 ? nil : titleView
     }
     // MARK:-UITableViewDelegate
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
         let top = sectionModels[indexPath.section].stories[indexPath.item]
         let detailVc = DetailStoryViewController()
         detailVc.storyID = top.id
         navigationController!.pushViewController(detailVc, animated: true)
     }
-    func  scrollViewDidScroll(scrollView: UIScrollView) {
+    func  scrollViewDidScroll(_ scrollView: UIScrollView) {
         let offsetY = scrollView.contentOffset.y
         if offsetY > scrollView.contentSize.height - 1.5 * kScreenHeight {
             loadMoreData()
@@ -219,9 +242,9 @@ extension HomePageController:UITableViewDelegate,UITableViewDataSource{
         if offsetY > -20 {
             let alpha = min(1, (20 + offsetY) / (20 + prelude))
             //NavBar透明度渐变
-            navBar.backgroundColor = color.colorWithAlphaComponent(alpha)
+            navBar.backgroundColor = color.withAlphaComponent(alpha)
         }else{
-            navBar.backgroundColor = UIColor.clearColor()
+            navBar.backgroundColor = UIColor.clear
         }
     }
 }

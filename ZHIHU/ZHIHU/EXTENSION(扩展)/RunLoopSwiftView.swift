@@ -10,7 +10,7 @@ import UIKit
 import Foundation
 import SDWebImage
 protocol RunLoopSwiftViewDelegate {
-    func runLoopSwiftViewDidClick(loopView: RunLoopSwiftView, didSelectRowAtIndex index: NSInteger)
+    func runLoopSwiftViewDidClick(_ loopView: RunLoopSwiftView, didSelectRowAtIndex index: NSInteger)
 }
 struct LoopData {
     var imageUrl : String = ""
@@ -20,8 +20,8 @@ struct LoopData {
         desc = des
     }
     //    序列化
-    func serialize() -> [String : AnyObject] {
-        return ["imageUrl":imageUrl,"desc":desc]
+    func serialize() -> [String : Any] {
+        return ["imageUrl":imageUrl ,"desc":desc]
     }
 }
 // MARK:变量与控件
@@ -34,47 +34,47 @@ class RunLoopSwiftView: UIView {
         }
     }
 //    私有变量
-    private var currIndex : Int = 0{
+    fileprivate var currIndex : Int = 0{
         didSet{
             pageControl.currentPage = currIndex
         }
     }
-    private var timer : NSTimer?
+    fileprivate var timer : Timer?
 // MARK:懒加载控件
-    lazy private  var scrollView: UIScrollView = {
+    lazy fileprivate  var scrollView: UIScrollView = {
         let view = UIScrollView()
-        view.pagingEnabled = true
+        view.isPagingEnabled = true
         view.delegate = self
         view.showsHorizontalScrollIndicator = false
         self.addSubview(view)
         return view
     }()
-    lazy private  var pageControl: UIPageControl = {
+    lazy fileprivate  var pageControl: UIPageControl = {
         let view = UIPageControl()
         view.hidesForSinglePage = true
-        view.currentPageIndicatorTintColor = UIColor.whiteColor()
-        view.pageIndicatorTintColor = UIColor.blackColor()
-        view.addTarget(self, action: #selector(RunLoopSwiftView.pageAction), forControlEvents: .TouchUpInside)
+        view.currentPageIndicatorTintColor = UIColor.white
+        view.pageIndicatorTintColor = UIColor.black
+        view.addTarget(self, action: #selector(RunLoopSwiftView.pageAction), for: .touchUpInside)
         self.insertSubview(view, aboveSubview: self.scrollView)
         return view
     }()
-    lazy private  var leftImageView: RunloopCell = {
+    lazy fileprivate  var leftImageView: RunloopCell = {
         let iconView = RunloopCell()
         self.scrollView.addSubview(iconView)
         return iconView
     }()
-    lazy private  var centerImageView: RunloopCell = {
+    lazy fileprivate  var centerImageView: RunloopCell = {
         let iconView = RunloopCell()
         iconView.addOnClickListener(self, action: #selector(RunLoopSwiftView.pageAction))
         self.scrollView.addSubview(iconView)
         return iconView
     }()
-    lazy private  var rightImageView: RunloopCell = {
+    lazy fileprivate  var rightImageView: RunloopCell = {
         let iconView = RunloopCell()
         self.scrollView.addSubview(iconView)
         return iconView
     }()
-    lazy private  var singleImageView: RunloopCell = {
+    lazy fileprivate  var singleImageView: RunloopCell = {
         let iconView = RunloopCell()
         iconView.addOnClickListener(self, action: #selector(RunLoopSwiftView.pageAction))
         self.scrollView.addSubview(iconView)
@@ -88,9 +88,9 @@ extension RunLoopSwiftView{
             singleImageView.frame = frame
         }else{
             leftImageView.frame = frame
-            centerImageView.frame = CGRect(origin: CGPoint(x: CGRectGetMaxX(leftImageView.frame), y: 0), size: frame.size)
-            rightImageView.frame = CGRect(origin: CGPoint(x: CGRectGetMaxX(centerImageView.frame), y: 0), size: frame.size)
-            scrollView.bringSubviewToFront(centerImageView)
+            centerImageView.frame = CGRect(origin: CGPoint(x: leftImageView.frame.maxX, y: 0), size: frame.size)
+            rightImageView.frame = CGRect(origin: CGPoint(x: centerImageView.frame.maxX, y: 0), size: frame.size)
+            scrollView.bringSubview(toFront: centerImageView)
             scrollView.frame = frame
             pageControl.setCenterX(getCenterX())
             pageControl.setY(frame.maxY - 20)
@@ -99,16 +99,16 @@ extension RunLoopSwiftView{
 }
 // MARK:UIScrollViewDelegate
 extension RunLoopSwiftView:UIScrollViewDelegate{
-    @objc internal func scrollViewWillBeginDragging(scrollView: UIScrollView) {
+    @objc internal func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
         stop()
     }
-    @objc internal func scrollViewDidEndDragging(scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+    @objc internal func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
         runloopViewFire()
     }
-    @objc internal func scrollViewDidScroll(scrollView: UIScrollView) {
+    @objc internal func scrollViewDidScroll(_ scrollView: UIScrollView) {
         loadImage(scrollView.contentOffset.x)
     }
-    private func loadImage(offX:CGFloat) {
+    fileprivate func loadImage(_ offX:CGFloat) {
         if offX >= bounds.width * 2
         {
             currIndex = currIndex + 1
@@ -149,11 +149,11 @@ extension RunLoopSwiftView:UIScrollViewDelegate{
     }
     func runloopViewFire() {
         if loopDataGroup.count < 2 { return }
-        NSRunLoop.currentRunLoop().addTimer(getTime(), forMode: NSDefaultRunLoopMode)
+        RunLoop.current.add(getTime(), forMode: RunLoopMode.defaultRunLoopMode)
     }
 }
 extension RunLoopSwiftView{
-    private func setUpRunloopView() {
+    fileprivate func setUpRunloopView() {
         if loopDataGroup.count < 2 {
             scrollView.contentSize = bounds.size
             singleImageView.frame = frame
@@ -164,22 +164,22 @@ extension RunLoopSwiftView{
             mapImage(loopDataGroup.count - 1, center: 0, right: 1)
         }
     }
-    private func mapImage(left:NSInteger,center:NSInteger,right:NSInteger) {
+    fileprivate func mapImage(_ left:NSInteger,center:NSInteger,right:NSInteger) {
         scrollView.setContentOffset(CGPoint(x: bounds.width, y: 0), animated: false)
         leftImageView.loopData = loopDataGroup[left]
         centerImageView.loopData = loopDataGroup[center]
         rightImageView.loopData = loopDataGroup[right]
     }
-    private func getTime()->NSTimer{
+    fileprivate func getTime()->Timer{
         if (timer == nil)  {
-            timer = NSTimer.scheduledTimerWithTimeInterval(5.0, target: self, selector: #selector(RunLoopSwiftView.timeAction), userInfo: nil, repeats: true)
+            timer = Timer.scheduledTimer(timeInterval: 5.0, target: self, selector: #selector(RunLoopSwiftView.timeAction), userInfo: nil, repeats: true)
         }
         return timer!
     }
     @objc func pageAction() {
         delegate?.runLoopSwiftViewDidClick(self, didSelectRowAtIndex: currIndex)
     }
-    @objc private func timeAction() {
+    @objc fileprivate func timeAction() {
         if loopDataGroup.count < 2 { return }
         scrollView.setContentOffset(CGPoint(x:scrollView.contentOffset.x + bounds.width, y: 0), animated: true)
     }
@@ -188,23 +188,23 @@ extension RunLoopSwiftView{
 class RunloopCell: UIView {
     var loopData : LoopData?{
         didSet{
-            iconView.sd_setImageWithURL(NSURL(string: (loopData?.imageUrl)!))
+            iconView.sd_setImage(with: URL(string: (loopData?.imageUrl)!))
             desLabel.text = loopData?.desc
         }
     }
-    lazy private  var iconView: UIImageView = {
+    lazy fileprivate  var iconView: UIImageView = {
         let object = UIImageView()
-        object.contentMode = .ScaleAspectFill
+        object.contentMode = .scaleAspectFill
         self.addSubview(object)
         return object
     }()
-    lazy private  var desLabel: UILabel = {
+    lazy fileprivate  var desLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont.boldSystemFontOfSize(20)
-        label.textColor = UIColor.whiteColor()
+        label.font = UIFont.boldSystemFont(ofSize: 20)
+        label.textColor = UIColor.white
         label.numberOfLines = 0
-        label.textAlignment = .Left
-        label.lineBreakMode = .ByCharWrapping
+        label.textAlignment = .left
+        label.lineBreakMode = .byCharWrapping
         label.sizeToFit()
         self.addSubview(label)
         return label
@@ -214,20 +214,20 @@ class RunloopCell: UIView {
 extension RunloopCell{
     override func layoutSubviews() {
         iconView.translatesAutoresizingMaskIntoConstraints = false
-        addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|[view]|", options: .AlignAllBaseline, metrics: nil, views: ["view" : iconView]))
-        addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|[view]|", options: .AlignAllBaseline, metrics: nil, views: ["view" : iconView]))
+        addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|[view]|", options: NSLayoutFormatOptions.alignAllLastBaseline, metrics: nil, views: ["view" : iconView]))
+        addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|[view]|", options: NSLayoutFormatOptions.alignAllLastBaseline, metrics: nil, views: ["view" : iconView]))
         desLabel.translatesAutoresizingMaskIntoConstraints = false
-        addConstraint(NSLayoutConstraint(item: desLabel, attribute: .Bottom, relatedBy: .Equal, toItem: iconView, attribute: .Bottom, multiplier: 1, constant: -20))
-        addConstraint(NSLayoutConstraint(item: desLabel, attribute: .Left, relatedBy: .Equal, toItem: iconView, attribute: .Left, multiplier: 1, constant: 20))
-        addConstraint(NSLayoutConstraint(item: desLabel, attribute: .Right, relatedBy: .Equal, toItem: iconView, attribute: .Right, multiplier: 1, constant: -20))
+        addConstraint(NSLayoutConstraint(item: desLabel, attribute: .bottom, relatedBy: .equal, toItem: iconView, attribute: .bottom, multiplier: 1, constant: -20))
+        addConstraint(NSLayoutConstraint(item: desLabel, attribute: .left, relatedBy: .equal, toItem: iconView, attribute: .left, multiplier: 1, constant: 20))
+        addConstraint(NSLayoutConstraint(item: desLabel, attribute: .right, relatedBy: .equal, toItem: iconView, attribute: .right, multiplier: 1, constant: -20))
     }
 }
 // MARK:添加点击事件
 extension RunloopCell {
-     func addOnClickListener(target: AnyObject, action: Selector) {
+     func addOnClickListener(_ target: AnyObject, action: Selector) {
         let gr = UITapGestureRecognizer(target: target, action: action)
         gr.numberOfTapsRequired = 1
-        userInteractionEnabled = true
+        isUserInteractionEnabled = true
         addGestureRecognizer(gr)
     }
 }

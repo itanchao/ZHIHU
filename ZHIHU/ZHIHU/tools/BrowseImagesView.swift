@@ -15,10 +15,10 @@ class BrowseImagesView: UIView,UIScrollViewDelegate {
     /// - parameter urls:       网络图片数组
     /// - parameter currentImg: 当前图片数组
     ///
-    static func showImageWithUrls(urls:[String], currentImg:String) -> BrowseImagesView {
+    static func showImageWithUrls(_ urls:[String], currentImg:String) -> BrowseImagesView {
         let browseImagesView = BrowseImagesView(frame: kScreenBounds)
         browseImagesView.initSubviews()
-        UIApplication.sharedApplication().keyWindow?.addSubview(browseImagesView)
+        UIApplication.shared.keyWindow?.addSubview(browseImagesView)
         browseImagesView.imageList = urls
         browseImagesView.imgUrl = currentImg
         return browseImagesView
@@ -26,7 +26,7 @@ class BrowseImagesView: UIView,UIScrollViewDelegate {
     /// 计算frame
     ///
     /// - parameter image: 网络图片
-    private func calculateImageFrameWithImage(image:UIImage)  {
+    fileprivate func calculateImageFrameWithImage(_ image:UIImage)  {
         self.getImageView().image = image
         let scaleX = scrollView.getWidth()/image.size.width
         let scaleY = scrollView.getHeight()/image.size.height
@@ -37,32 +37,32 @@ class BrowseImagesView: UIView,UIScrollViewDelegate {
             let imgViewHeight = image.size.height*scaleX
             getImageView().frame = CGRect(x: 0, y: 0.5*(scrollView.getHeight()-imgViewHeight), width: scrollView.getWidth(), height: imgViewHeight)
         }
-        getImageView().transform = CGAffineTransformMakeScale(0.7, 0.7)
-        UIView.animateWithDuration(0.2) { 
-            self.getImageView().transform = CGAffineTransformIdentity
-        }
+        getImageView().transform = CGAffineTransform(scaleX: 0.7, y: 0.7)
+        UIView.animate(withDuration: 0.2, animations: { 
+            self.getImageView().transform = CGAffineTransform.identity
+        }) 
     }
-    @objc internal func scrollViewDidScroll(scrollView: UIScrollView) {
+    @objc internal func scrollViewDidScroll(_ scrollView: UIScrollView) {
         if imageList == nil {return}
         if imageList?.count == 1 {return}
         if changeFinished {return}
-        if CGRectEqualToRect(getScaleView().frame, scrollView.frame){
+        if getScaleView().frame.equalTo(scrollView.frame){
             if (scrollView.contentOffset.y >  70){ self.changeImage(true)}
             if (scrollView.contentOffset.y < -70){ self.changeImage(false)}
         }
     }
     /// 切换图片成功标示
-    private var changeFinished : Bool = false
+    fileprivate var changeFinished : Bool = false
     /// 切换图片
     ///
     /// - parameter next: 方向
-    private func changeImage(next:Bool) {
-        UIView.animateWithDuration(0.5, animations: { 
+    fileprivate func changeImage(_ next:Bool) {
+        UIView.animate(withDuration: 0.5, animations: { 
             self.changeFinished = true
             var viewY:CGFloat = 0
             if next{ viewY = -kScreenHeight}else{viewY = kScreenHeight}
-            self.getImageView().transform = CGAffineTransformMakeTranslation(0, viewY)
-            }) { (finished) in
+            self.getImageView().transform = CGAffineTransform(translationX: 0, y: viewY)
+            }, completion: { (finished) in
                 self.getImageView().removeFromSuperview()
                 self.getScaleView().removeFromSuperview()
                 self.imageView = nil
@@ -75,33 +75,33 @@ class BrowseImagesView: UIView,UIScrollViewDelegate {
                 self.imgUrl = self.getImageList()[self.currenteImgIndex]
                 self.changeFinished = false
 
-        }
+        }) 
     }
     /// 移除当前浏览器
-    private func removeView() {
-        UIView.animateWithDuration(0.2, animations: { 
-            self.getImageView().transform = CGAffineTransformMakeScale(0.7, 0.7)
+    fileprivate func removeView() {
+        UIView.animate(withDuration: 0.2, animations: { 
+            self.getImageView().transform = CGAffineTransform(scaleX: 0.7, y: 0.7)
             self.alpha = 0.5
-            }) { (finished) in
+            }, completion: { (finished) in
                 self.removeFromSuperview()
                 self.scrollView.removeFromSuperview()
-        }
+        }) 
     }
-    private func initSubviews() {
-        self.backgroundColor = UIColor.blackColor()
+    fileprivate func initSubviews() {
+        self.backgroundColor = UIColor.black
         self.alpha = 0
         scrollView.addSubview(getScaleView())
         getScaleView().addSubview(getImageView())
-        UIView .animateWithDuration(0.2) { 
+        UIView .animate(withDuration: 0.2, animations: { 
             self.alpha = 0.8
-        }
+        }) 
     }
-    @objc internal func viewForZoomingInScrollView(scrollView: UIScrollView) -> UIView? {
+    @objc internal func viewForZooming(in scrollView: UIScrollView) -> UIView? {
         return scaleView
     }
     /// 当前图片
-    private var currenteImgIndex : Int = 0
-    private func getCurrenteImgIndex() -> Int {
+    fileprivate var currenteImgIndex : Int = 0
+    fileprivate func getCurrenteImgIndex() -> Int {
         for i in 0 ... getImageList().count-1{
             if imgUrl! == getImageList()[i] {
                 currenteImgIndex = i
@@ -111,24 +111,28 @@ class BrowseImagesView: UIView,UIScrollViewDelegate {
         return currenteImgIndex
     }
         /// 当前图片url
-    private var imgUrl : String?{
+    fileprivate var imgUrl : String?{
         didSet{
-            UIApplication.sharedApplication().keyWindow?.addSubview(scrollView)
-            SDWebImageManager.sharedManager().downloadImageWithURL(NSURL(string: imgUrl!), options: SDWebImageOptions.init(rawValue: 0), progress: { (a, b) in }) { (icon, error, cacheType, finished, imgUrl) in
-                self.calculateImageFrameWithImage(icon)
+            UIApplication.shared.keyWindow?.addSubview(scrollView)
+            SDWebImageDownloader.shared().downloadImage(with: URL(string: imgUrl!), options: SDWebImageDownloaderOptions.init(rawValue: 0), progress: { (a, b, _) in
+            }) { (icon, _, error, finished) in
+                self.calculateImageFrameWithImage(icon!)
             }
+//            SDWebImageDownloader.shared().downloadImage(with: URL(string: imgUrl!), options: SDWebImageOptions.init(rawValue: 0), progress: { (a, b) in }) { (icon, error, cacheType, finished, imgUrl) in
+//                self.calculateImageFrameWithImage(icon)
+//            }
         }
     }
     /// 图片列表
-    private var imageList : [String]?
-    private func getImageList() -> [String] {
+    fileprivate var imageList : [String]?
+    fileprivate func getImageList() -> [String] {
         if imageList == nil {
             imageList = [imgUrl!]
         }
         return imageList!
     }
-    private var scaleView : UIView?
-    private func getScaleView() -> UIView {
+    fileprivate var scaleView : UIView?
+    fileprivate func getScaleView() -> UIView {
         if scaleView == nil {
             let object = UIView(frame: self.scrollView.frame)
             let singleTapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(BrowseImagesView.handleTapGesture))
@@ -137,42 +141,42 @@ class BrowseImagesView: UIView,UIScrollViewDelegate {
             let doubleTapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(BrowseImagesView.handleTapGesture))
             doubleTapGestureRecognizer.numberOfTapsRequired = 2
             object.addGestureRecognizer(doubleTapGestureRecognizer)
-            singleTapGestureRecognizer.requireGestureRecognizerToFail(doubleTapGestureRecognizer)
-            object.backgroundColor = UIColor.clearColor()
+            singleTapGestureRecognizer.require(toFail: doubleTapGestureRecognizer)
+            object.backgroundColor = UIColor.clear
             scaleView = object
         }
         return scaleView!
     }
-    @objc private func handleTapGesture(sender:UITapGestureRecognizer)  {
+    @objc fileprivate func handleTapGesture(_ sender:UITapGestureRecognizer)  {
         if sender.numberOfTapsRequired == 1 {
             if self.scrollView.zoomScale == self.scrollView.minimumZoomScale {
                 removeView()
             }else{
-                UIView.animateWithDuration(0.2, animations: {
+                UIView.animate(withDuration: 0.2, animations: {
                     self.scrollView.zoomScale = self.scrollView.minimumZoomScale
                 })
             }
             return
         }
         if sender.numberOfTapsRequired == 2 {
-            UIView.animateWithDuration(0.2, animations: {
+            UIView.animate(withDuration: 0.2, animations: {
                 if self.scrollView.zoomScale <= 1.7{  self.scrollView.zoomScale = self.scrollView.maximumZoomScale}else{self.scrollView.zoomScale = self.scrollView.minimumZoomScale}
             })
         }
     }
     
-    private var imageView : UIImageView?
+    fileprivate var imageView : UIImageView?
     func getImageView() -> UIImageView {
         if imageView == nil {
             let object = UIImageView()
             object.clipsToBounds = true
-            object.contentMode = .ScaleAspectFill
+            object.contentMode = .scaleAspectFill
             imageView = object
         }
         return imageView!
     }
-    lazy private  var scrollView: UIScrollView = {
-        let object = UIScrollView(frame: CGRect(origin: CGPointZero, size: CGSize(width: kScreenWidth, height: kScreenHeight)))
+    lazy fileprivate  var scrollView: UIScrollView = {
+        let object = UIScrollView(frame: CGRect(origin: CGPoint.zero, size: CGSize(width: kScreenWidth, height: kScreenHeight)))
         object.showsVerticalScrollIndicator = false
         object.showsHorizontalScrollIndicator = false
         object.bouncesZoom = true

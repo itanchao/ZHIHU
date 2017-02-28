@@ -9,7 +9,7 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>Pods.xcscheme</key>
+		<key>Pods-ZHIHU.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -22,17 +22,17 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>432ECC54282C84882B482CCB4CF227FC</key>
+		<key>1D0DDF0B73AC26C26A25E71C94EDD909</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>9200DBD143E35950CB5D0D96B8355293</key>
+		<key>25B2649E7A05034EB312843215EB71CB</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>D3A3A5B964FDDECA740B8E199A27347A</key>
+		<key>88E9EC28B8B46C3631E6B242B50F4442</key>
 		<dict>
 			<key>primary</key>
 			<true/>
