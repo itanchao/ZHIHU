@@ -3,15 +3,18 @@ PODS:
   - SDWebImage (4.0.0):
     - SDWebImage/Core (= 4.0.0)
   - SDWebImage/Core (4.0.0)
+  - TCParallax (2.0.3)
 
 DEPENDENCIES:
   - Alamofire (~> 4.0)
   - SDWebImage
+  - TCParallax
 
 SPEC CHECKSUMS:
   Alamofire: dc44b1600b800eb63da6a19039a0083d62a6a62d
   SDWebImage: 76a6348bdc74eb5a55dd08a091ef298e56b55e41
+  TCParallax: b729e5c1565c09ee596d80f1dbb438cb40a8e407
 
-PODFILE CHECKSUM: 15bc8c800bfa9ea8b99fe3f10f697a0d54ec6a90
+PODFILE CHECKSUM: 1b430415167c575b867c326886f1d5366c85db9b
 
-COCOAPODS: 1.2.0
+COCOAPODS: 1.2.1

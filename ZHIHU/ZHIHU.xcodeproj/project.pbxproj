@@ -8,12 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		2107E8C71CBE2C0B0040F2F2 /* DetailStoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2107E8C61CBE2C0B0040F2F2 /* DetailStoryViewController.swift */; };
-		2134746E1CC8B05B009C5389 /* ParallaxScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2134746C1CC8B05B009C5389 /* ParallaxScrollView.swift */; };
-		2134746F1CC8B05B009C5389 /* UIImage+ImageEffects.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2134746D1CC8B05B009C5389 /* UIImage+ImageEffects.swift */; };
 		218F326F1CD87C990059508B /* tools.js in Resources */ = {isa = PBXBuildFile; fileRef = 218F326E1CD87C990059508B /* tools.js */; };
 		2192A18A1CC63BD900A763B0 /* RunLoopSwiftView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2192A1891CC63BD900A763B0 /* RunLoopSwiftView.swift */; };
 		219573DB1CC9C13300BBA710 /* HomePageHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 219573DA1CC9C13300BBA710 /* HomePageHeaderView.swift */; };
 		219573DE1CCA0E2100BBA710 /* TCCircleChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 219573DD1CCA0E2100BBA710 /* TCCircleChart.swift */; };
+		98B1770291C4DDE4200C2822 /* Pods_ZHIHU.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F2ECF836358CCFBB864C9C4C /* Pods_ZHIHU.framework */; };
 		D5222E8C1CD904D70038B5AD /* podfile in Resources */ = {isa = PBXBuildFile; fileRef = D5222E8B1CD904D70038B5AD /* podfile */; };
 		D554EAA11CBD3513001466E1 /* HomePageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D554EAA01CBD3513001466E1 /* HomePageController.swift */; };
 		D554EAA61CBD35FC001466E1 /* LauchImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D554EAA51CBD35FC001466E1 /* LauchImageViewController.swift */; };
@@ -51,8 +50,6 @@
 
 /* Begin PBXFileReference section */
 		2107E8C61CBE2C0B0040F2F2 /* DetailStoryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailStoryViewController.swift; sourceTree = "<group>"; };
-		2134746C1CC8B05B009C5389 /* ParallaxScrollView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParallaxScrollView.swift; sourceTree = "<group>"; };
-		2134746D1CC8B05B009C5389 /* UIImage+ImageEffects.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+ImageEffects.swift"; sourceTree = "<group>"; };
 		218F326E1CD87C990059508B /* tools.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; name = tools.js; path = "ZHIHU/EXTENSION(扩展)/tools.js"; sourceTree = SOURCE_ROOT; };
 		2192A1891CC63BD900A763B0 /* RunLoopSwiftView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RunLoopSwiftView.swift; sourceTree = "<group>"; };
 		219573DA1CC9C13300BBA710 /* HomePageHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomePageHeaderView.swift; sourceTree = "<group>"; };
@@ -91,6 +88,7 @@
 				D5E3E18E1E65E21D0016DF2C /* SDWebImage.framework in Frameworks */,
 				D5E3E18C1E65E2170016DF2C /* Alamofire.framework in Frameworks */,
 				D5E3E1911E65E2D50016DF2C /* Alamofire.framework in Frameworks */,
+				98B1770291C4DDE4200C2822 /* Pods_ZHIHU.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -104,16 +102,6 @@
 				DD2F3509F58A1490C0CADA8E /* Pods-ZHIHU.release.xcconfig */,
 			);
 			name = Pods;
-			sourceTree = "<group>";
-		};
-		2134746B1CC8B05B009C5389 /* ParallaxHeaderView */ = {
-			isa = PBXGroup;
-			children = (
-				2134746C1CC8B05B009C5389 /* ParallaxScrollView.swift */,
-				2134746D1CC8B05B009C5389 /* UIImage+ImageEffects.swift */,
-			);
-			name = ParallaxHeaderView;
-			path = Sauces;
 			sourceTree = "<group>";
 		};
 		219573DC1CCA0E0300BBA710 /* TCCircleChart */ = {
@@ -200,7 +188,6 @@
 			children = (
 				D5CF5A8E1CDDB5FE00566DBC /* tools */,
 				219573DC1CCA0E0300BBA710 /* TCCircleChart */,
-				2134746B1CC8B05B009C5389 /* ParallaxHeaderView */,
 				D56C9B3F1CC541A600F72C18 /* EXTENSION(扩展) */,
 				D554EAA41CBD35E3001466E1 /* LauchView */,
 				D554EA9F1CBD34F3001466E1 /* HomePage */,
@@ -318,7 +305,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		E860899C42155DACDAADAA77 /* [CP] Embed Pods Frameworks */ = {
@@ -368,10 +355,8 @@
 				2192A18A1CC63BD900A763B0 /* RunLoopSwiftView.swift in Sources */,
 				D5CF5A901CDDB68000566DBC /* BrowseImagesView.swift in Sources */,
 				2107E8C71CBE2C0B0040F2F2 /* DetailStoryViewController.swift in Sources */,
-				2134746E1CC8B05B009C5389 /* ParallaxScrollView.swift in Sources */,
 				219573DB1CC9C13300BBA710 /* HomePageHeaderView.swift in Sources */,
 				D56C9B441CC541A700F72C18 /* Commom.swift in Sources */,
-				2134746F1CC8B05B009C5389 /* UIImage+ImageEffects.swift in Sources */,
 				D554EAD51CBD5345001466E1 /* HomePageCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

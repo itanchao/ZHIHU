@@ -4,4 +4,6 @@ use_frameworks!
 target "ZHIHU" do
 pod "Alamofire", "~> 4.0"
 pod 'SDWebImage'
+pod 'TCParallax'
+
 end

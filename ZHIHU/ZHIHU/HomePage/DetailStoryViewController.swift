@@ -8,6 +8,7 @@
 
 import UIKit
 import Alamofire
+import TCParallax
 struct Section {
     var id   : NSNumber
     var name : String
@@ -101,7 +102,8 @@ class DetailStoryViewController:UIViewController {
         return object
     }()
     lazy fileprivate  var webHeaderView: ParallaxScrollView = {
-        let object = (ParallaxScrollView.creatParallaxWebHeaderViewWithSubView(self.headerView, forSize: CGSize(width: kScreenWidth, height: 223), referView: self.webView))
+        let object = ParallaxScrollView.creatParallaxScrollViewWithSubView(subView: self.headerView, referView: self.webView.scrollView)
+//        let object = (ParallaxScrollView.creatParallaxWebHeaderViewWithSubView(self.headerView, forSize: CGSize(width: kScreenWidth, height: 223), referView: self.webView))
         self.webView.scrollView.addSubview(object)
         return object
     }()

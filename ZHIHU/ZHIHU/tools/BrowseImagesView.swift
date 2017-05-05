@@ -15,6 +15,7 @@ class BrowseImagesView: UIView,UIScrollViewDelegate {
     /// - parameter urls:       网络图片数组
     /// - parameter currentImg: 当前图片数组
     ///
+    @discardableResult
     static func showImageWithUrls(_ urls:[String], currentImg:String) -> BrowseImagesView {
         let browseImagesView = BrowseImagesView(frame: kScreenBounds)
         browseImagesView.initSubviews()

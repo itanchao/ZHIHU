@@ -7,8 +7,6 @@
 //
 
 import UIKit
-// FIXME: comparison operators with optionals were removed from the Swift Standard Libary.
-// Consider refactoring the code to use the non-optional operators.
 fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
   switch (lhs, rhs) {
   case let (l?, r?):
@@ -19,9 +17,6 @@ fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
     return false
   }
 }
-
-// FIXME: comparison operators with optionals were removed from the Swift Standard Libary.
-// Consider refactoring the code to use the non-optional operators.
 fileprivate func >= <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
   switch (lhs, rhs) {
   case let (l?, r?):
@@ -31,8 +26,6 @@ fileprivate func >= <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
   }
 }
 
-// FIXME: comparison operators with optionals were removed from the Swift Standard Libary.
-// Consider refactoring the code to use the non-optional operators.
 fileprivate func <= <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
   switch (lhs, rhs) {
   case let (l?, r?):
@@ -91,16 +84,12 @@ class TCCircleChart: UIView {
         if scrollView?.contentOffset.y >= 0 || refreshing {return}
         let radius = (frame.size.width - 5) * 0.5
         let context2 = UIGraphicsGetCurrentContext()
-//        context2?.addRect(CGRect(x: frame.size.width*0.5, y: frame.size.width*0.5, width: 0, height: 0))
-        context2?.addArc(center: CGPoint(x: frame.size.width*0.5, y: frame.size.width*0.5), radius: 0, startAngle: CGFloat(M_PI) * 2, endAngle: CGFloat(M_PI) * 2, clockwise: false)
-            
-//        CGContext.addArc(context2, frame.size.width * 0.5, frame.size.width * 0.5, 0, 0, CGFloat(M_PI) * 2, 0)
+        context2?.addArc(center: CGPoint(x: frame.size.width*0.5, y: frame.size.width*0.5), radius: 0, startAngle: .pi * 2, endAngle: .pi * 2, clockwise: false)
         UIColor.lightGray.set()
         context2?.strokePath()
         let context = UIGraphicsGetCurrentContext()
-        let endAngle = CGFloat(-M_PI) / 30 * offsetY! - CGFloat(M_PI) * 1.5
-        context?.addArc(center: CGPoint(x: frame.size.width * 0.5, y: frame.size.width * 0.5), radius: radius, startAngle:  CGFloat(-M_PI) * 1.5, endAngle: endAngle, clockwise: false)
-//        CGContextAddArc(context, frame.size.width * 0.5, frame.size.width * 0.5, radius, CGFloat(-M_PI) * 1.5, endAngle, 0)
+        let endAngle = -.pi / 30 * offsetY! - .pi * 1.5
+        context?.addArc(center: CGPoint(x: frame.size.width * 0.5, y: frame.size.width * 0.5), radius: radius, startAngle:  -.pi * 1.5, endAngle: endAngle, clockwise: false)
         UIColor.white.set()
         context?.strokePath()
     }
@@ -112,7 +101,6 @@ class TCCircleChart: UIView {
     fileprivate var scrollView : UIScrollView?{
         didSet{
             scrollView?.addObserver(self, forKeyPath: "contentOffset", options: [.new,.old], context: UnsafeMutableRawPointer.allocate(bytes: 0, alignedTo: 0))
-//        scrollView?.addObserver(self, forKeyPath: "contentOffset", options: [.new,.old], context: UnsafeMutableRawPointer.allocate(capacity: 0))
         }
     }
     fileprivate var target :AnyObject?

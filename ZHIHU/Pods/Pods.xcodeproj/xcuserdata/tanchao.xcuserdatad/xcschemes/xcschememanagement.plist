@@ -19,20 +19,30 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>TCParallax.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>1D0DDF0B73AC26C26A25E71C94EDD909</key>
+		<key>23683424DA4F37FBDB12D3ECE5E696DB</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>25B2649E7A05034EB312843215EB71CB</key>
+		<key>78E30AFB0C73B9FD52049A2A45692F74</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
 		<key>88E9EC28B8B46C3631E6B242B50F4442</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>F5877F91FF3E8AB5F78BA40A7D3CC0C3</key>
 		<dict>
 			<key>primary</key>
 			<true/>

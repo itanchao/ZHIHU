@@ -8,6 +8,7 @@
 
 import UIKit
 import Alamofire
+import TCParallax
 let rowHeight :CGFloat = 90.0
 let sectionHeight :CGFloat = 35.0
 let homeCellIdentifier:String = "HomeCell"
@@ -101,7 +102,7 @@ class HomePageController: UIViewController {
     lazy fileprivate  var tableView: UITableView = {
         let view = UITableView(frame: CGRect(x: 0, y: 0, width: kScreenWidth, height: kScreenHeight), style: .plain)
         view.rowHeight = 100
-        view.tableHeaderView = ParallaxScrollView.creatParallaxScrollViewWithSubView(self.headerView, referView: view)
+        view.tableHeaderView = ParallaxScrollView.creatParallaxScrollViewWithSubView(subView: self.headerView, referView: view)
         view.delegate = self
         view.dataSource = self
         return view
