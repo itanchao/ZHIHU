@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		2107E8C71CBE2C0B0040F2F2 /* DetailStoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2107E8C61CBE2C0B0040F2F2 /* DetailStoryViewController.swift */; };
 		218F326F1CD87C990059508B /* tools.js in Resources */ = {isa = PBXBuildFile; fileRef = 218F326E1CD87C990059508B /* tools.js */; };
-		2192A18A1CC63BD900A763B0 /* RunLoopSwiftView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2192A1891CC63BD900A763B0 /* RunLoopSwiftView.swift */; };
 		219573DB1CC9C13300BBA710 /* HomePageHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 219573DA1CC9C13300BBA710 /* HomePageHeaderView.swift */; };
 		219573DE1CCA0E2100BBA710 /* TCCircleChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 219573DD1CCA0E2100BBA710 /* TCCircleChart.swift */; };
 		98B1770291C4DDE4200C2822 /* Pods_ZHIHU.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F2ECF836358CCFBB864C9C4C /* Pods_ZHIHU.framework */; };
@@ -51,7 +50,6 @@
 /* Begin PBXFileReference section */
 		2107E8C61CBE2C0B0040F2F2 /* DetailStoryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailStoryViewController.swift; sourceTree = "<group>"; };
 		218F326E1CD87C990059508B /* tools.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; name = tools.js; path = "ZHIHU/EXTENSION(扩展)/tools.js"; sourceTree = SOURCE_ROOT; };
-		2192A1891CC63BD900A763B0 /* RunLoopSwiftView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RunLoopSwiftView.swift; sourceTree = "<group>"; };
 		219573DA1CC9C13300BBA710 /* HomePageHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomePageHeaderView.swift; sourceTree = "<group>"; };
 		219573DD1CCA0E2100BBA710 /* TCCircleChart.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TCCircleChart.swift; sourceTree = "<group>"; };
 		81190A93E11610A53A44BB17 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -147,7 +145,6 @@
 		D56C9B3F1CC541A600F72C18 /* EXTENSION(扩展) */ = {
 			isa = PBXGroup;
 			children = (
-				2192A1891CC63BD900A763B0 /* RunLoopSwiftView.swift */,
 				D56C9B401CC541A600F72C18 /* Commom.swift */,
 				D56C9B411CC541A600F72C18 /* TC_UIColor.swift */,
 				D56C9B421CC541A600F72C18 /* TC_UINavigationBar.swift */,
@@ -352,7 +349,6 @@
 				D554EAA61CBD35FC001466E1 /* LauchImageViewController.swift in Sources */,
 				D56C9B461CC541A700F72C18 /* TC_UINavigationBar.swift in Sources */,
 				D554EAA11CBD3513001466E1 /* HomePageController.swift in Sources */,
-				2192A18A1CC63BD900A763B0 /* RunLoopSwiftView.swift in Sources */,
 				D5CF5A901CDDB68000566DBC /* BrowseImagesView.swift in Sources */,
 				2107E8C71CBE2C0B0040F2F2 /* DetailStoryViewController.swift in Sources */,
 				219573DB1CC9C13300BBA710 /* HomePageHeaderView.swift in Sources */,
@@ -468,7 +464,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				DEVELOPMENT_TEAM = ART43VL26Q;
 				INFOPLIST_FILE = ZHIHU/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.tanchao.ZHIHU;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -485,7 +481,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				DEVELOPMENT_TEAM = ART43VL26Q;
 				INFOPLIST_FILE = ZHIHU/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.tanchao.ZHIHU;
 				PRODUCT_NAME = "$(TARGET_NAME)";

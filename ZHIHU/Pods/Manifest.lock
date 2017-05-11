@@ -4,17 +4,24 @@ PODS:
     - SDWebImage/Core (= 4.0.0)
   - SDWebImage/Core (4.0.0)
   - TCParallax (2.0.3)
+  - TCRunloopView (2.0.2):
+    - SDWebImage (~> 4.0.0)
+  - TrickyNavigationBar (0.1.0)
 
 DEPENDENCIES:
   - Alamofire (~> 4.0)
   - SDWebImage
   - TCParallax
+  - TCRunloopView
+  - TrickyNavigationBar
 
 SPEC CHECKSUMS:
   Alamofire: dc44b1600b800eb63da6a19039a0083d62a6a62d
   SDWebImage: 76a6348bdc74eb5a55dd08a091ef298e56b55e41
   TCParallax: b729e5c1565c09ee596d80f1dbb438cb40a8e407
+  TCRunloopView: 3a12f4567175c6f9a2d9ac26733e9f02e2cd51df
+  TrickyNavigationBar: b1c9c7c19b02a2180bfe5706707809947f13d78a
 
-PODFILE CHECKSUM: 1b430415167c575b867c326886f1d5366c85db9b
+PODFILE CHECKSUM: 7ed1b024588fe9c7f63aa9d32ed1a03b8d40543d
 
 COCOAPODS: 1.2.1

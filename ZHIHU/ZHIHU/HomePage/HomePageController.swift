@@ -9,6 +9,7 @@
 import UIKit
 import Alamofire
 import TCParallax
+import TCRunloopView
 let rowHeight :CGFloat = 90.0
 let sectionHeight :CGFloat = 35.0
 let homeCellIdentifier:String = "HomeCell"
@@ -107,8 +108,9 @@ class HomePageController: UIViewController {
         view.dataSource = self
         return view
     }()
-    lazy fileprivate  var headerView: RunLoopSwiftView = {
-        let object = RunLoopSwiftView(frame: CGRect(x: 0, y: 0, width: kScreenWidth, height: 200))
+    
+    lazy fileprivate  var headerView:TCRunLoopView = {
+        let object = TCRunLoopView(frame: CGRect(x: 0, y: 0, width: kScreenWidth, height: 200))
         object.delegate = self
         return object
     }()
@@ -182,8 +184,8 @@ extension HomePageController{
         }
     }
 }
-extension HomePageController:RunLoopSwiftViewDelegate{
-    func runLoopSwiftViewDidClick(_ loopView: RunLoopSwiftView, didSelectRowAtIndex index: NSInteger) {
+extension HomePageController:TCRunLoopViewDelegate{
+    func runLoopSwiftViewDidClick(_ loopView: TCRunLoopView, didSelectRowAtIndex index: NSInteger) {
         let top = sectionModels[0].top_stories[index]
         let detailVc = DetailStoryViewController()
         detailVc.storyID = top.id
@@ -233,6 +235,9 @@ extension HomePageController:UITableViewDelegate,UITableViewDataSource{
         navigationController!.pushViewController(detailVc, animated: true)
     }
     func  scrollViewDidScroll(_ scrollView: UIScrollView) {
+        if scrollView != tableView {
+            return
+        }
         let offsetY = scrollView.contentOffset.y
         if offsetY > scrollView.contentSize.height - 1.5 * kScreenHeight {
             loadMoreData()

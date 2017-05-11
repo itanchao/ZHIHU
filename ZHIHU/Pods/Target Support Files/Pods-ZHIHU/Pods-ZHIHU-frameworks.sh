@@ -92,11 +92,15 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "$BUILT_PRODUCTS_DIR/Alamofire/Alamofire.framework"
   install_framework "$BUILT_PRODUCTS_DIR/SDWebImage/SDWebImage.framework"
   install_framework "$BUILT_PRODUCTS_DIR/TCParallax/TCParallax.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/TCRunloopView/TCRunloopView.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/TrickyNavigationBar/TrickyNavigationBar.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "$BUILT_PRODUCTS_DIR/Alamofire/Alamofire.framework"
   install_framework "$BUILT_PRODUCTS_DIR/SDWebImage/SDWebImage.framework"
   install_framework "$BUILT_PRODUCTS_DIR/TCParallax/TCParallax.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/TCRunloopView/TCRunloopView.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/TrickyNavigationBar/TrickyNavigationBar.framework"
 fi
 if [ "${COCOAPODS_PARALLEL_CODE_SIGN}" == "true" ]; then
   wait

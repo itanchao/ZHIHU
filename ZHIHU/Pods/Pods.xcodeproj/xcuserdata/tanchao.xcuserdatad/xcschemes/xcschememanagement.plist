@@ -24,15 +24,25 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>TCRunloopView.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>TrickyNavigationBar.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>23683424DA4F37FBDB12D3ECE5E696DB</key>
+		<key>46842E44BAFEF48420A4E56864EEEF74</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>78E30AFB0C73B9FD52049A2A45692F74</key>
+		<key>5B1B77CC916D348756BDD9F8830956FC</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -42,7 +52,17 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>F5877F91FF3E8AB5F78BA40A7D3CC0C3</key>
+		<key>ABEB8BABC386C90B7DD51B8BF855C019</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>B7D3F98C08DC0C36E87AB582E72518B5</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>F2D13BB15F4C00B229CDAF6DBEAAF937</key>
 		<dict>
 			<key>primary</key>
 			<true/>

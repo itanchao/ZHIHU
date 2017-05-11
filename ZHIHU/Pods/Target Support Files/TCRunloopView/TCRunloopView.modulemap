@@ -1,0 +1,6 @@
+framework module TCRunloopView {
+  umbrella header "TCRunloopView-umbrella.h"
+
+  export *
+  module * { export * }
+}

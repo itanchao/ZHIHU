@@ -14,7 +14,7 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = 'F5877F91FF3E8AB5F78BA40A7D3CC0C3'
+               BlueprintIdentifier = '46842E44BAFEF48420A4E56864EEEF74'
                BlueprintName = 'TCParallax'
                ReferencedContainer = 'container:Pods.xcodeproj'
                BuildableName = 'TCParallax.framework'>
