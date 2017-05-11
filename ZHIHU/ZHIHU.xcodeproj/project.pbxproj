@@ -18,7 +18,6 @@
 		D554EAD51CBD5345001466E1 /* HomePageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D554EAD41CBD5345001466E1 /* HomePageCell.swift */; };
 		D56C9B441CC541A700F72C18 /* Commom.swift in Sources */ = {isa = PBXBuildFile; fileRef = D56C9B401CC541A600F72C18 /* Commom.swift */; };
 		D56C9B451CC541A700F72C18 /* TC_UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = D56C9B411CC541A600F72C18 /* TC_UIColor.swift */; };
-		D56C9B461CC541A700F72C18 /* TC_UINavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = D56C9B421CC541A600F72C18 /* TC_UINavigationBar.swift */; };
 		D56C9B471CC541A700F72C18 /* TC_scrollsToTop.swift in Sources */ = {isa = PBXBuildFile; fileRef = D56C9B431CC541A700F72C18 /* TC_scrollsToTop.swift */; };
 		D5CF5A901CDDB68000566DBC /* BrowseImagesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5CF5A8F1CDDB68000566DBC /* BrowseImagesView.swift */; };
 		D5E3E18C1E65E2170016DF2C /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5E3E18B1E65E2170016DF2C /* Alamofire.framework */; };
@@ -61,7 +60,6 @@
 		D554EAD41CBD5345001466E1 /* HomePageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomePageCell.swift; sourceTree = "<group>"; };
 		D56C9B401CC541A600F72C18 /* Commom.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Commom.swift; sourceTree = "<group>"; };
 		D56C9B411CC541A600F72C18 /* TC_UIColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TC_UIColor.swift; sourceTree = "<group>"; };
-		D56C9B421CC541A600F72C18 /* TC_UINavigationBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TC_UINavigationBar.swift; sourceTree = "<group>"; };
 		D56C9B431CC541A700F72C18 /* TC_scrollsToTop.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TC_scrollsToTop.swift; sourceTree = "<group>"; };
 		D5CF5A8F1CDDB68000566DBC /* BrowseImagesView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrowseImagesView.swift; sourceTree = "<group>"; };
 		D5E3E18B1E65E2170016DF2C /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = "../../../Library/Developer/Xcode/DerivedData/ZHIHU-fzleywqqvodfargaduropkdsvflz/Build/Products/Debug-iphonesimulator/Alamofire/Alamofire.framework"; sourceTree = "<group>"; };
@@ -147,7 +145,6 @@
 			children = (
 				D56C9B401CC541A600F72C18 /* Commom.swift */,
 				D56C9B411CC541A600F72C18 /* TC_UIColor.swift */,
-				D56C9B421CC541A600F72C18 /* TC_UINavigationBar.swift */,
 				D56C9B431CC541A700F72C18 /* TC_scrollsToTop.swift */,
 			);
 			path = "EXTENSION(扩展)";
@@ -347,7 +344,6 @@
 				D56C9B451CC541A700F72C18 /* TC_UIColor.swift in Sources */,
 				219573DE1CCA0E2100BBA710 /* TCCircleChart.swift in Sources */,
 				D554EAA61CBD35FC001466E1 /* LauchImageViewController.swift in Sources */,
-				D56C9B461CC541A700F72C18 /* TC_UINavigationBar.swift in Sources */,
 				D554EAA11CBD3513001466E1 /* HomePageController.swift in Sources */,
 				D5CF5A901CDDB68000566DBC /* BrowseImagesView.swift in Sources */,
 				2107E8C71CBE2C0B0040F2F2 /* DetailStoryViewController.swift in Sources */,
